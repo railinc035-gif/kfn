@@ -9286,7 +9286,80 @@ function runProjectDiagnostics() {
             }
         }
 
-        // 3. Análisis de CSS
+        // 3. Análisis y Linter de Ensamblador Assembly (.asm)
+        if (fileType === "asm") {
+            const lines = content.split("\n");
+            lines.forEach((line, idx) => {
+                const lineNum = idx + 1;
+                const cleanLine = line.split(";")[0].trim();
+                if (!cleanLine) return;
+
+                // Validar comillas o apóstrofes sin cerrar
+                const doubleQuotes = (cleanLine.match(/"/g) || []).length;
+                const singleQuotes = (cleanLine.match(/'/g) || []).length;
+                if (doubleQuotes % 2 !== 0 || singleQuotes % 2 !== 0) {
+                    allIssues.push({
+                        file: filename,
+                        line: lineNum,
+                        type: "error",
+                        message: `[Sintaxis Assembly] Cadena de texto o comilla sin cerrar`
+                    });
+                }
+            });
+
+            // Verificar firma de arranque 0x55AA si es un bootsector
+            if (filename.includes("boot") && !content.includes("0xAA55") && !content.includes("0xaa55") && !content.includes("55aa")) {
+                allIssues.push({
+                    file: filename,
+                    line: lines.length,
+                    type: "warning",
+                    message: `[Bootsector ASM] Advertencia: Falta la firma de arranque estándar dw 0xAA55 al final`
+                });
+            }
+        }
+
+        // 4. Análisis y Linter de C (.c)
+        if (fileType === "c") {
+            const openBraces = (content.match(/\{/g) || []).length;
+            const closeBraces = (content.match(/\}/g) || []).length;
+            if (openBraces !== closeBraces) {
+                allIssues.push({
+                    file: filename,
+                    line: 1,
+                    type: "error",
+                    message: `[Sintaxis C] Desbalance de llaves '{' (${openBraces}) y '}' (${closeBraces})`
+                });
+            }
+
+            const openParens = (content.match(/\(/g) || []).length;
+            const closeParens = (content.match(/\)/g) || []).length;
+            if (openParens !== closeParens) {
+                allIssues.push({
+                    file: filename,
+                    line: 1,
+                    type: "error",
+                    message: `[Sintaxis C] Desbalance de paréntesis '(' (${openParens}) y ')' (${closeParens})`
+                });
+            }
+
+            const lines = content.split("\n");
+            lines.forEach((line, idx) => {
+                const lineNum = idx + 1;
+                const cleanLine = line.trim();
+                if (!cleanLine || cleanLine.startsWith("//") || cleanLine.startsWith("/*") || cleanLine.startsWith("#") || cleanLine.endsWith("{") || cleanLine.endsWith("}") || cleanLine.endsWith(":")) return;
+
+                if (!cleanLine.endsWith(";") && !cleanLine.endsWith(",") && !cleanLine.endsWith("\\") && (cleanLine.includes("=") || cleanLine.includes("return") || cleanLine.includes("print") || cleanLine.includes("vga["))) {
+                    allIssues.push({
+                        file: filename,
+                        line: lineNum,
+                        type: "warning",
+                        message: `[Sintaxis C] Posible falta de punto y coma ';' al final de la sentencia`
+                    });
+                }
+            });
+        }
+
+        // 5. Análisis de CSS
         if (fileType === "css") {
             const openBraces = (content.match(/\{/g) || []).length;
             const closeBraces = (content.match(/\}/g) || []).length;
