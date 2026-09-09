@@ -663,15 +663,54 @@ button{border:0;cursor:pointer}
     box-sizing: border-box;
 }  
 
-.preview-frame.mobile {
-    width: 390px !important;
-    min-width: 390px !important;
-    height: 720px !important;
-    max-height: 100% !important;
-    border-radius: 36px !important;
-    border: 10px solid #1c242d !important;
-    box-shadow: 0 0 0 2px #344856, 0 20px 50px rgba(0, 0, 0, 0.7) !important;
-    margin: auto !important;
+/* Phone Chassis Container - Generic Samsung Infinity-O Style */
+.phone-chassis {
+    display: none;
+    width: 380px;
+    height: 800px;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 80px);
+    background: #12161f;
+    border: 3px solid #2a3442;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    box-sizing: border-box;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-punch-hole {
+    width: 12px;
+    height: 12px;
+    background: #000000;
+    border: 1px solid #1e2633;
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.phone-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background: #ffffff;
 }
 
 
@@ -3738,11 +3777,13 @@ builtins.input = custom_input
     }
 
     const previewFrame = document.getElementById("previewFrame");
+    const phonePreviewFrame = document.getElementById("phonePreviewFrame");
     if (previewFrame) {
         if (sequence !== previewUpdateSequence) return;
         if (previewFrame.__lastHtml !== html) {
             previewFrame.__lastHtml = html;
             previewFrame.srcdoc = html;  
+            if (phonePreviewFrame) phonePreviewFrame.srcdoc = html;
         }
     }
 }  
@@ -3870,20 +3911,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const desktopPreview = document.getElementById("desktopPreview");  
     const mobilePreview = document.getElementById("mobilePreview");  
 
-    if (desktopPreview && previewFrame) {
-        desktopPreview.addEventListener("click", () => {  
-            previewFrame.className = "preview-frame";
-            desktopPreview.classList.add("active");  
-            if (mobilePreview) mobilePreview.classList.remove("active");  
-        });  
+    if (desktopPreview) {
+        desktopPreview.addEventListener("click", () => setDeviceMode("laptop"));
     }
 
-    if (mobilePreview && previewFrame) {
-        mobilePreview.addEventListener("click", () => {  
-            previewFrame.className = "preview-frame mobile";
-            mobilePreview.classList.add("active");  
-            if (desktopPreview) desktopPreview.classList.remove("active");  
-        });  
+    if (mobilePreview) {
+        mobilePreview.addEventListener("click", () => setDeviceMode("mobile"));
     }
 
 
@@ -5328,11 +5361,16 @@ function replaceAllMatches() {
   
     <div class="preview-wrapper-container"> 
         <div class="preview-wrapper">  
-            <iframe  
-                id="previewFrame"  
-                class="preview-frame"  
-                sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin">  
-            </iframe>  
+                <iframe
+                    id="previewFrame"
+                    class="preview-frame">
+                </iframe>
+                <div id="phoneChassis" class="phone-chassis">
+                    <div class="phone-punch-hole"></div>
+                    <div class="phone-screen">
+                        <iframe id="phonePreviewFrame" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"></iframe>
+                    </div>
+                </div>
         </div>  
     </div> 
 </section>  
@@ -5788,7 +5826,7 @@ function replaceAllMatches() {
                     <button  
                         id="exitToGalleryBtn"  
                         class="settings-exit-button">  
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Salir a la Galería
+                        🚪 Salir a la Galería
                     </button>  
                 </div>
 
@@ -5892,19 +5930,37 @@ function replaceAllMatches() {
             <div class="version-list"> 
                 <button class="settings-option theme-option-btn" data-theme="oscuro"> 
                     <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#080808; border: 1px solid #ff6a00; width: 24px; height: 24px; border-radius: 50%;"></div>
+                        <div class="option-icon" style="background:#111; border: 1px solid #444; width: 24px; height: 24px;"></div>
                         <div> 
-                            <strong style="color:#ffffff;">Negro</strong>
-                            <small style="color:#a0a0a0;">Fondo oscuro con acentos naranja MIWY</small>
+                            <strong>Oscuro</strong>
+                            <small>Fondo oscuro original (predeterminado)</small>
                         </div> 
                     </div> 
                 </button> 
                 <button class="settings-option theme-option-btn" data-theme="claro"> 
                     <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#ffffff; border: 1px solid #000000; width: 24px; height: 24px; border-radius: 50%;"></div>
+                        <div class="option-icon" style="background:#eee; border: 1px solid #ccc; width: 24px; height: 24px;"></div>
+                        <div>
+                            <strong>Claro</strong>
+                            <small>Interfaz brillante y limpia</small>
+                        </div>
+                    </div>
+                </button>
+                <button class="settings-option theme-option-btn" data-theme="cobalto">
+                    <div class="settings-option-left">
+                        <div class="option-icon" style="background:#002240; border: 1px solid #00aaff; width: 24px; height: 24px;"></div>
                         <div> 
-                            <strong style="color:#000000;">Blanco</strong>
-                            <small style="color:#555555;">Fondo claro y textos principales en negro</small>
+                            <strong>Cobalto</strong>
+                            <small>Azul profundo con acentos neón</small>
+                        </div>
+                    </div>
+                </button>
+                <button class="settings-option theme-option-btn" data-theme="monokai">
+                    <div class="settings-option-left">
+                        <div class="option-icon" style="background:#272822; border: 1px solid #f92672; width: 24px; height: 24px;"></div>
+                        <div>
+                            <strong>Monokai</strong>
+                            <small>Estilo de contraste para código</small>
                         </div> 
                     </div> 
                 </button> 
@@ -8799,7 +8855,7 @@ function lintAndFixCurrentCode() {
    TEMAS DE INTERFAZ (LOGIC)  
 ===================================================== */  
 function applyTheme(themeName) { 
-    const validThemes = ["oscuro", "claro"];
+    const validThemes = ["oscuro", "claro", "cobalto", "monokai"];
     if (!validThemes.includes(themeName)) themeName = "oscuro";
     document.body.classList.remove("theme-oscuro", "theme-claro", "theme-cobalto", "theme-monokai"); 
     document.body.classList.add("theme-" + themeName); 
@@ -8807,7 +8863,7 @@ function applyTheme(themeName) {
     document.querySelectorAll(".theme-option-btn").forEach(btn => { 
         if (btn.getAttribute("data-theme") === themeName) { 
             btn.classList.add("active"); 
-            btn.style.borderColor = themeName === "claro" ? "#000000" : "var(--orange)";
+            btn.style.borderColor = "var(--orange)";
         } else { 
             btn.classList.remove("active"); 
             btn.style.borderColor = ""; 
@@ -9189,23 +9245,47 @@ document.addEventListener("touchcancel", stopWorkspaceResize);
    VISTA MÓVIL / LAPTOP
 ===================================================== */  
   
+function setDeviceMode(mode) {
+    const desktopBtn = document.getElementById("desktopPreview");
+    const mobileBtn = document.getElementById("mobilePreview");
+    const pFrame = document.getElementById("previewFrame");
+    const phoneChassis = document.getElementById("phoneChassis");
+    const phoneFrame = document.getElementById("phonePreviewFrame");
+
+    if (mode === "mobile") {
+        if (mobileBtn) mobileBtn.classList.add("active");
+        if (desktopBtn) desktopBtn.classList.remove("active");
+        if (pFrame) pFrame.style.display = "none";
+        if (phoneChassis) {
+            phoneChassis.style.display = "flex";
+            if (phoneFrame && pFrame && phoneFrame.srcdoc !== pFrame.srcdoc) {
+                phoneFrame.srcdoc = pFrame.srcdoc;
+            }
+        }
+    } else {
+        if (desktopBtn) desktopBtn.classList.add("active");
+        if (mobileBtn) mobileBtn.classList.remove("active");
+        if (phoneChassis) phoneChassis.style.display = "none";
+        if (pFrame) pFrame.style.display = "block";
+    }
+
+    const activeIframe = mode === "mobile" ? phoneFrame : pFrame;
+    if (activeIframe && activeIframe.contentWindow) {
+        try {
+            activeIframe.contentWindow.dispatchEvent(new Event("resize"));
+        } catch (e) {}
+    }
+}
+
 const desktopPreview = document.getElementById("desktopPreview");  
 const mobilePreview = document.getElementById("mobilePreview");  
 
 if (desktopPreview) {
-    desktopPreview.addEventListener("click", () => {
-        previewFrame.className = "preview-frame";
-        desktopPreview.classList.add("active");
-        if (mobilePreview) mobilePreview.classList.remove("active");
-    });
+    desktopPreview.addEventListener("click", () => setDeviceMode("laptop"));
 }
 
 if (mobilePreview) {
-    mobilePreview.addEventListener("click", () => {
-        previewFrame.className = "preview-frame mobile";
-        mobilePreview.classList.add("active");
-        if (desktopPreview) desktopPreview.classList.remove("active");
-    });
+    mobilePreview.addEventListener("click", () => setDeviceMode("mobile"));
 }
   
   
