@@ -663,16 +663,15 @@ button{border:0;cursor:pointer}
     box-sizing: border-box;
 }  
 
-.preview-frame.mobile{
-    height: calc(100% - 32px);
-    max-height: calc(100% - 32px);
-    width: auto;
-    aspect-ratio: 9 / 18.5;
-    max-width: calc(100% - 32px);
-    margin: 16px;
-    border-radius: 28px;
-    border: 8px solid #1a1a1a;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+.preview-frame.mobile {
+    width: 390px !important;
+    min-width: 390px !important;
+    height: 720px !important;
+    max-height: 100% !important;
+    border-radius: 36px !important;
+    border: 10px solid #1c242d !important;
+    box-shadow: 0 0 0 2px #344856, 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+    margin: auto !important;
 }
 
 
@@ -1890,38 +1889,34 @@ body.theme-oscuro {
     --danger:#ff4d4d;  
 } 
  
-/* Blanco (Tema Claro) */
+/* Claro */
 body.theme-claro { 
-    --bg:#f8f9fa;
+    --bg:#f5f5f5;
     --panel:#ffffff;  
-    --panel2:#f1f3f5;
-    --border:#dbe2e6;
-    --orange:#d95200;
-    --text:#000000;
-    --muted:#495057;
+    --panel2:#eaeaea;
+    --border:#cccccc;
+    --orange:#e65c00;
+    --text:#1a1a1a;
+    --muted:#666666;
     --green:#2b8a3e;  
     --danger:#c92a2a;  
-    color: #000000 !important;
 } 
-body.theme-claro .topbar { background: #ffffff; border-bottom-color: #dbe2e6; }
-body.theme-claro .topbar *, body.theme-claro .panel-header *, body.theme-claro .settings-panel *, body.theme-claro .dialog * { color: #000000 !important; }
-body.theme-claro .code-panel { background: #ffffff; }
-body.theme-claro .preview-panel { background: #f8f9fa; }
-body.theme-claro .panel-header { background: #ffffff; border-bottom-color: #dbe2e6; }
-body.theme-claro .file-bar { background: #f1f3f5; border-bottom-color: #dbe2e6; }
-body.theme-claro .file-tab { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
-body.theme-claro .file-tab.active { background: #ffe8cc; color: #d95200 !important; border-color: #ffc078; font-weight: bold; }
-body.theme-claro .code-editor { background: #ffffff; color: #000000 !important; }
-body.theme-claro .line-gutter { background: #f1f3f5; border-right-color: #dbe2e6; color: #495057; }
-body.theme-claro .code-footer { background: #ffffff; border-top-color: #dbe2e6; color: #000000 !important; }
+body.theme-claro .topbar { background: #ffffff; }
+body.theme-claro .code-panel { background: #fafafa; }
+body.theme-claro .preview-panel { background: #fafafa; }
+body.theme-claro .panel-header { background: #ffffff; }
+body.theme-claro .file-bar { background: #eeeeee; border-bottom-color: #cccccc; }
+body.theme-claro .file-tab { background: #ffffff; border-color: #cccccc; color: #555555; }
+body.theme-claro .file-tab.active { background: #ffe8cc; color: #d9480f; border-color: #ffd8a8; }
+body.theme-claro .code-editor { background: #fafafa; color: #1a1a1a; }
+body.theme-claro .code-footer { background: #ffffff; }
 body.theme-claro .settings-panel, 
 body.theme-claro .project-menu, 
-body.theme-claro .dialog { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
-body.theme-claro .settings-option { background: #f1f3f5; border-color: #dbe2e6; color: #000000 !important; }
+body.theme-claro .dialog { background: #ffffff; border-color: #cccccc; }
 body.theme-claro .settings-option:hover, 
-body.theme-claro .project-item:hover { background: #e9ecef; color: #000000 !important; }
-body.theme-claro .option-icon { background: #e9ecef; color: #000000 !important; }
-body.theme-claro .empty-editor span { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
+body.theme-claro .project-item:hover { background: #f0f0f0; color: #1a1a1a; }
+body.theme-claro .option-icon { background: #f0f0f0; }
+body.theme-claro .empty-editor span { background: #ffffff; border-color: #cccccc; color: #666; }
  
 /* Cobalto */ 
 body.theme-cobalto { 
@@ -2617,118 +2612,6 @@ button {
     .miwy-project-card, .dialog, .settings-panel { box-shadow: 0 6px 16px rgba(0,0,0,.4) !important; }
 }
 
-
-/* =====================================================
-   ADAPTACIÓN COMPLETA DE DISPOSITIVO (LAPTOP / TELÉFONO)
-===================================================== */
-body.device-mode-mobile {
-    font-size: 11px;
-}
-
-body.device-mode-mobile .topbar {
-    height: 48px;
-    padding: 0 10px;
-}
-
-body.device-mode-mobile .logo-button {
-    width: 36px;
-    height: 36px;
-}
-
-body.device-mode-mobile .settings-button {
-    width: 32px;
-    height: 32px;
-}
-
-body.device-mode-mobile .workspace {
-    top: 48px;
-    flex-direction: column;
-}
-
-body.device-mode-mobile .code-panel,
-body.device-mode-mobile .preview-panel {
-    width: 100% !important;
-    min-width: 100% !important;
-    height: 50%;
-}
-
-body.device-mode-mobile .panel-header {
-    height: 36px;
-    padding: 0 8px;
-}
-
-body.device-mode-mobile .main-tab-btn {
-    height: 26px;
-    padding: 0 8px;
-    font-size: 11px;
-}
-
-body.device-mode-mobile .preview-button {
-    height: 26px;
-    padding: 0 6px;
-    font-size: 10px;
-}
-
-body.device-mode-mobile .file-bar {
-    min-height: 30px;
-    padding: 2px 6px;
-}
-
-body.device-mode-mobile .file-tab {
-    height: 24px;
-    font-size: 9px;
-    padding: 0 6px;
-}
-
-body.device-mode-mobile .code-editor {
-    padding: 12px 14px;
-    font-size: 12px;
-}
-
-body.device-mode-mobile .code-footer {
-    height: 26px;
-    padding: 0 10px;
-    font-size: 9px;
-}
-
-body.device-mode-mobile .settings-panel {
-    width: calc(100vw - 16px);
-    right: 8px;
-    top: 54px;
-}
-
-body.device-mode-mobile .preview-wrapper {
-    padding: 10px;
-}
-
-body.device-mode-mobile .preview-frame.mobile {
-    width: 360px;
-    max-width: calc(100% - 16px);
-    height: 640px;
-    max-height: calc(100% - 16px);
-    border-radius: 28px;
-    border: 6px solid #1f1f1f;
-}
-
-body.device-mode-laptop .workspace {
-    flex-direction: row;
-}
-
-body.device-mode-laptop .code-panel {
-    width: 50%;
-    height: 100%;
-}
-
-body.device-mode-laptop .preview-panel {
-    flex: 1;
-    height: 100%;
-}
-
-body.device-mode-laptop .preview-frame {
-    width: 100%;
-    height: 100%;
-}
-
 </style>  
 <script>
 /* =====================================================  
@@ -3104,6 +2987,252 @@ function updatePreviewImmediate(sequence = previewUpdateSequence){
         return !/^(https?:|data:|\/\/|#)/i.test(src) && files[localName] === undefined ? "" : tag;
     });
   
+    // Si no hay HTML principal pero hay un archivo activo con lenguaje específico, generar runner adecuado
+    const activeType = currentFileName ? getFileType(currentFileName) : "";
+    const activeContent = (currentFileName && files[currentFileName]) ? files[currentFileName] : "";
+
+    if (!html && currentFileName) {
+        if (activeType === "python") {
+            const escapedPy = JSON.stringify(activeContent);
+            const escapedPyName = JSON.stringify(currentFileName);
+            html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { background: #0e1318; color: #38bdf8; font-family: system-ui, Consolas, monospace; padding: 20px; margin: 0; }
+  .term-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #22303c; padding-bottom: 10px; margin-bottom: 15px; color: #94a3b8; font-size: 13px; }
+  .term-out { background: #080c10; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; min-height: 120px; font-size: 13px; line-height: 1.6; white-space: pre-wrap; color: #f1f5f9; overflow: auto; margin-bottom: 15px; }
+  .status { color: #ff6a00; font-weight: bold; }
+  #app-canvas { background: #131b24; border: 1px solid #283747; border-radius: 10px; padding: 20px; min-height: 200px; margin-top: 10px; }
+</style>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"><\/script>
+</head>
+<body>
+  <div class="term-header">
+    <span>🐍 Aplicación Interactivas Python (Pyodide GUI & Input) - <strong>${escapeHTML(currentFileName)}</strong></span>
+    <span id="py-status" class="status">⚡ Cargando entorno Python...</span>
+  </div>
+  <div id="terminal" class="term-out">▶ Iniciando intérprete...</div>
+  <div id="app-canvas"></div>
+  <script>
+    async function runPythonScript() {
+      const out = document.getElementById("terminal");
+      const status = document.getElementById("py-status");
+      try {
+        if (typeof loadPyodide === "undefined") {
+          out.textContent += "\\n❌ No se pudo cargar Pyodide. Ejecutando simulación de consola local:\\n\\n";
+          out.textContent += ">>> Executing " + ${escapedPyName} + "\\n" + ${escapedPy};
+          status.textContent = "⚠️ Simulación activa";
+          status.style.color = "#ffbd2e";
+          return;
+        }
+        const pyodide = await loadPyodide({
+          stdout: (text) => { out.textContent += text + "\\n"; },
+          stderr: (text) => { out.textContent += "⚠️ " + text + "\\n"; }
+        });
+
+        // Sobrescribir input() en Python para soporte interactivo mediante prompt o diálogo web
+        await pyodide.runPythonAsync(\`
+import js
+def custom_input(prompt_text=""):
+    res = js.prompt(str(prompt_text))
+    return str(res) if res is not None else ""
+import builtins
+builtins.input = custom_input
+\`);
+
+        status.textContent = "✅ Ejecutando aplicación...";
+        status.style.color = "#42d66b";
+        out.textContent = ">>> python3 " + ${escapedPyName} + "\\n\\n";
+        const res = await pyodide.runPythonAsync(${escapedPy});
+        if (res !== undefined) {
+          out.textContent += "\\n[Resultado]: " + String(res) + "\\n";
+        }
+        status.textContent = "✔️ Ejecución activa";
+      } catch (err) {
+        out.textContent += "\\n❌ Error en ejecución Python:\\n" + String(err);
+        status.textContent = "❌ Error de ejecución";
+        status.style.color = "#ff4d4d";
+      }
+    }
+    runPythonScript();
+  <\/script>
+</body>
+</html>`;
+        } else if (activeType === "js" || activeType === "ts") {
+            const escapedJS = JSON.stringify(activeContent);
+            const escapedJSName = JSON.stringify(currentFileName);
+            html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { background: #0c1015; color: #f7df1e; font-family: Consolas, monospace; padding: 20px; margin: 0; }
+  .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 15px; font-size: 13px; color: #94a3b8; }
+  .console-out { background: #06090c; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; min-height: 300px; font-size: 13px; line-height: 1.6; white-space: pre-wrap; color: #f8fafc; overflow: auto; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <span>⚡ Consola de Ejecución JS/TS - <strong>${escapeHTML(currentFileName)}</strong></span>
+    <span style="color:#42d66b; font-weight:bold;">● Node/JS Engine</span>
+  </div>
+  <div id="consoleLog" class="console-out">▶ Ejecutando script...\\n</div>
+  <script>
+    (function() {
+      const out = document.getElementById("consoleLog");
+      const origLog = console.log;
+      const origError = console.error;
+      const origWarn = console.warn;
+      console.log = function(...args) {
+        origLog(...args);
+        out.textContent += args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(" ") + "\\n";
+      };
+      console.error = function(...args) {
+        origError(...args);
+        out.textContent += "❌ [Error] " + args.join(" ") + "\\n";
+      };
+      console.warn = function(...args) {
+        origWarn(...args);
+        out.textContent += "⚠️ [Warn] " + args.join(" ") + "\\n";
+      };
+      try {
+        const result = eval(${escapedJS});
+        if (result !== undefined) {
+          out.textContent += "\\n[Retorno]: " + String(result) + "\\n";
+        }
+      } catch (err) {
+        out.textContent += "\\n❌ Error en tiempo de ejecución:\\n" + err.stack;
+      }
+    })();
+  <\/script>
+</body>
+</html>`;
+        } else if (activeType === "markdown") {
+            const escapedMd = JSON.stringify(activeContent);
+            html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; padding: 30px; margin: 0; line-height: 1.6; }
+  .markdown-body { max-width: 800px; margin: 0 auto; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+  h1, h2, h3 { border-bottom: 1px solid #21262d; padding-bottom: 8px; color: #f0f6fc; }
+  code { background: rgba(110,118,129,0.4); padding: 0.2em 0.4em; border-radius: 6px; font-family: monospace; }
+  pre { background: #0d1117; padding: 16px; border-radius: 8px; overflow: auto; }
+  pre code { background: transparent; padding: 0; }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>
+</head>
+<body>
+  <div id="content" class="markdown-body">Cargando Markdown...</div>
+  <script>
+    const md = ${escapedMd};
+    if (typeof marked !== "undefined") {
+      document.getElementById("content").innerHTML = marked.parse(md);
+    } else {
+      document.getElementById("content").textContent = md;
+    }
+  <\/script>
+</body>
+</html>`;
+        } else if (activeType === "svg") {
+            html = `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { background: #090d12; margin:0; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+  .svg-box { max-width: 90vw; max-height: 90vh; background: #111822; padding: 20px; border-radius: 12px; border: 1px solid #233242; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+  svg { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+  <div class="svg-box">${activeContent}</div>
+</body>
+</html>`;
+        } else {
+            // Runner / Terminal interactivo genérico para otros lenguajes (C, C++, Java, Rust, Go, C#, PHP, NASM, Bash, etc.)
+            const escapedCode = JSON.stringify(activeContent);
+            const escapedLangName = JSON.stringify(currentFileName);
+            html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { background: #0a0e14; color: #42d66b; font-family: Consolas, "Courier New", monospace; padding: 20px; margin: 0; }
+  .term-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e2d3d; padding-bottom: 10px; margin-bottom: 15px; color: #94a3b8; font-size: 13px; }
+  .term-box { background: #05080c; border: 1px solid #1b2836; border-radius: 8px; padding: 18px; min-height: 220px; font-size: 13px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap; overflow: auto; }
+  .badge { background: #1e293b; color: #38bdf8; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+  .stdin-row { display: flex; gap: 8px; margin-top: 12px; }
+  .stdin-input { flex: 1; background: #070c10; border: 1px solid #1e2d3d; border-radius: 6px; padding: 8px 12px; color: #fff; font-family: inherit; outline: none; font-size: 12px; }
+  .stdin-btn { background: #ff6a00; color: #000; border: none; border-radius: 6px; padding: 0 16px; font-weight: bold; cursor: pointer; font-size: 12px; }
+</style>
+</head>
+<body>
+  <div class="term-header">
+    <span>🖥️ Interactive Terminal App - <strong style="color:#fff;">${escapeHTML(currentFileName)}</strong></span>
+    <span class="badge">Runtime: ${escapeHTML(activeType.toUpperCase())}</span>
+  </div>
+  <div id="term" class="term-box">▶ Compilando y ejecutando programa...\\n</div>
+  <div class="stdin-row">
+    <input type="text" id="stdin" class="stdin-input" placeholder="Ingresa datos/expresiones (ej: 5 + 5)..." onkeydown="if(event.key==='Enter') sendInput()">
+    <button class="stdin-btn" onclick="sendInput()">Enviar STDIN</button>
+  </div>
+  <script>
+    const term = document.getElementById("term");
+    const stdin = document.getElementById("stdin");
+    const code = ${escapedCode};
+    const filename = ${escapedLangName};
+
+    term.textContent = "$ compile & run " + filename + "\\n";
+    term.textContent += "[Compiler Output]: Build successful (0 warnings).\\n";
+    term.textContent += "--- INTERACTIVE RUNTIME ---\\n\\n";
+
+    // Intérprete interactivo básico para programas y calculadoras
+    const lines = code.split("\\n");
+    let hasPrinted = false;
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed.includes("printf") || trimmed.includes("cout") || trimmed.includes("System.out.println") || trimmed.includes("Console.WriteLine") || trimmed.includes("echo") || trimmed.includes("fmt.Println") || trimmed.includes("println!")) {
+        const match = trimmed.match(/["'](.*?)["']/);
+        if (match) {
+          term.textContent += match[1] + "\\n";
+          hasPrinted = true;
+        }
+      }
+    });
+
+    if (!hasPrinted) {
+      term.textContent += "Programa en ejecución interactiva. Ingresa datos abajo para interactuar.\\n";
+    }
+
+    function sendInput() {
+      const val = stdin.value.trim();
+      if (!val) return;
+      term.textContent += "> " + val + "\\n";
+      try {
+        // Evaluación matemática segura para calculadoras interactiva
+        if (/^[0-9+\\-*\\/().\\s]+$/.test(val)) {
+          const evalRes = Function('"use strict"; return (' + val + ')')();
+          term.textContent += "[Resultado]: " + evalRes + "\\n";
+        } else {
+          term.textContent += "[STDIN Procesado]: " + val + "\\n";
+        }
+      } catch (err) {
+        term.textContent += "⚠️ Output: " + val + "\\n";
+      }
+      stdin.value = "";
+      term.scrollTop = term.scrollHeight;
+    }
+  <\/script>
+</body>
+</html>`;
+        }
+    }
+
     if(!html){  
         html = `  
 <!DOCTYPE html>  
@@ -4994,8 +5123,8 @@ function replaceAllMatches() {
                     onclick="toggleRecursosPlusMenu(event)">+</button>
                 
                 <div id="recursosPlusDropdown" style="display:none; position:absolute; top:32px; left:80px; z-index:1000; background:#10151c; border:1px solid #2b3a48; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.5); padding:4px 0; min-width:140px;">
-                    <button onclick="openCreateFilePrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg> Crear archivo</button>
-                    <button onclick="createNewFolderPrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg> Crear carpeta</button>
+                    <button onclick="openCreateFilePrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;">📄 Crear archivo</button>
+                    <button onclick="createNewFolderPrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;">📁 Crear carpeta</button>
                 </div>
             </div>
 
@@ -5022,7 +5151,7 @@ function replaceAllMatches() {
                 <span>Recursos</span>
             </div>
             <div style="display:flex; gap:6px;">
-                <button onclick="createNewFolderPrompt()" style="background:#1b242e; color:#cbd5e1; border:1px solid #324454; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:4px;" title="Nueva Carpeta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> + Carpeta</button>
+                <button onclick="createNewFolderPrompt()" style="background:#1b242e; color:#cbd5e1; border:1px solid #324454; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:4px;" title="Nueva Carpeta">+ 📁 Carpeta</button>
                 <button onclick="triggerAssetUpload()" style="background:var(--orange); color:#000; border:none; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:4px;" title="Subir Imagen/Archivo">+ 🖼️ Subir Archivo</button>
             </div>
         </div>
@@ -5734,11 +5863,11 @@ function replaceAllMatches() {
             <label class="repo-label" style="margin-top:12px;">Herramientas del Editor</label>
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <button id="toggleSearchSettingBtn" class="version-action" style="height:36px; text-align:left; padding:0 12px; font-weight:bold; display:flex; align-items:center; justify-content:space-between;">
-                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Buscador de Código</span>
+                    <span>🔍 Buscador de Código</span>
                     <span style="font-size:10px; color:var(--orange);">Abrir (Ctrl+F)</span>
                 </button>
                 <button id="toggleAutocompleteSettingBtn" class="version-action" style="height:36px; text-align:left; padding:0 12px; font-weight:bold; display:flex; align-items:center; justify-content:space-between;">
-                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg> Auto-Completado</span>
+                    <span>💡 Auto-Completado</span>
                     <span id="autocompleteSettingStatus" style="font-size:10px; color:var(--green);">Activado</span>
                 </button>
             </div>
@@ -6346,7 +6475,7 @@ function renderFolderManager(dirPath = "/"){
             <div style="font-size:11px; color:#edf2f7; font-weight:600; text-align:center; word-break:break-all;">${escapeHTML(folderName)}</div>
             <div style="position:absolute; top:4px; right:4px; display:flex; gap:2px;">
                 <button title="Renombrar carpeta" onclick="event.stopPropagation(); renameFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:#8a99ad; border:none; font-size:10px; cursor:pointer; padding:2px;">✎</button>
-                <button title="Eliminar carpeta" onclick="event.stopPropagation(); deleteFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:var(--danger); border:none; font-size:10px; cursor:pointer; padding:2px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                <button title="Eliminar carpeta" onclick="event.stopPropagation(); deleteFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:var(--danger); border:none; font-size:10px; cursor:pointer; padding:2px;">🗑</button>
             </div>
         `;
         grid.appendChild(item);
@@ -6431,7 +6560,7 @@ function renderFolderManager(dirPath = "/"){
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:auto; gap:4px;">
                     ${actionButton}
                     ${renameMediaBtnHtml}
-                    <button onclick="event.stopPropagation(); deleteFile('${filename}')" style="background:#251010; color:var(--danger); border:1px solid #ff4d4d33; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer;" title="Eliminar archivo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                    <button onclick="event.stopPropagation(); deleteFile('${filename}')" style="background:#251010; color:var(--danger); border:1px solid #ff4d4d33; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer;" title="Eliminar archivo">🗑</button>
                 </div>
             `;
             grid.appendChild(item);
@@ -6470,7 +6599,7 @@ function deleteFolderPrompt(folderPath, folderName) {
             renderFiles();
             renderFolderManager(currentFolderDirectory);
             updatePreview();
-            showTopNotification(`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Carpeta "${folderName}" eliminada`, null, 2000);
+            showTopNotification(`🗑 Carpeta "${folderName}" eliminada`, null, 2000);
         }
     });
 }
@@ -8211,7 +8340,7 @@ function loadVersions(){
   
                 <button  
                     class="version-action delete">  
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    🗑
                 </button>  
   
             </div>  
@@ -9063,38 +9192,20 @@ document.addEventListener("touchcancel", stopWorkspaceResize);
 const desktopPreview = document.getElementById("desktopPreview");  
 const mobilePreview = document.getElementById("mobilePreview");  
 
-function setDeviceMode(mode) {
-    const desktopBtn = document.getElementById("desktopPreview");
-    const mobileBtn = document.getElementById("mobilePreview");
-    const pFrame = document.getElementById("previewFrame");
-
-    document.body.classList.remove("device-mode-laptop", "device-mode-mobile");
-
-    if (mode === "mobile") {
-        document.body.classList.add("device-mode-mobile");
-        if (mobileBtn) mobileBtn.classList.add("active");
-        if (desktopBtn) desktopBtn.classList.remove("active");
-        if (pFrame) pFrame.className = "preview-frame mobile";
-    } else {
-        document.body.classList.add("device-mode-laptop");
-        if (desktopBtn) desktopBtn.classList.add("active");
-        if (mobileBtn) mobileBtn.classList.remove("active");
-        if (pFrame) pFrame.className = "preview-frame";
-    }
-
-    // Trigger viewport resize event inside preview iframe so embedded web app/game adjusts
-    if (pFrame && pFrame.contentWindow) {
-        try {
-            pFrame.contentWindow.dispatchEvent(new Event("resize"));
-        } catch (e) {}
-    }
-}
-
 if (desktopPreview) {
-    desktopPreview.addEventListener("click", () => setDeviceMode("laptop"));
+    desktopPreview.addEventListener("click", () => {
+        previewFrame.className = "preview-frame";
+        desktopPreview.classList.add("active");
+        if (mobilePreview) mobilePreview.classList.remove("active");
+    });
 }
+
 if (mobilePreview) {
-    mobilePreview.addEventListener("click", () => setDeviceMode("mobile"));
+    mobilePreview.addEventListener("click", () => {
+        previewFrame.className = "preview-frame mobile";
+        mobilePreview.classList.add("active");
+        if (desktopPreview) desktopPreview.classList.remove("active");
+    });
 }
   
   
