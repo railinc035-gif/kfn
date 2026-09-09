@@ -1890,34 +1890,38 @@ body.theme-oscuro {
     --danger:#ff4d4d;  
 } 
  
-/* Claro */ 
+/* Blanco (Tema Claro) */
 body.theme-claro { 
-    --bg:#f5f5f5;  
+    --bg:#f8f9fa;
     --panel:#ffffff;  
-    --panel2:#eaeaea;  
-    --border:#cccccc;  
-    --orange:#e65c00;  
-    --text:#1a1a1a;  
-    --muted:#666666;  
+    --panel2:#f1f3f5;
+    --border:#dbe2e6;
+    --orange:#d95200;
+    --text:#000000;
+    --muted:#495057;
     --green:#2b8a3e;  
     --danger:#c92a2a;  
+    color: #000000 !important;
 } 
-body.theme-claro .topbar { background: #ffffff; } 
-body.theme-claro .code-panel { background: #fafafa; } 
-body.theme-claro .preview-panel { background: #fafafa; } 
-body.theme-claro .panel-header { background: #ffffff; } 
-body.theme-claro .file-bar { background: #eeeeee; border-bottom-color: #cccccc; } 
-body.theme-claro .file-tab { background: #ffffff; border-color: #cccccc; color: #555555; } 
-body.theme-claro .file-tab.active { background: #ffe8cc; color: #d9480f; border-color: #ffd8a8; } 
-body.theme-claro .code-editor { background: #fafafa; color: #1a1a1a; } 
-body.theme-claro .code-footer { background: #ffffff; } 
+body.theme-claro .topbar { background: #ffffff; border-bottom-color: #dbe2e6; }
+body.theme-claro .topbar *, body.theme-claro .panel-header *, body.theme-claro .settings-panel *, body.theme-claro .dialog * { color: #000000 !important; }
+body.theme-claro .code-panel { background: #ffffff; }
+body.theme-claro .preview-panel { background: #f8f9fa; }
+body.theme-claro .panel-header { background: #ffffff; border-bottom-color: #dbe2e6; }
+body.theme-claro .file-bar { background: #f1f3f5; border-bottom-color: #dbe2e6; }
+body.theme-claro .file-tab { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
+body.theme-claro .file-tab.active { background: #ffe8cc; color: #d95200 !important; border-color: #ffc078; font-weight: bold; }
+body.theme-claro .code-editor { background: #ffffff; color: #000000 !important; }
+body.theme-claro .line-gutter { background: #f1f3f5; border-right-color: #dbe2e6; color: #495057; }
+body.theme-claro .code-footer { background: #ffffff; border-top-color: #dbe2e6; color: #000000 !important; }
 body.theme-claro .settings-panel, 
 body.theme-claro .project-menu, 
-body.theme-claro .dialog { background: #ffffff; border-color: #cccccc; } 
+body.theme-claro .dialog { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
+body.theme-claro .settings-option { background: #f1f3f5; border-color: #dbe2e6; color: #000000 !important; }
 body.theme-claro .settings-option:hover, 
-body.theme-claro .project-item:hover { background: #f0f0f0; color: #1a1a1a; } 
-body.theme-claro .option-icon { background: #f0f0f0; } 
-body.theme-claro .empty-editor span { background: #ffffff; border-color: #cccccc; color: #666; } 
+body.theme-claro .project-item:hover { background: #e9ecef; color: #000000 !important; }
+body.theme-claro .option-icon { background: #e9ecef; color: #000000 !important; }
+body.theme-claro .empty-editor span { background: #ffffff; border-color: #dbe2e6; color: #000000 !important; }
  
 /* Cobalto */ 
 body.theme-cobalto { 
@@ -2611,6 +2615,118 @@ button {
     button, .miwy-project-card, .file-tab, .settings-option { touch-action: manipulation; }
     .miwy-gallery, .code-editor, #folderGrid, .settings-panel { -webkit-overflow-scrolling: touch; }
     .miwy-project-card, .dialog, .settings-panel { box-shadow: 0 6px 16px rgba(0,0,0,.4) !important; }
+}
+
+
+/* =====================================================
+   ADAPTACIÓN COMPLETA DE DISPOSITIVO (LAPTOP / TELÉFONO)
+===================================================== */
+body.device-mode-mobile {
+    font-size: 11px;
+}
+
+body.device-mode-mobile .topbar {
+    height: 48px;
+    padding: 0 10px;
+}
+
+body.device-mode-mobile .logo-button {
+    width: 36px;
+    height: 36px;
+}
+
+body.device-mode-mobile .settings-button {
+    width: 32px;
+    height: 32px;
+}
+
+body.device-mode-mobile .workspace {
+    top: 48px;
+    flex-direction: column;
+}
+
+body.device-mode-mobile .code-panel,
+body.device-mode-mobile .preview-panel {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 50%;
+}
+
+body.device-mode-mobile .panel-header {
+    height: 36px;
+    padding: 0 8px;
+}
+
+body.device-mode-mobile .main-tab-btn {
+    height: 26px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+body.device-mode-mobile .preview-button {
+    height: 26px;
+    padding: 0 6px;
+    font-size: 10px;
+}
+
+body.device-mode-mobile .file-bar {
+    min-height: 30px;
+    padding: 2px 6px;
+}
+
+body.device-mode-mobile .file-tab {
+    height: 24px;
+    font-size: 9px;
+    padding: 0 6px;
+}
+
+body.device-mode-mobile .code-editor {
+    padding: 12px 14px;
+    font-size: 12px;
+}
+
+body.device-mode-mobile .code-footer {
+    height: 26px;
+    padding: 0 10px;
+    font-size: 9px;
+}
+
+body.device-mode-mobile .settings-panel {
+    width: calc(100vw - 16px);
+    right: 8px;
+    top: 54px;
+}
+
+body.device-mode-mobile .preview-wrapper {
+    padding: 10px;
+}
+
+body.device-mode-mobile .preview-frame.mobile {
+    width: 360px;
+    max-width: calc(100% - 16px);
+    height: 640px;
+    max-height: calc(100% - 16px);
+    border-radius: 28px;
+    border: 6px solid #1f1f1f;
+}
+
+body.device-mode-laptop .workspace {
+    flex-direction: row;
+}
+
+body.device-mode-laptop .code-panel {
+    width: 50%;
+    height: 100%;
+}
+
+body.device-mode-laptop .preview-panel {
+    flex: 1;
+    height: 100%;
+}
+
+body.device-mode-laptop .preview-frame {
+    width: 100%;
+    height: 100%;
 }
 
 </style>  
@@ -4878,8 +4994,8 @@ function replaceAllMatches() {
                     onclick="toggleRecursosPlusMenu(event)">+</button>
                 
                 <div id="recursosPlusDropdown" style="display:none; position:absolute; top:32px; left:80px; z-index:1000; background:#10151c; border:1px solid #2b3a48; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.5); padding:4px 0; min-width:140px;">
-                    <button onclick="openCreateFilePrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;">📄 Crear archivo</button>
-                    <button onclick="createNewFolderPrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;">📁 Crear carpeta</button>
+                    <button onclick="openCreateFilePrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg> Crear archivo</button>
+                    <button onclick="createNewFolderPrompt(); toggleRecursosPlusMenu();" style="width:100%; padding:8px 12px; background:transparent; border:none; color:#edf2f7; text-align:left; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg> Crear carpeta</button>
                 </div>
             </div>
 
@@ -4906,7 +5022,7 @@ function replaceAllMatches() {
                 <span>Recursos</span>
             </div>
             <div style="display:flex; gap:6px;">
-                <button onclick="createNewFolderPrompt()" style="background:#1b242e; color:#cbd5e1; border:1px solid #324454; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:4px;" title="Nueva Carpeta">+ 📁 Carpeta</button>
+                <button onclick="createNewFolderPrompt()" style="background:#1b242e; color:#cbd5e1; border:1px solid #324454; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:4px;" title="Nueva Carpeta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> + Carpeta</button>
                 <button onclick="triggerAssetUpload()" style="background:var(--orange); color:#000; border:none; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:4px;" title="Subir Imagen/Archivo">+ 🖼️ Subir Archivo</button>
             </div>
         </div>
@@ -5543,7 +5659,7 @@ function replaceAllMatches() {
                     <button  
                         id="exitToGalleryBtn"  
                         class="settings-exit-button">  
-                        🚪 Salir a la Galería  
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Salir a la Galería
                     </button>  
                 </div>
 
@@ -5618,11 +5734,11 @@ function replaceAllMatches() {
             <label class="repo-label" style="margin-top:12px;">Herramientas del Editor</label>
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <button id="toggleSearchSettingBtn" class="version-action" style="height:36px; text-align:left; padding:0 12px; font-weight:bold; display:flex; align-items:center; justify-content:space-between;">
-                    <span>🔍 Buscador de Código</span>
+                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Buscador de Código</span>
                     <span style="font-size:10px; color:var(--orange);">Abrir (Ctrl+F)</span>
                 </button>
                 <button id="toggleAutocompleteSettingBtn" class="version-action" style="height:36px; text-align:left; padding:0 12px; font-weight:bold; display:flex; align-items:center; justify-content:space-between;">
-                    <span>💡 Auto-Completado</span>
+                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:6px;"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg> Auto-Completado</span>
                     <span id="autocompleteSettingStatus" style="font-size:10px; color:var(--green);">Activado</span>
                 </button>
             </div>
@@ -5647,37 +5763,19 @@ function replaceAllMatches() {
             <div class="version-list"> 
                 <button class="settings-option theme-option-btn" data-theme="oscuro"> 
                     <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#111; border: 1px solid #444; width: 24px; height: 24px;"></div> 
+                        <div class="option-icon" style="background:#080808; border: 1px solid #ff6a00; width: 24px; height: 24px; border-radius: 50%;"></div>
                         <div> 
-                            <strong>Oscuro</strong> 
-                            <small>Fondo oscuro original (predeterminado)</small> 
+                            <strong style="color:#ffffff;">Negro</strong>
+                            <small style="color:#a0a0a0;">Fondo oscuro con acentos naranja MIWY</small>
                         </div> 
                     </div> 
                 </button> 
                 <button class="settings-option theme-option-btn" data-theme="claro"> 
                     <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#eee; border: 1px solid #ccc; width: 24px; height: 24px;"></div> 
+                        <div class="option-icon" style="background:#ffffff; border: 1px solid #000000; width: 24px; height: 24px; border-radius: 50%;"></div>
                         <div> 
-                            <strong>Claro</strong> 
-                            <small>Interfaz brillante y limpia</small> 
-                        </div> 
-                    </div> 
-                </button> 
-                <button class="settings-option theme-option-btn" data-theme="cobalto"> 
-                    <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#002240; border: 1px solid #00aaff; width: 24px; height: 24px;"></div> 
-                        <div> 
-                            <strong>Cobalto</strong> 
-                            <small>Azul profundo con acentos neón</small> 
-                        </div> 
-                    </div> 
-                </button> 
-                <button class="settings-option theme-option-btn" data-theme="monokai"> 
-                    <div class="settings-option-left"> 
-                        <div class="option-icon" style="background:#272822; border: 1px solid #f92672; width: 24px; height: 24px;"></div> 
-                        <div> 
-                            <strong>Monokai</strong> 
-                            <small>Estilo de contraste para código</small> 
+                            <strong style="color:#000000;">Blanco</strong>
+                            <small style="color:#555555;">Fondo claro y textos principales en negro</small>
                         </div> 
                     </div> 
                 </button> 
@@ -6248,7 +6346,7 @@ function renderFolderManager(dirPath = "/"){
             <div style="font-size:11px; color:#edf2f7; font-weight:600; text-align:center; word-break:break-all;">${escapeHTML(folderName)}</div>
             <div style="position:absolute; top:4px; right:4px; display:flex; gap:2px;">
                 <button title="Renombrar carpeta" onclick="event.stopPropagation(); renameFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:#8a99ad; border:none; font-size:10px; cursor:pointer; padding:2px;">✎</button>
-                <button title="Eliminar carpeta" onclick="event.stopPropagation(); deleteFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:var(--danger); border:none; font-size:10px; cursor:pointer; padding:2px;">🗑</button>
+                <button title="Eliminar carpeta" onclick="event.stopPropagation(); deleteFolderPrompt('${fullFolderPath}', '${folderName}')" style="background:transparent; color:var(--danger); border:none; font-size:10px; cursor:pointer; padding:2px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
             </div>
         `;
         grid.appendChild(item);
@@ -6333,7 +6431,7 @@ function renderFolderManager(dirPath = "/"){
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:auto; gap:4px;">
                     ${actionButton}
                     ${renameMediaBtnHtml}
-                    <button onclick="event.stopPropagation(); deleteFile('${filename}')" style="background:#251010; color:var(--danger); border:1px solid #ff4d4d33; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer;" title="Eliminar archivo">🗑</button>
+                    <button onclick="event.stopPropagation(); deleteFile('${filename}')" style="background:#251010; color:var(--danger); border:1px solid #ff4d4d33; border-radius:4px; padding:3px 8px; font-size:10px; cursor:pointer;" title="Eliminar archivo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                 </div>
             `;
             grid.appendChild(item);
@@ -6372,7 +6470,7 @@ function deleteFolderPrompt(folderPath, folderName) {
             renderFiles();
             renderFolderManager(currentFolderDirectory);
             updatePreview();
-            showTopNotification(`🗑 Carpeta "${folderName}" eliminada`, null, 2000);
+            showTopNotification(`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Carpeta "${folderName}" eliminada`, null, 2000);
         }
     });
 }
@@ -8113,7 +8211,7 @@ function loadVersions(){
   
                 <button  
                     class="version-action delete">  
-                    🗑  
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                 </button>  
   
             </div>  
@@ -8572,7 +8670,7 @@ function lintAndFixCurrentCode() {
    TEMAS DE INTERFAZ (LOGIC)  
 ===================================================== */  
 function applyTheme(themeName) { 
-    const validThemes = ["oscuro", "claro", "cobalto", "monokai"];
+    const validThemes = ["oscuro", "claro"];
     if (!validThemes.includes(themeName)) themeName = "oscuro";
     document.body.classList.remove("theme-oscuro", "theme-claro", "theme-cobalto", "theme-monokai"); 
     document.body.classList.add("theme-" + themeName); 
@@ -8580,7 +8678,7 @@ function applyTheme(themeName) {
     document.querySelectorAll(".theme-option-btn").forEach(btn => { 
         if (btn.getAttribute("data-theme") === themeName) { 
             btn.classList.add("active"); 
-            btn.style.borderColor = "var(--orange)"; 
+            btn.style.borderColor = themeName === "claro" ? "#000000" : "var(--orange)";
         } else { 
             btn.classList.remove("active"); 
             btn.style.borderColor = ""; 
@@ -8965,20 +9063,38 @@ document.addEventListener("touchcancel", stopWorkspaceResize);
 const desktopPreview = document.getElementById("desktopPreview");  
 const mobilePreview = document.getElementById("mobilePreview");  
 
-if (desktopPreview) {
-    desktopPreview.addEventListener("click", () => {  
-        previewFrame.className = "preview-frame";
-        desktopPreview.classList.add("active");  
-        if (mobilePreview) mobilePreview.classList.remove("active");  
-    });  
+function setDeviceMode(mode) {
+    const desktopBtn = document.getElementById("desktopPreview");
+    const mobileBtn = document.getElementById("mobilePreview");
+    const pFrame = document.getElementById("previewFrame");
+
+    document.body.classList.remove("device-mode-laptop", "device-mode-mobile");
+
+    if (mode === "mobile") {
+        document.body.classList.add("device-mode-mobile");
+        if (mobileBtn) mobileBtn.classList.add("active");
+        if (desktopBtn) desktopBtn.classList.remove("active");
+        if (pFrame) pFrame.className = "preview-frame mobile";
+    } else {
+        document.body.classList.add("device-mode-laptop");
+        if (desktopBtn) desktopBtn.classList.add("active");
+        if (mobileBtn) mobileBtn.classList.remove("active");
+        if (pFrame) pFrame.className = "preview-frame";
+    }
+
+    // Trigger viewport resize event inside preview iframe so embedded web app/game adjusts
+    if (pFrame && pFrame.contentWindow) {
+        try {
+            pFrame.contentWindow.dispatchEvent(new Event("resize"));
+        } catch (e) {}
+    }
 }
 
+if (desktopPreview) {
+    desktopPreview.addEventListener("click", () => setDeviceMode("laptop"));
+}
 if (mobilePreview) {
-    mobilePreview.addEventListener("click", () => {  
-        previewFrame.className = "preview-frame mobile";
-        mobilePreview.classList.add("active");  
-        if (desktopPreview) desktopPreview.classList.remove("active");  
-    });  
+    mobilePreview.addEventListener("click", () => setDeviceMode("mobile"));
 }
   
   
