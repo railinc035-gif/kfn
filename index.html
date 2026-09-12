@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FRAMEN - Novelas & Historias</title>
+    <!-- GUNDB DECENTRALIZED REALTIME DATABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <style>
         :root {
             --bg-dark: #08090d;
@@ -1024,7 +1026,7 @@
             <div class="profile-card">
                 <div class="profile-avatar">F</div>
                 <h3 class="profile-name">Escritor FRAMEN+</h3>
-                <p class="profile-bio">Publica tus novelas y capítulos periódicamente.</p>
+                <p class="profile-bio">Publica tus novelas en la red descentralizada GunDB.</p>
                 <div class="profile-stats">
                     <div class="stat-item">
                         <h4 id="stat-published-count">0</h4>
@@ -1160,9 +1162,9 @@
 
         <!-- COMENTARIOS AL FINAL DEL CAPÍTULO -->
         <div class="comments-section">
-            <h4 class="comments-title">Comentarios de Lectores</h4>
+            <h4 class="comments-title">Comentarios de Lectores (GunDB Realtime)</h4>
             <div class="comment-input-box">
-                <input type="text" id="comment-input-el" class="comment-input" placeholder="Escribe tu comentario sobre este capítulo...">
+                <input type="text" id="comment-input-el" class="comment-input" placeholder="Escribe tu comentario en la red GunDB...">
                 <button class="comment-submit-btn" id="comment-submit-btn">Enviar</button>
             </div>
             <div id="comments-list-container">
@@ -1175,7 +1177,7 @@
 <!-- MODAL SUBIR OBRA / CAPÍTULO -->
 <div class="modal" id="upload-modal">
     <div class="modal-header">
-        <h3 style="font-size: 16px; font-weight: 800;">Subir Obra / Capítulo</h3>
+        <h3 style="font-size: 16px; font-weight: 800;">Subir Obra / Capítulo (GunDB)</h3>
         <button class="icon-btn" id="upload-close-btn">
             <svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -1226,7 +1228,7 @@
                 <label class="form-label">Contenido del Capítulo (Texto)</label>
                 <textarea id="form-content" class="form-textarea" placeholder="Escribe el texto del capítulo aquí..." required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Publicar en FRAMEN+</button>
+            <button type="submit" class="submit-btn">Publicar en GunDB</button>
         </form>
     </div>
 </div>
@@ -1234,7 +1236,19 @@
 <div class="toast" id="toast-el">Notificación</div>
 
 <script>
-    // BASE DE DATOS DE OBRAS (DESDE LOCALSTORAGE)
+    // INICIALIZACIÓN DE GUNDB
+    let gun = null;
+    if (typeof Gun !== 'undefined') {
+        gun = Gun({
+            peers: [
+                'https://gun-manhattan.herokuapp.com/gun',
+                'https://gun-matrix.herokuapp.com/gun'
+            ],
+            localStorage: true
+        });
+    }
+
+    // BASE DE DATOS DE OBRAS Y COMENTARIOS
     let STORIES = JSON.parse(localStorage.getItem('framen_user_stories') || '[]');
 
     let state = {
@@ -1243,7 +1257,6 @@
         selectedDay: 'Todos',
         savedStoryIds: JSON.parse(localStorage.getItem('framen_saved') || '[]'),
         likedStoryIds: JSON.parse(localStorage.getItem('framen_liked') || '[]'),
-        comments: JSON.parse(localStorage.getItem('framen_comments') || '{}'),
         currentStory: null,
         currentChapter: null,
         fontSizeIndex: 1,
@@ -1255,12 +1268,46 @@
     document.addEventListener('DOMContentLoaded', () => {
         applyTheme(state.theme);
         initScheduleFilters();
+        initGunSync();
         renderAllViews();
         setupEventListeners();
     });
 
-    function saveStories() {
+    // SINCRONIZACIÓN REALTIME CON GUNDB
+    function initGunSync() {
+        if (!gun) return;
+
+        // Escuchar cambios de Obras en GunDB
+        const gunStories = gun.get('framen_v2_stories');
+        gunStories.map().on((data, id) => {
+            if (!data) return;
+            try {
+                const storyObj = typeof data === 'string' ? JSON.parse(data) : data;
+                if (!storyObj || !storyObj.id) return;
+
+                const existingIdx = STORIES.findIndex(s => s.id === storyObj.id);
+                if (existingIdx > -1) {
+                    STORIES[existingIdx] = storyObj;
+                } else {
+                    STORIES.unshift(storyObj);
+                }
+                saveLocalStories();
+                renderAllViews();
+            } catch (err) {
+                console.error('GunDB story parse error:', err);
+            }
+        });
+    }
+
+    function saveLocalStories() {
         localStorage.setItem('framen_user_stories', JSON.stringify(STORIES));
+    }
+
+    function saveStoriesToGun(storyObj) {
+        saveLocalStories();
+        if (gun && storyObj && storyObj.id) {
+            gun.get('framen_v2_stories').get(storyObj.id).put(JSON.stringify(storyObj));
+        }
     }
 
     function renderAllViews() {
@@ -1292,7 +1339,7 @@
         showToast(`Modo ${state.theme === 'blanco' ? 'Claro' : 'Oscuro'} activado`);
     }
 
-    /* RENDER BANNERS (DESTACADOS MANGA PLUS) */
+    /* RENDER BANNERS */
     function renderBanners() {
         const container = document.getElementById('featured-carousel');
         if (!container) return;
@@ -1301,7 +1348,7 @@
             container.innerHTML = `
                 <div class="empty-state" style="width: 100%; background: var(--bg-card); border-radius: 16px; border: 1px dashed var(--border-color);">
                     <p style="font-weight: 800; color: var(--text-primary);">Sin contenido destacado</p>
-                    <p style="font-size: 12px;">Publica la primera obra en la pestaña Perfil.</p>
+                    <p style="font-size: 12px;">Publica la primera obra en GunDB desde la pestaña Perfil.</p>
                 </div>
             `;
             return;
@@ -1325,13 +1372,13 @@
         `).join('');
     }
 
-    /* RENDER RANKING TOP */
+    /* RENDER RANKING */
     function renderRanking() {
         const container = document.getElementById('ranking-container');
         if (!container) return;
 
         if (STORIES.length === 0) {
-            container.innerHTML = `<div class="empty-state"><p>No hay obras publicadas en el ranking.</p></div>`;
+            container.innerHTML = `<div class="empty-state"><p>No hay obras publicadas en la red GunDB.</p></div>`;
             return;
         }
 
@@ -1403,7 +1450,7 @@
             return;
         }
 
-        container.innerHTML = filtered.map((story, idx) => `
+        container.innerHTML = filtered.map((story) => `
             <div class="ranking-item" onclick="openStoryDetail('${story.id}')">
                 <div class="rank-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60'}');"></div>
                 <div class="rank-info">
@@ -1447,7 +1494,7 @@
         document.getElementById('stat-likes-count').textContent = totalLikes;
     }
 
-    /* PÁGINA DETALLE DE LA OBRA (ESTILO MANGA PLUS) */
+    /* PÁGINA DETALLE DE LA OBRA */
     function openStoryDetail(storyId) {
         const story = STORIES.find(s => s.id === storyId);
         if (!story) return;
@@ -1476,7 +1523,7 @@
         switchTab('story-detail');
     }
 
-    /* LECTOR DE CAPÍTULOS */
+    /* LECTOR DE CAPÍTULOS CON GUNDB COMMENTS */
     function openChapterReader(chapterIndex) {
         if (!state.currentStory) return;
         const chapters = state.currentStory.chapters || [{ title: 'Capítulo 1', content: state.currentStory.content || [] }];
@@ -1496,7 +1543,7 @@
             : (chapter.content || '').split('\n').filter(p => p.trim());
         contentEl.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
 
-        renderComments();
+        listenGunComments();
         document.getElementById('reader-modal').classList.add('active');
     }
 
@@ -1504,20 +1551,55 @@
         document.getElementById('reader-modal').classList.remove('active');
     }
 
-    /* SECCIÓN DE COMENTARIOS */
-    function renderComments() {
+    /* ESCUCHAR Y RENDEREAR COMENTARIOS CON GUNDB */
+    let currentGunCommentListener = null;
+    let loadedCommentsList = [];
+
+    function listenGunComments() {
         const container = document.getElementById('comments-list-container');
         if (!container || !state.currentStory) return;
 
-        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`;
-        const commentList = state.comments[key] || [];
+        loadedCommentsList = [];
+        container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Cargando comentarios en tiempo real...</p>`;
 
-        if (commentList.length === 0) {
-            container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Sé el primero en comentar este capítulo.</p>`;
+        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`.replace(/[^a-zA-Z0-9_]/g, '_');
+
+        if (gun) {
+            gun.get('framen_comments_node').get(key).map().on((commentData) => {
+                if (!commentData) return;
+                try {
+                    const parsed = typeof commentData === 'string' ? JSON.parse(commentData) : commentData;
+                    if (!parsed || !parsed.id) return;
+
+                    const idx = loadedCommentsList.findIndex(c => c.id === parsed.id);
+                    if (idx > -1) {
+                        loadedCommentsList[idx] = parsed;
+                    } else {
+                        loadedCommentsList.unshift(parsed);
+                    }
+                    renderLoadedComments();
+                } catch (e) {
+                    console.error('Error parsing GunDB comment:', e);
+                }
+            });
+        } else {
+            // Local fallback
+            const localComms = JSON.parse(localStorage.getItem(`framen_comm_${key}`) || '[]');
+            loadedCommentsList = localComms;
+            renderLoadedComments();
+        }
+    }
+
+    function renderLoadedComments() {
+        const container = document.getElementById('comments-list-container');
+        if (!container) return;
+
+        if (loadedCommentsList.length === 0) {
+            container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Sé el primero en comentar este capítulo en la red GunDB.</p>`;
             return;
         }
 
-        container.innerHTML = commentList.map(c => `
+        container.innerHTML = loadedCommentsList.map(c => `
             <div class="comment-item">
                 <div class="comment-user">${escapeHtml(c.user)} • <span style="color: var(--text-secondary); font-size: 10px;">${c.date}</span></div>
                 <div class="comment-text">${escapeHtml(c.text)}</div>
@@ -1530,19 +1612,25 @@
         const text = input.value.trim();
         if (!text || !state.currentStory) return;
 
-        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`;
-        if (!state.comments[key]) state.comments[key] = [];
-
-        state.comments[key].push({
+        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`.replace(/[^a-zA-Z0-9_]/g, '_');
+        const commentObj = {
+            id: Date.now().toString() + Math.random().toString(36).substr(2, 4),
             user: 'Lector FRAMEN+',
             text,
-            date: 'Ahora'
-        });
+            date: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
+        };
 
-        localStorage.setItem('framen_comments', JSON.stringify(state.comments));
+        if (gun) {
+            gun.get('framen_comments_node').get(key).get(commentObj.id).put(JSON.stringify(commentObj));
+        }
+
+        // Respaldo local
+        loadedCommentsList.unshift(commentObj);
+        localStorage.setItem(`framen_comm_${key}`, JSON.stringify(loadedCommentsList));
+
         input.value = '';
-        renderComments();
-        showToast('Comentario publicado');
+        renderLoadedComments();
+        showToast('Comentario enviado a GunDB');
     }
 
     /* PUBLICAR NUEVA OBRA / CAPÍTULO */
@@ -1568,7 +1656,8 @@
                 title: chapterTitle,
                 content: paragraphs
             });
-            showToast('¡Nuevo capítulo añadido a la obra!');
+            saveStoriesToGun(story);
+            showToast('¡Nuevo capítulo añadido en GunDB!');
         } else {
             story = {
                 id: Date.now().toString(),
@@ -1586,10 +1675,10 @@
                 }]
             };
             STORIES.unshift(story);
-            showToast('¡Nueva obra publicada en FRAMEN+!');
+            saveStoriesToGun(story);
+            showToast('¡Nueva obra publicada en GunDB!');
         }
 
-        saveStories();
         renderAllViews();
 
         document.getElementById('upload-form').reset();
@@ -1673,7 +1762,7 @@
         document.getElementById('reader-like-btn').addEventListener('click', () => {
             if (!state.currentStory) return;
             state.currentStory.likes = (state.currentStory.likes || 0) + 1;
-            saveStories();
+            saveStoriesToGun(state.currentStory);
             renderAllViews();
             showToast('¡Te ha gustado este capítulo!');
         });
