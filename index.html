@@ -202,13 +202,15 @@
         }
 
         .section-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             margin: 24px 0 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: var(--accent-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .section-title:first-child {
@@ -526,137 +528,277 @@
             stroke-width: 2;
         }
 
-        /* PROFILE VIEW REDESIGN */
-        .profile-card {
+        /* ====================================================
+           NUEVO PERFIL ESTILO ASCII
+        ==================================================== */
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-header-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 20px;
+            border-radius: 18px;
+            padding: 20px;
             position: relative;
-            overflow: hidden;
         }
 
-        .profile-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent-orange), #ff9933);
-            opacity: 0.8;
-        }
-
-        .profile-avatar {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 3px solid var(--bg-card);
+        .profile-header-actions {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px auto 12px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-            color: var(--accent-orange);
-            font-weight: 900;
-            font-size: 32px;
-        }
-
-        .profile-name {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .profile-badge-tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            background: rgba(255, 102, 0, 0.15);
-            color: var(--accent-orange);
-            font-size: 11px;
-            font-weight: 800;
+            justify-content: flex-end;
             margin-bottom: 12px;
         }
 
-        .profile-bio {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-
-        .profile-stats {
+        .profile-main-info {
             display: flex;
-            justify-content: space-around;
-            border-top: 1px solid var(--border-color);
-            padding-top: 16px;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .stat-item h4 {
-            font-size: 20px;
+        .user-titles {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .user-handle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .profile-photo-stats-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: space-between;
+        }
+
+        .profile-photo-box {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff9933);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 32px;
+            color: #fff;
+            flex-shrink: 0;
+            border: 2px solid var(--border-color);
+        }
+
+        .photo-edit-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .stats-columns {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .stat-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-col-num {
+            font-size: 18px;
             font-weight: 900;
             color: var(--accent-orange);
         }
 
-        .stat-item p {
+        .stat-col-label {
             font-size: 12px;
             color: var(--text-secondary);
-        }
-
-        .settings-list {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .setting-item {
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .setting-item:last-child {
-            border-bottom: none;
-        }
-
-        .setting-item:hover {
-            background: var(--card-hover);
-        }
-
-        .setting-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .setting-info svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--text-secondary);
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .setting-label {
-            font-size: 14px;
             font-weight: 600;
         }
 
-        .setting-value {
+        .follow-btn {
+            width: 100px;
+            padding: 8px;
+            border-radius: 10px;
+            background: var(--accent-orange);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 4px;
+        }
+
+        .follow-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        /* CARD HISTORIA RECIENTE EN PERFIL */
+        .recent-story-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .recent-story-cover {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--border-color);
+        }
+
+        .recent-story-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .recent-story-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border-color);
+            margin: 4px 0;
+        }
+
+        .recent-story-desc {
             font-size: 13px;
             color: var(--text-secondary);
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .recent-story-tags {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-align: center;
+        }
+
+        .recent-story-actions {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .action-btn-outlined {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn-outlined:hover {
+            background: var(--accent-orange);
+            color: #fff;
+        }
+
+        .action-btn-danger {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn-danger:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        /* GRID MIS HISTORIAS */
+        .my-stories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .grid-story-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .grid-story-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        .grid-story-cover {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--border-color);
+            margin-bottom: 8px;
+        }
+
+        .grid-story-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .grid-story-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
         }
 
         /* Navegación Inferior */
@@ -1033,7 +1175,7 @@
 
     <!-- Vistas de Navegación -->
     <main>
-        <!-- TAB 1: INICIO (ESTRUCTURA ORIGINAL RESTAURADA CON NOMBRES EN NARANJA) -->
+        <!-- TAB 1: INICIO (ESTRUCTURA ORIGINAL CON LETRAS EN NARANJA) -->
         <section id="view-inicio" class="tab-view active">
             <!-- Categorías -->
             <div class="categories-scroll" id="categories-container">
@@ -1091,68 +1233,95 @@
             </div>
         </section>
 
-        <!-- TAB 4: PERFIL (MEJORADO CON GESTIÓN Y BORRADO DE OBRAS) -->
+        <!-- TAB 4: PERFIL (REDISEÑO FIEL AL DIAGRAMA ASCII) -->
         <section id="view-perfil" class="tab-view">
-            <div class="profile-card">
-                <div class="profile-avatar">F</div>
-                <h3 class="profile-name">Escritor FRAMEN</h3>
-                <span class="profile-badge-tag">Creador Verificado</span>
-                <p class="profile-bio">Gestión completa de obras en la red descentralizada GunDB.</p>
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <h4 id="stat-published-count">0</h4>
-                        <p>Mis Obras</p>
+            <div class="profile-container">
+                <!-- Tarjeta de Encabezado Perfil -->
+                <div class="profile-header-card">
+                    <div class="profile-header-actions">
+                        <button class="icon-btn" style="width: 32px; height: 32px;" title="Opciones">⋮</button>
                     </div>
-                    <div class="stat-item">
-                        <h4 id="stat-saved-count">0</h4>
-                        <p>Guardadas</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4 id="stat-likes-count">0</h4>
-                        <p>Me Gusta</p>
+
+                    <div class="profile-main-info">
+                        <div class="user-titles">
+                            <h2 class="user-name-title" id="profile-display-name">Mi Nombre</h2>
+                            <span class="user-handle" id="profile-display-handle">@miusuario</span>
+                        </div>
+
+                        <div class="profile-photo-stats-row">
+                            <div class="profile-photo-box" id="profile-photo-container">
+                                <span id="avatar-initials">F</span>
+                                <div class="photo-edit-badge" title="Editar Foto">✎</div>
+                            </div>
+
+                            <div class="stats-columns">
+                                <div class="stat-col">
+                                    <span class="stat-col-num">0</span>
+                                    <span class="stat-col-label">Lectores</span>
+                                </div>
+                                <div class="stat-col">
+                                    <span class="stat-col-num">0</span>
+                                    <span class="stat-col-label">Siguiendo</span>
+                                </div>
+                                <div class="stat-col">
+                                    <span class="stat-col-num" id="stat-profile-stories-count">0</span>
+                                    <span class="stat-col-label">Historias</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button class="follow-btn" id="follow-profile-btn">Seguir</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section-title">
-                <span>Gestión de Contenido</span>
-            </div>
-
-            <div class="settings-list" style="margin-bottom: 20px;">
-                <div class="setting-item" id="upload-story-btn">
-                    <div class="setting-info">
-                        <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                        <span class="setting-label">Subir nueva obra</span>
+                <!-- Sección Publicar Nueva Obra -->
+                <div class="settings-list">
+                    <div class="setting-item" id="upload-story-btn">
+                        <div class="setting-info">
+                            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                            <span class="setting-label">Subir nueva obra</span>
+                        </div>
+                        <span class="setting-value" style="color: var(--accent-orange); font-weight: 800;">+ Publicar</span>
                     </div>
-                    <span class="setting-value" style="color: var(--accent-orange); font-weight: 800;">+ Publicar</span>
                 </div>
-            </div>
 
-            <div class="section-title">
-                <span>Mis Obras Publicadas</span>
-            </div>
-            <div class="stories-list" id="my-stories-container" style="margin-bottom: 24px;">
-                <!-- Lista de obras con opción de borrar -->
-            </div>
-
-            <div class="section-title">
-                <span>Ajustes y Preferencias</span>
-            </div>
-
-            <div class="settings-list">
-                <div class="setting-item" id="toggle-theme-setting">
-                    <div class="setting-info">
-                        <svg viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                        <span class="setting-label">Tema de aplicación</span>
-                    </div>
-                    <span class="setting-value" id="theme-status-label">Oscuro (Negro)</span>
+                <!-- HISTORIA Reciente (Cuadro ASCII) -->
+                <div class="section-title">
+                    <span>HISTORIA reciente</span>
                 </div>
-                <div class="setting-item" id="reset-library-btn">
-                    <div class="setting-info">
-                        <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                        <span class="setting-label">Vaciar biblioteca</span>
+                <div id="recent-story-wrapper">
+                    <!-- Dinámico -->
+                </div>
+
+                <!-- MIS HISTORIAS Grid (ASCII Layout con Vistas y Likes) -->
+                <div class="section-title">
+                    <span>MIS HISTORIAS</span>
+                </div>
+                <div class="my-stories-grid" id="my-stories-grid-container">
+                    <!-- Tarjetas pequeñas -->
+                </div>
+
+                <!-- Ajustes adicionales -->
+                <div class="section-title">
+                    <span>Ajustes</span>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item" id="toggle-theme-setting">
+                        <div class="setting-info">
+                            <svg viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                            <span class="setting-label">Tema de aplicación</span>
+                        </div>
+                        <span class="setting-value" id="theme-status-label">Oscuro</span>
                     </div>
-                    <span class="setting-value">Limpiar</span>
+                    <div class="setting-item" id="reset-library-btn">
+                        <div class="setting-info">
+                            <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                            <span class="setting-label">Vaciar biblioteca</span>
+                        </div>
+                        <span class="setting-value">Limpiar</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1247,18 +1416,17 @@
         <form id="upload-form">
             <div class="form-group">
                 <label class="form-label">Título de la obra</label>
-                <input type="text" id="form-title" class="form-input" placeholder="Ej. El Viaje de las Estrellas" required>
+                <input type="text" id="form-title" class="form-input" placeholder="Ej. El Último Tren" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Categoría / Género</label>
                 <select id="form-category" class="form-select" required>
+                    <option value="Misterio">Misterio</option>
+                    <option value="Terror">Terror</option>
                     <option value="Ciencia Ficción">Ciencia Ficción</option>
                     <option value="Fantasía">Fantasía</option>
-                    <option value="Misterio">Misterio</option>
                     <option value="Romance">Romance</option>
                     <option value="Cyberpunk">Cyberpunk</option>
-                    <option value="Poesía">Poesía</option>
-                    <option value="Drama">Drama</option>
                 </select>
             </div>
             <div class="form-group">
@@ -1267,7 +1435,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Tiempo estimado de lectura</label>
-                <input type="text" id="form-readtime" class="form-input" placeholder="Ej. 5 min" value="5 min" required>
+                <input type="text" id="form-readtime" class="form-input" placeholder="Ej. 8 min" value="8 min" required>
             </div>
             <div class="form-group">
                 <label class="form-label">URL de portada (opcional)</label>
@@ -1301,7 +1469,7 @@
         });
     }
 
-    // BASE DE DATOS DE OBRAS EN LOCALSTORAGE + GUNDB
+    // BASE DE DATOS DE OBRAS
     let STORIES = JSON.parse(localStorage.getItem('framen_user_stories') || '[]');
 
     let state = {
@@ -1312,10 +1480,12 @@
         likedStoryIds: JSON.parse(localStorage.getItem('framen_liked') || '[]'),
         currentReadingStory: null,
         fontSizeIndex: 1,
-        fontSizes: ['15px', '18px', '21px']
+        fontSizes: ['15px', '18px', '21px'],
+        isFollowing: false
     };
 
-    const CATEGORIES = ['Todas', 'Ciencia Ficción', 'Fantasía', 'Misterio', 'Romance', 'Cyberpunk', 'Poesía', 'Drama'];
+    const CATEGORIES = ['Todas', 'Ciencia Ficción', 'Fantasía', 'Misterio', 'Terror', 'Romance', 'Cyberpunk'];
+    const SIX_HOURS_MS = 6 * 60 * 60 * 1000; // 6 HORAS EN MILISEGUNDOS
 
     document.addEventListener('DOMContentLoaded', () => {
         applyTheme(state.theme);
@@ -1330,7 +1500,6 @@
 
         gun.get('framen_v3_stories').map().on((data, id) => {
             if (data === null) {
-                // Obra borrada
                 STORIES = STORIES.filter(s => s.id !== id);
                 saveLocalStories();
                 renderAllViews();
@@ -1383,13 +1552,27 @@
         showToast('Obra borrada con éxito');
     }
 
+    /* REGLA DE VISTAS ANTI-SPAM (COOLDOWN DE 6 HORAS POR USUARIO/DISPOSITIVO) */
+    function registerStoryView(story) {
+        if (!story) return;
+        const storageKey = `framen_view_time_${story.id}`;
+        const lastViewTime = parseInt(localStorage.getItem(storageKey) || '0', 10);
+        const now = Date.now();
+
+        if (now - lastViewTime >= SIX_HOURS_MS) {
+            story.views = (story.views || 0) + 1;
+            localStorage.setItem(storageKey, now.toString());
+            saveStoriesToGun(story);
+            renderAllViews();
+        }
+    }
+
     function renderAllViews() {
         renderFeaturedStory();
         renderHomeStories();
         renderExploreStories(document.getElementById('explore-search-input')?.value || '');
         renderLibrary();
-        renderMyStoriesList();
-        updateProfileStats();
+        renderProfileSection();
     }
 
     function applyTheme(theme) {
@@ -1430,7 +1613,7 @@
         });
     }
 
-    /* RENDER INICIO RESTAURADO */
+    /* RENDER INICIO RESTAURADO CON LETRAS EN NARANJA */
     function renderFeaturedStory() {
         const wrapper = document.getElementById('featured-card-wrapper');
         if (!wrapper) return;
@@ -1483,19 +1666,19 @@
                 <p>Por ${escapeHtml(story.author)}</p>
                 <div class="story-footer">
                     <span>${story.readTime || '5 min'}</span>
-                    <span style="color: var(--accent-orange); font-weight: 700;">♥ ${story.likes || 0}</span>
+                    <span style="color: var(--accent-orange); font-weight: 700;">👁 ${story.views || 0}</span>
                 </div>
             </div>
         `).join('');
 
-        popContainer.innerHTML = [...filtered].sort((a,b) => (b.likes || 0) - (a.likes || 0)).map(story => `
+        popContainer.innerHTML = [...filtered].sort((a,b) => (b.views || 0) - (a.views || 0)).map(story => `
             <div class="story-list-item" onclick="openReader('${story.id}')">
                 <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');"></div>
                 <div class="story-list-info">
                     <h3>${escapeHtml(story.title)}</h3>
                     <p>${escapeHtml(story.excerpt)}</p>
                     <div class="story-list-meta">
-                        <span>${escapeHtml(story.author)}</span> • <span>${story.readTime || '5 min'}</span> • <span style="color: var(--accent-orange); font-weight: 700;">♥ ${story.likes || 0}</span>
+                        <span>${escapeHtml(story.author)}</span> • <span>👁 ${story.views || 0}</span> • <span style="color: var(--accent-orange); font-weight: 700;">♥ ${story.likes || 0}</span>
                     </div>
                 </div>
             </div>
@@ -1531,7 +1714,7 @@
                     <h3>${escapeHtml(story.title)}</h3>
                     <p>${escapeHtml(story.excerpt)}</p>
                     <div class="story-list-meta">
-                        <span>${story.category}</span> • <span>${story.readTime || '5 min'}</span>
+                        <span>${story.category}</span> • <span>👁 ${story.views || 0}</span>
                     </div>
                 </div>
             </div>
@@ -1541,8 +1724,6 @@
     function renderLibrary() {
         const container = document.getElementById('library-container');
         const savedStories = STORIES.filter(s => state.savedStoryIds.includes(s.id));
-
-        document.getElementById('stat-saved-count').textContent = savedStories.length;
 
         if (savedStories.length === 0) {
             container.innerHTML = `<div class="empty-state"><p>No tienes historias guardadas en tu biblioteca.</p></div>`;
@@ -1563,46 +1744,68 @@
         `).join('');
     }
 
-    /* VISTA DE PERFIL MEJORADA: LISTA DE OBRAS CON OPCIÓN DE BORRAR */
-    function renderMyStoriesList() {
-        const container = document.getElementById('my-stories-container');
-        if (!container) return;
+    /* RENDER PERFIL REDISEÑADO FIEL AL ESQUEMA ASCII */
+    function renderProfileSection() {
+        document.getElementById('stat-profile-stories-count').textContent = STORIES.length;
 
-        if (STORIES.length === 0) {
-            container.innerHTML = `<div class="empty-state"><p>Aún no has publicado ninguna obra.</p></div>`;
-            return;
+        // HISTORIA Reciente (La primera publicada)
+        const recentWrapper = document.getElementById('recent-story-wrapper');
+        if (recentWrapper) {
+            if (STORIES.length === 0) {
+                recentWrapper.innerHTML = `
+                    <div class="empty-state" style="background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 18px;">
+                        <p style="font-weight: 700; color: var(--accent-orange);">Aún no has publicado ninguna historia.</p>
+                        <p style="font-size: 12px; margin-top: 4px;">Usa el botón "+ Publicar" arriba para agregar tu primera obra.</p>
+                    </div>
+                `;
+            } else {
+                const rec = STORIES[0];
+                recentWrapper.innerHTML = `
+                    <div class="recent-story-box">
+                        <div class="recent-story-cover" style="background-image: url('${rec.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&auto=format&fit=crop&q=60'}');"></div>
+                        <div class="recent-story-title">${escapeHtml(rec.title.toUpperCase())}</div>
+                        <div class="recent-story-divider"></div>
+                        <div class="recent-story-desc">${escapeHtml(rec.excerpt)}</div>
+                        <div class="recent-story-tags">${rec.category} · ${rec.readTime || '8 min'}</div>
+                        <div class="recent-story-actions">
+                            <button class="action-btn-outlined" onclick="openReader('${rec.id}')">LEER</button>
+                            <button class="action-btn-danger" onclick="deleteStory('${rec.id}')">ELIMINAR</button>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
-        container.innerHTML = STORIES.map(story => `
-            <div class="story-list-item">
-                <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');" onclick="openReader('${story.id}')"></div>
-                <div class="story-list-info" onclick="openReader('${story.id}')">
-                    <h3>${escapeHtml(story.title)}</h3>
-                    <p>${escapeHtml(story.excerpt)}</p>
-                    <div class="story-list-meta">
-                        <span>${story.category}</span> • <span>♥ ${story.likes || 0}</span>
+        // MIS HISTORIAS GRID
+        const gridContainer = document.getElementById('my-stories-grid-container');
+        if (gridContainer) {
+            if (STORIES.length === 0) {
+                gridContainer.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p>Sin historias en tu catálogo.</p></div>`;
+            } else {
+                gridContainer.innerHTML = STORIES.map(s => `
+                    <div class="grid-story-card" onclick="openReader('${s.id}')">
+                        <div class="grid-story-cover" style="background-image: url('${s.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');"></div>
+                        <div class="grid-story-title">${escapeHtml(s.title)}</div>
+                        <div class="grid-story-stats">
+                            <span>👁 ${s.views || 0}</span>
+                            <span>♥ ${s.likes || 0}</span>
+                        </div>
                     </div>
-                </div>
-                <button class="delete-btn" onclick="deleteStory('${story.id}')">
-                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; stroke: currentColor; fill: none;"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                    Borrar
-                </button>
-            </div>
-        `).join('');
+                `).join('');
+            }
+        }
     }
 
-    function updateProfileStats() {
-        document.getElementById('stat-published-count').textContent = STORIES.length;
-        const totalLikes = STORIES.reduce((sum, s) => sum + (s.likes || 0), 0);
-        document.getElementById('stat-likes-count').textContent = totalLikes;
-    }
-
-    /* MODAL DEL LECTOR CON COMENTARIOS REALTIME EN GUNDB */
+    /* MODAL DEL LECTOR */
     function openReader(storyId) {
         const story = STORIES.find(s => s.id === storyId);
         if (!story) return;
 
         state.currentReadingStory = story;
+
+        // Registrar vista respetando el cooldown de 6 horas
+        registerStoryView(story);
+
         document.getElementById('reader-category').textContent = story.category;
         document.getElementById('reader-title').textContent = story.title;
         document.getElementById('reader-author-name').textContent = story.author;
@@ -1788,7 +1991,7 @@
         const title = document.getElementById('form-title').value.trim();
         const category = document.getElementById('form-category').value;
         const author = document.getElementById('form-author').value.trim();
-        const readTime = document.getElementById('form-readtime').value.trim() || '5 min';
+        const readTime = document.getElementById('form-readtime').value.trim() || '8 min';
         const cover = document.getElementById('form-cover').value.trim();
         const excerpt = document.getElementById('form-excerpt').value.trim();
         const contentText = document.getElementById('form-content').value.trim();
@@ -1803,6 +2006,7 @@
             excerpt,
             content: contentText.split('\n').filter(p => p.trim()),
             likes: 0,
+            views: 0,
             date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })
         };
 
@@ -1858,6 +2062,21 @@
                 initCategories();
                 renderHomeStories();
                 renderExploreStories(document.getElementById('explore-search-input')?.value || '');
+            }
+        });
+
+        document.getElementById('follow-profile-btn')?.addEventListener('click', () => {
+            state.isFollowing = !state.isFollowing;
+            const btn = document.getElementById('follow-profile-btn');
+            if (state.isFollowing) {
+                btn.textContent = 'Siguiendo';
+                btn.style.background = 'var(--bg-card)';
+                btn.style.border = '1px solid var(--border-color)';
+                showToast('Ahora sigues a este perfil');
+            } else {
+                btn.textContent = 'Seguir';
+                btn.style.background = 'var(--accent-orange)';
+                showToast('Has dejado de seguir a este perfil');
             }
         });
 
