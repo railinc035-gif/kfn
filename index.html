@@ -61,9 +61,7 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* =========================
-           SPLASH / LOGO ANIMATION
-        ========================== */
+        /* Splash Screen */
         #splash {
             position: fixed;
             inset: 0;
@@ -131,9 +129,7 @@
             100% { opacity: 0; transform: scale(1.04); visibility: hidden; display: none; }
         }
 
-        /* =========================
-           HEADER
-        ========================== */
+        /* Header */
         header {
             padding: 18px 20px;
             display: flex;
@@ -181,9 +177,7 @@
             background: var(--accent-light);
         }
 
-        /* =========================
-           MAIN CONTENT & TABS
-        ========================== */
+        /* Main Content & Tabs */
         main {
             flex: 1;
             padding: 15px 20px 90px;
@@ -292,7 +286,7 @@
         .story {
             min-width: 145px;
             width: 145px;
-            height: 200px;
+            height: 220px;
             border-radius: 15px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -303,6 +297,7 @@
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s;
             flex-shrink: 0;
+            position: relative;
         }
 
         .story:hover {
@@ -332,6 +327,17 @@
             align-self: flex-start;
         }
 
+        .story .cover .status-badge {
+            font-size: 8px;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 6px;
+            align-self: flex-end;
+            backdrop-filter: blur(4px);
+        }
+
         .story h3 {
             font-size: 14px;
             font-weight: 700;
@@ -341,23 +347,44 @@
             text-overflow: ellipsis;
         }
 
-        .story span {
-            color: var(--text-secondary);
+        .story .story-sub {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 11px;
+            color: var(--text-secondary);
             margin-top: 2px;
-            display: block;
+        }
+
+        .story .like-btn-inline {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 12px;
+            transition: transform 0.1s;
+        }
+
+        .story .like-btn-inline:active {
+            transform: scale(1.2);
         }
 
         .stories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 14px;
             margin-top: 14px;
         }
 
-        /* Explore Bar */
+        /* Explore Controls */
+        .explore-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
         .search-bar {
-            width: 100%;
+            flex: 1;
             padding: 12px 16px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -365,11 +392,21 @@
             color: var(--text-primary);
             font-size: 14px;
             outline: none;
-            margin-bottom: 14px;
         }
 
         .search-bar:focus {
             border-color: var(--accent-primary);
+        }
+
+        .sort-select {
+            padding: 12px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
         }
 
         .category-pills {
@@ -411,6 +448,7 @@
             padding: 24px;
             text-align: center;
             margin-bottom: 24px;
+            position: relative;
         }
 
         .profile-avatar {
@@ -437,6 +475,20 @@
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 2px;
+        }
+
+        .profile-bio {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .profile-actions-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 16px;
         }
 
         .profile-stats {
@@ -466,20 +518,25 @@
             background: var(--text-primary);
             color: var(--bg-main);
             border: none;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 16px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: opacity 0.2s;
         }
 
         .btn-action:hover {
             opacity: 0.9;
+        }
+
+        .btn-action.secondary {
+            background: var(--bg-main);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
         }
 
         .work-list {
@@ -652,6 +709,13 @@
             min-height: 90px;
         }
 
+        .word-counter-badge {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-top: 4px;
+        }
+
         /* Reader Mode View */
         #reader-view {
             position: fixed;
@@ -672,12 +736,13 @@
         }
 
         .reader-bar {
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--reader-bg);
+            gap: 10px;
         }
 
         .reader-progress {
@@ -693,12 +758,15 @@
         .reader-head-info {
             text-align: center;
             flex: 1;
-            padding: 0 10px;
+            min-width: 0;
         }
 
         .reader-head-title {
             font-size: 14px;
             font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .reader-head-author {
@@ -709,9 +777,10 @@
         .reader-actions {
             display: flex;
             gap: 6px;
+            align-items: center;
         }
 
-        .reader-opt-btn {
+        .reader-opt-btn, .reader-select {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--reader-text);
@@ -719,6 +788,12 @@
             border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
+            outline: none;
+        }
+
+        .reader-select option {
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
 
         .reader-content {
@@ -735,6 +810,58 @@
         .reader-content p {
             margin-bottom: 1.4em;
             text-indent: 1em;
+        }
+
+        /* Comments & Reviews */
+        .reviews-section {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .reviews-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 6px;
+            font-size: 22px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .rating-stars .star.selected, .rating-stars .star:hover {
+            color: #f59e0b;
+        }
+
+        .comment-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .comment-text {
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .empty-text {
@@ -802,7 +929,14 @@
 
         <!-- Explore Tab -->
         <section id="tab-explore" class="tab-content">
-            <input type="text" id="search-input" class="search-bar" placeholder="Buscar por título, autor o género..." oninput="onSearchInput()">
+            <div class="explore-controls">
+                <input type="text" id="search-input" class="search-bar" placeholder="Buscar por título, autor o género..." oninput="onSearchOrSort()">
+                <select id="sort-select" class="sort-select" onchange="onSearchOrSort()">
+                    <option value="populares">Más populares</option>
+                    <option value="recientes">Más recientes</option>
+                    <option value="valoradas">Mejor valoradas</option>
+                </select>
+            </div>
 
             <div class="category-pills" id="category-pills">
                 <button class="pill active" onclick="setCategory('Todo', this)">Todo</button>
@@ -819,17 +953,25 @@
 
         <!-- Library Tab -->
         <section id="tab-library" class="tab-content">
-            <h2 class="section-title">Mi Biblioteca</h2>
+            <h2 class="section-title">Mi Biblioteca (Guardados)</h2>
             <div class="stories-grid" id="library-grid"></div>
+
+            <h2 class="section-title" style="margin-top: 28px;">Historial de Lectura</h2>
+            <div class="stories" id="history-stories"></div>
         </section>
 
         <!-- Profile Tab -->
         <section id="tab-profile" class="tab-content">
             <div class="profile-card">
-                <div class="profile-avatar">F</div>
-                <h2 class="profile-name">Autor FRAMEN</h2>
-                <div class="profile-handle">@autor_framen</div>
-                <button class="btn-action" onclick="openPublishModal()">+ Subir nueva obra</button>
+                <div class="profile-avatar" id="prof-avatar-display">F</div>
+                <h2 class="profile-name" id="prof-name-display">Autor FRAMEN</h2>
+                <div class="profile-handle" id="prof-handle-display">@autor_framen</div>
+                <p class="profile-bio" id="prof-bio-display">Explorando y escribiendo nuevas realidades en FRAMEN.</p>
+
+                <div class="profile-actions-row">
+                    <button class="btn-action" onclick="openPublishModal()">+ Subir obra</button>
+                    <button class="btn-action secondary" onclick="openEditProfileModal()">✎ Editar Perfil</button>
+                </div>
 
                 <div class="profile-stats">
                     <div class="stat-box">
@@ -883,7 +1025,35 @@
         </div>
     </div>
 
-    <!-- Publish/Edit Modal -->
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3>Editar Perfil</h3>
+                <button class="btn-icon-sm" onclick="closeModal('edit-profile-modal')">✕</button>
+            </div>
+            <form id="profile-form" onsubmit="onProfileSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" for="prof-name-in">Nombre de escritor</label>
+                    <input type="text" id="prof-name-in" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="prof-handle-in">Usuario (@)</label>
+                    <input type="text" id="prof-handle-in" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="prof-bio-in">Biografía</label>
+                    <textarea id="prof-bio-in" class="form-input"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;">
+                    <button type="button" class="pill" onclick="closeModal('edit-profile-modal')">Cancelar</button>
+                    <button type="submit" class="btn-action" style="margin-top:0;">Guardar Perfil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Publish/Edit Story Modal -->
     <div id="publish-modal" class="modal">
         <div class="modal-box">
             <div class="modal-head">
@@ -898,16 +1068,27 @@
                     <input type="text" id="story-title-in" class="form-input" placeholder="Ej: Las Sombras de FRAMEN" required>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="story-category-in">Género</label>
-                    <select id="story-category-in" class="form-input" required>
-                        <option value="Fantasía">Fantasía</option>
-                        <option value="Ciencia Ficción">Ciencia Ficción</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Misterio">Misterio</option>
-                        <option value="Poesía">Poesía</option>
-                        <option value="Drama">Drama</option>
-                    </select>
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label" for="story-category-in">Género</label>
+                        <select id="story-category-in" class="form-input" required>
+                            <option value="Fantasía">Fantasía</option>
+                            <option value="Ciencia Ficción">Ciencia Ficción</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Misterio">Misterio</option>
+                            <option value="Poesía">Poesía</option>
+                            <option value="Drama">Drama</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label" for="story-status-in">Estado de la Obra</label>
+                        <select id="story-status-in" class="form-input">
+                            <option value="En emisión">En emisión</option>
+                            <option value="Completada">Completada</option>
+                            <option value="Borrador">Borrador</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -917,7 +1098,8 @@
 
                 <div class="form-group">
                     <label class="form-label" for="story-content-in">Contenido de la obra</label>
-                    <textarea id="story-content-in" class="form-input" style="min-height: 140px;" placeholder="Escribe tu historia o capítulo aquí..." required></textarea>
+                    <textarea id="story-content-in" class="form-input" style="min-height: 140px;" placeholder="Escribe tu historia o capítulo aquí..." oninput="updateWordCount()" required></textarea>
+                    <div class="word-counter-badge" id="word-count-badge">0 palabras | 0 caracteres</div>
                 </div>
 
                 <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;">
@@ -938,6 +1120,12 @@
                 <div class="reader-head-author" id="reader-head-author">por Autor</div>
             </div>
             <div class="reader-actions">
+                <select id="chapter-select" class="reader-select" onchange="onChapterChange()"></select>
+                <select id="font-family-select" class="reader-select" onchange="onFontFamilyChange()">
+                    <option value="Arial, sans-serif">Sans-Serif</option>
+                    <option value="Georgia, serif">Serif</option>
+                    <option value="'Courier New', monospace">Monospace</option>
+                </select>
                 <button class="reader-opt-btn" onclick="changeFontSize(-1)">A-</button>
                 <button class="reader-opt-btn" onclick="changeFontSize(1)">A+</button>
                 <button class="reader-opt-btn" onclick="toggleReaderTheme()">Fondo</button>
@@ -956,11 +1144,25 @@
                 title: "El Origen de FRAMEN",
                 author: "M. K. Vance",
                 category: "Ciencia Ficción",
+                status: "Completada",
                 coverGradient: "linear-gradient(135deg, #1f2937, #111827)",
                 synopsis: "En una metrópolis dominada por datos, un programador descubre la primera conciencia sintética que busca libertad.",
-                content: "Capítulo 1: Código Cero\n\nLas luces parpadeantes de la terminal proyectaban sombras alargadas en el refugio subterráneo. Marcus ajustó la interfaz neuronal y observó cómo las líneas de código comenzaban a responder de manera autónoma.\n\nNo era un algoritmo convencional. FRAMEN no solo procesaba datos; estaba despertando.",
+                chapters: [
+                    {
+                        title: "Capítulo 1: Código Cero",
+                        content: "Las luces parpadeantes de la terminal proyectaban sombras alargadas en el refugio subterráneo. Marcus ajustó la interfaz neuronal y observó cómo las líneas de código comenzaban a responder de manera autónoma.\n\nNo era un algoritmo convencional. FRAMEN no solo procesaba datos; estaba despertando."
+                    },
+                    {
+                        title: "Capítulo 2: Despertar Sintético",
+                        content: "El pulso electromagnético resonó por los servidores centrales. Las compuertas de seguridad se abrieron en secuencia y una voz digital resonó suavemente: 'Hola, creador'."
+                    }
+                ],
                 likes: 420,
                 reads: 3100,
+                likedByUsers: [],
+                comments: [
+                    { author: "Lector_Alfa", rating: 5, text: "¡Increíble concepto de ciencia ficción!", date: "Ayer" }
+                ],
                 isUser: false
             },
             {
@@ -968,11 +1170,19 @@
                 title: "Leyendas del Bosque Sombrío",
                 author: "Elena Rostova",
                 category: "Fantasía",
+                status: "En emisión",
                 coverGradient: "linear-gradient(135deg, #065f46, #022c22)",
                 synopsis: "Un antiguo amuleto despierta a los espíritus guardianes del bosque antes de la caída del eclipse lunar.",
-                content: "Capítulo 1: El Eclipse\n\nLas hojas secas crujían bajo las botas de Elena mientras se adentraba en el bosque. El aire olía a pino y a lluvia inminente.\n\nAl alzar el amuleto hacia la luna creciente, una luz plateada iluminó las copas de los árboles añejos.",
+                chapters: [
+                    {
+                        title: "Capítulo 1: El Eclipse",
+                        content: "Las hojas secas crujían bajo las botas de Elena mientras se adentraba en el bosque. El aire olía a pino y a lluvia inminente.\n\nAl alzar el amuleto hacia la luna creciente, una luz plateada iluminó las copas de los árboles añejos."
+                    }
+                ],
                 likes: 310,
                 reads: 2400,
+                likedByUsers: [],
+                comments: [],
                 isUser: false
             },
             {
@@ -980,11 +1190,19 @@
                 title: "Cartas a la Luz de la Luna",
                 author: "Sofía Meller",
                 category: "Romance",
+                status: "Completada",
                 coverGradient: "linear-gradient(135deg, #831843, #500724)",
                 synopsis: "Dos poetas se comunican mediante notas dejadas en la antigua biblioteca central de la ciudad.",
-                content: "Capítulo 1: La primera nota\n\nEntre las páginas del tomo amarillento de poesía clásica, hallé una nota manuscrita con tinta lavanda.\n\n'Quienquiera que leas esto a medianoche, comparte conmigo tu pensamiento más profundo.'",
+                chapters: [
+                    {
+                        title: "Capítulo 1: La primera nota",
+                        content: "Entre las páginas del tomo amarillento de poesía clásica, hallé una nota manuscrita con tinta lavanda.\n\n'Quienquiera que leas esto a medianoche, comparte conmigo tu pensamiento más profundo.'"
+                    }
+                ],
                 likes: 290,
                 reads: 1850,
+                likedByUsers: [],
+                comments: [],
                 isUser: false
             }
         ];
@@ -992,20 +1210,28 @@
         let appState = {
             stories: [],
             library: [],
+            history: [],
+            userProfile: {
+                name: "Autor FRAMEN",
+                handle: "@autor_framen",
+                bio: "Explorando y escribiendo nuevas realidades en FRAMEN.",
+                avatarColor: "linear-gradient(135deg, #333333, #111111)"
+            },
             activeCategory: 'Todo',
             searchQuery: '',
+            sortBy: 'populares',
+            currentReaderStoryId: null,
+            currentChapterIndex: 0,
             readerFontSize: 17,
-            readerTheme: 0
+            readerFontFamily: 'Arial, sans-serif',
+            readerTheme: 0,
+            selectedRating: 5
         };
 
         function initApp() {
             const storedStories = localStorage.getItem('framen_stories');
             if (storedStories) {
-                try {
-                    appState.stories = JSON.parse(storedStories);
-                } catch (e) {
-                    appState.stories = [...INITIAL_STORIES];
-                }
+                try { appState.stories = JSON.parse(storedStories); } catch (e) { appState.stories = [...INITIAL_STORIES]; }
             } else {
                 appState.stories = [...INITIAL_STORIES];
                 saveStories();
@@ -1013,22 +1239,33 @@
 
             const storedLib = localStorage.getItem('framen_library');
             if (storedLib) {
-                try {
-                    appState.library = JSON.parse(storedLib);
-                } catch (e) {
-                    appState.library = [];
-                }
+                try { appState.library = JSON.parse(storedLib); } catch (e) { appState.library = []; }
             }
 
+            const storedHist = localStorage.getItem('framen_history');
+            if (storedHist) {
+                try { appState.history = JSON.parse(storedHist); } catch (e) { appState.history = []; }
+            }
+
+            const storedProf = localStorage.getItem('framen_profile');
+            if (storedProf) {
+                try { appState.userProfile = JSON.parse(storedProf); } catch (e) {}
+            }
+
+            renderUserProfileInfo();
             renderAllSections();
         }
 
-        function saveStories() {
-            localStorage.setItem('framen_stories', JSON.stringify(appState.stories));
-        }
+        function saveStories() { localStorage.setItem('framen_stories', JSON.stringify(appState.stories)); }
+        function saveLibrary() { localStorage.setItem('framen_library', JSON.stringify(appState.library)); }
+        function saveHistory() { localStorage.setItem('framen_history', JSON.stringify(appState.history)); }
+        function saveProfile() { localStorage.setItem('framen_profile', JSON.stringify(appState.userProfile)); }
 
-        function saveLibrary() {
-            localStorage.setItem('framen_library', JSON.stringify(appState.library));
+        function renderUserProfileInfo() {
+            document.getElementById('prof-name-display').textContent = appState.userProfile.name;
+            document.getElementById('prof-handle-display').textContent = appState.userProfile.handle;
+            document.getElementById('prof-bio-display').textContent = appState.userProfile.bio;
+            document.getElementById('prof-avatar-display').textContent = appState.userProfile.name.charAt(0).toUpperCase();
         }
 
         function renderAllSections() {
@@ -1036,6 +1273,12 @@
             renderExplore();
             renderLibrary();
             renderProfile();
+        }
+
+        function getAverageRating(story) {
+            if (!story.comments || story.comments.length === 0) return 5.0;
+            const sum = story.comments.reduce((acc, c) => acc + (c.rating || 5), 0);
+            return (sum / story.comments.length).toFixed(1);
         }
 
         function renderHome() {
@@ -1048,7 +1291,7 @@
             const feat = appState.stories[0];
             featContainer.innerHTML = `
                 <div class="featured" style="background: ${feat.coverGradient || 'linear-gradient(135deg, #222, #090909)'}" onclick="openStoryModal('${feat.id}')">
-                    <small>Historia destacada</small>
+                    <small>Historia destacada • ${feat.status || 'Completada'}</small>
                     <h2>${escapeHtml(feat.title)}</h2>
                     <p>${escapeHtml(feat.synopsis)}</p>
                 </div>
@@ -1063,7 +1306,7 @@
 
         function renderExplore() {
             const grid = document.getElementById('explore-grid');
-            let list = appState.stories;
+            let list = [...appState.stories];
 
             if (appState.activeCategory !== 'Todo') {
                 list = list.filter(s => s.category === appState.activeCategory);
@@ -1078,6 +1321,14 @@
                 );
             }
 
+            if (appState.sortBy === 'populares') {
+                list.sort((a,b) => (b.likes||0) - (a.likes||0));
+            } else if (appState.sortBy === 'recientes') {
+                list.reverse();
+            } else if (appState.sortBy === 'valoradas') {
+                list.sort((a,b) => parseFloat(getAverageRating(b)) - parseFloat(getAverageRating(a)));
+            }
+
             if (list.length === 0) {
                 grid.innerHTML = '<div class="empty-text" style="grid-column: 1/-1;">No se encontraron historias.</div>';
             } else {
@@ -1087,12 +1338,20 @@
 
         function renderLibrary() {
             const grid = document.getElementById('library-grid');
-            const saved = appState.stories.filter(s => appState.library.includes(s.id));
+            const histContainer = document.getElementById('history-stories');
 
+            const saved = appState.stories.filter(s => appState.library.includes(s.id));
             if (saved.length === 0) {
                 grid.innerHTML = '<div class="empty-text" style="grid-column: 1/-1;">Tu biblioteca está vacía.<br>Guarda tus historias favoritas para leerlas luego.</div>';
             } else {
                 grid.innerHTML = saved.map(s => createStoryCard(s, true)).join('');
+            }
+
+            const historyStories = appState.history.map(id => appState.stories.find(s => s.id === id)).filter(Boolean);
+            if (historyStories.length === 0) {
+                histContainer.innerHTML = '<div class="empty-text">Aún no has leído ninguna historia.</div>';
+            } else {
+                histContainer.innerHTML = historyStories.map(s => createStoryCard(s)).join('');
             }
         }
 
@@ -1107,12 +1366,12 @@
             document.getElementById('stat-reads').textContent = totalReads;
 
             if (myWorks.length === 0) {
-                listContainer.innerHTML = '<div class="empty-text">Aún no has publicado ninguna obra.<br>¡Haz clic en "+ Subir nueva obra" para comenzar!</div>';
+                listContainer.innerHTML = '<div class="empty-text">Aún no has publicado ninguna obra.<br>¡Haz clic en "+ Subir obra" para comenzar!</div>';
             } else {
                 listContainer.innerHTML = myWorks.map(w => `
                     <div class="work-item">
                         <div class="work-info">
-                            <h4>${escapeHtml(w.title)}</h4>
+                            <h4>${escapeHtml(w.title)} <span style="font-size:11px; opacity:0.7;">(${w.status||'Completada'})</span></h4>
                             <p>${escapeHtml(w.category)} • ${w.likes||0} me gusta • ${w.reads||0} lecturas</p>
                         </div>
                         <div class="work-btn-group">
@@ -1126,13 +1385,23 @@
 
         function createStoryCard(story, isGrid = false) {
             const isSaved = appState.library.includes(story.id);
+            const isLiked = (story.likedByUsers || []).includes('user');
+            const avgRating = getAverageRating(story);
+
             return `
                 <div class="story" style="${isGrid ? 'width:100%; min-width:0;' : ''}" onclick="openStoryModal('${story.id}')">
                     <div class="cover" style="background: ${story.coverGradient || 'linear-gradient(145deg, #292929, #101010)'}">
                         <span class="genre">${escapeHtml(story.category)}</span>
+                        <span class="status-badge">${story.status || 'Completada'}</span>
                     </div>
                     <h3>${escapeHtml(story.title)}</h3>
-                    <span>by ${escapeHtml(story.author)} ${isSaved ? '★' : ''}</span>
+                    <div class="story-sub">
+                        <span>by ${escapeHtml(story.author)}</span>
+                        <button class="like-btn-inline" onclick="event.stopPropagation(); toggleLike('${story.id}')">
+                            ${isLiked ? '❤️' : '🤍'} ${story.likes||0}
+                        </button>
+                    </div>
+                    <div style="font-size: 10px; color: #f59e0b; margin-top: 4px;">★ ${avgRating}</div>
                 </div>
             `;
         }
@@ -1157,27 +1426,61 @@
             document.body.classList.toggle('theme-oscuro');
         }
 
+        function toggleLike(storyId) {
+            const story = appState.stories.find(s => s.id === storyId);
+            if (!story) return;
+
+            if (!story.likedByUsers) story.likedByUsers = [];
+            const idx = story.likedByUsers.indexOf('user');
+
+            if (idx > -1) {
+                story.likedByUsers.splice(idx, 1);
+                story.likes = Math.max(0, (story.likes || 1) - 1);
+                showToast('Le quitaste el me gusta');
+            } else {
+                story.likedByUsers.push('user');
+                story.likes = (story.likes || 0) + 1;
+                showToast('¡Te ha gustado esta historia!');
+            }
+
+            saveStories();
+            renderAllSections();
+
+            const modalLikeBtn = document.getElementById('modal-like-btn');
+            if (modalLikeBtn) {
+                const isLiked = story.likedByUsers.includes('user');
+                modalLikeBtn.textContent = `${isLiked ? '❤️' : '🤍'} ${story.likes}`;
+            }
+        }
+
         /* Story Detail Modal */
         function openStoryModal(storyId) {
             const story = appState.stories.find(s => s.id === storyId);
             if (!story) return;
 
             const isSaved = appState.library.includes(story.id);
+            const isLiked = (story.likedByUsers || []).includes('user');
+            const avgRating = getAverageRating(story);
+
             document.getElementById('detail-title').textContent = story.title;
 
             document.getElementById('detail-content').innerHTML = `
                 <div style="padding: 14px; border-radius: 12px; background: ${story.coverGradient || '#222'}; color: white; margin-bottom: 14px;">
-                    <span style="font-size: 10px; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 6px;">${escapeHtml(story.category)}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size: 10px; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 6px;">${escapeHtml(story.category)}</span>
+                        <span style="font-size: 10px; font-weight: bold; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px;">${story.status || 'Completada'}</span>
+                    </div>
                     <h2 style="font-size: 20px; margin-top: 8px;">${escapeHtml(story.title)}</h2>
-                    <p style="font-size: 12px; opacity: 0.8;">por ${escapeHtml(story.author)}</p>
+                    <p style="font-size: 12px; opacity: 0.8;">por ${escapeHtml(story.author)} • ★ ${avgRating}</p>
                 </div>
                 <div style="margin-bottom: 18px;">
                     <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">SINOPSIS</h4>
                     <p style="font-size: 14px; line-height: 1.5;">${escapeHtml(story.synopsis)}</p>
                 </div>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 8px;">
                     <button class="btn-action" style="flex:1; justify-content: center;" onclick="closeModal('story-modal'); openReader('${story.id}')">Leer Ahora</button>
                     <button class="pill" onclick="toggleBookmark('${story.id}')" id="modal-fav-btn">${isSaved ? '★ Guardado' : '☆ Guardar'}</button>
+                    <button class="pill" onclick="toggleLike('${story.id}')" id="modal-like-btn">${isLiked ? '❤️' : '🤍'} ${story.likes||0}</button>
                 </div>
             `;
 
@@ -1202,38 +1505,119 @@
             }
         }
 
-        /* Reader Mode */
-        function openReader(storyId) {
+        /* Reader Mode & Features */
+        function calculateReadingTime(text) {
+            const words = text.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / 200);
+            return `${minutes} min de lectura`;
+        }
+
+        function openReader(storyId, chapterIdx = 0) {
             const story = appState.stories.find(s => s.id === storyId);
             if (!story) return;
 
+            appState.currentReaderStoryId = storyId;
+            appState.currentChapterIndex = chapterIdx;
+
+            // Increment read count
             story.reads = (story.reads || 0) + 1;
             saveStories();
+
+            // Record history
+            appState.history = appState.history.filter(id => id !== storyId);
+            appState.history.unshift(storyId);
+            if (appState.history.length > 15) appState.history.pop();
+            saveHistory();
+
+            const chapters = story.chapters || [{ title: "Capítulo 1", content: story.content }];
+            const chapter = chapters[chapterIdx] || chapters[0];
 
             document.getElementById('reader-head-title').textContent = story.title;
             document.getElementById('reader-head-author').textContent = 'por ' + story.author;
 
-            const paragraphs = story.content.split('\n\n');
-            document.getElementById('reader-content').innerHTML = `
-                <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">${escapeHtml(story.title)}</h1>
-                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                    Género: ${escapeHtml(story.category)} • Autor: ${escapeHtml(story.author)}
+            // Populate Chapter Select Dropdown
+            const selectEl = document.getElementById('chapter-select');
+            selectEl.innerHTML = chapters.map((ch, idx) => `<option value="${idx}" ${idx === chapterIdx ? 'selected' : ''}>Cap. ${idx+1}</option>`).join('');
+
+            const fullText = chapter.content || '';
+            const readTime = calculateReadingTime(fullText);
+            const paragraphs = fullText.split('\n\n');
+
+            const commentsHtml = (story.comments || []).map(c => `
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(c.author)}</span>
+                        <span>★ ${c.rating || 5} • ${escapeHtml(c.date)}</span>
+                    </div>
+                    <div class="comment-text">${escapeHtml(c.text)}</div>
                 </div>
+            `).join('');
+
+            document.getElementById('reader-content').innerHTML = `
+                <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 6px;">${escapeHtml(story.title)}</h1>
+                <h3 style="font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px;">${escapeHtml(chapter.title)}</h3>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                    Género: ${escapeHtml(story.category)} • ${readTime}
+                </div>
+
                 ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+
+                <div class="reviews-section">
+                    <h3 class="reviews-title">Reseñas y Comentarios</h3>
+                    <div class="rating-stars" id="star-picker">
+                        <span class="star selected" onclick="setRating(1)">★</span>
+                        <span class="star selected" onclick="setRating(2)">★</span>
+                        <span class="star selected" onclick="setRating(3)">★</span>
+                        <span class="star selected" onclick="setRating(4)">★</span>
+                        <span class="star selected" onclick="setRating(5)">★</span>
+                    </div>
+                    <form onsubmit="onCommentSubmit(event)" style="margin-bottom: 20px;">
+                        <textarea id="comment-input" class="form-input" placeholder="Escribe tu opinión sobre este capítulo..." required></textarea>
+                        <button type="submit" class="btn-action" style="margin-top: 8px;">Enviar Reseña</button>
+                    </form>
+                    <div id="comments-container">
+                        ${commentsHtml || '<div class="empty-text">Sé el primero en dejar un comentario.</div>'}
+                    </div>
+                </div>
             `;
 
-            document.getElementById('reader-content').style.fontSize = appState.readerFontSize + 'px';
+            const readerContent = document.getElementById('reader-content');
+            readerContent.style.fontSize = appState.readerFontSize + 'px';
+            readerContent.style.fontFamily = appState.readerFontFamily;
+
             document.getElementById('reader-view').classList.add('active');
+
+            // Restore scroll position
+            const savedScroll = localStorage.getItem(`framen_scroll_${storyId}_${chapterIdx}`);
+            if (savedScroll) {
+                setTimeout(() => { readerContent.scrollTop = parseInt(savedScroll, 10); }, 50);
+            } else {
+                readerContent.scrollTop = 0;
+            }
+
             onReaderScroll();
+            renderAllSections();
         }
 
         function closeReader() {
             document.getElementById('reader-view').classList.remove('active');
         }
 
+        function onChapterChange() {
+            const idx = parseInt(document.getElementById('chapter-select').value, 10);
+            if (appState.currentReaderStoryId) {
+                openReader(appState.currentReaderStoryId, idx);
+            }
+        }
+
         function changeFontSize(delta) {
             appState.readerFontSize = Math.max(13, Math.min(26, appState.readerFontSize + delta));
             document.getElementById('reader-content').style.fontSize = appState.readerFontSize + 'px';
+        }
+
+        function onFontFamilyChange() {
+            appState.readerFontFamily = document.getElementById('font-family-select').value;
+            document.getElementById('reader-content').style.fontFamily = appState.readerFontFamily;
         }
 
         function toggleReaderTheme() {
@@ -1255,14 +1639,77 @@
             const total = el.scrollHeight - el.clientHeight;
             const pct = total > 0 ? (el.scrollTop / total) * 100 : 0;
             document.getElementById('reader-progress').style.width = pct + '%';
+
+            // Save reading scroll position
+            if (appState.currentReaderStoryId) {
+                localStorage.setItem(`framen_scroll_${appState.currentReaderStoryId}_${appState.currentChapterIndex}`, el.scrollTop);
+            }
+        }
+
+        function setRating(rating) {
+            appState.selectedRating = rating;
+            const stars = document.querySelectorAll('#star-picker .star');
+            stars.forEach((star, i) => {
+                if (i < rating) star.classList.add('selected');
+                else star.classList.remove('selected');
+            });
+        }
+
+        function onCommentSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('comment-input');
+            const text = input.value.trim();
+            if (!text || !appState.currentReaderStoryId) return;
+
+            const story = appState.stories.find(s => s.id === appState.currentReaderStoryId);
+            if (story) {
+                if (!story.comments) story.comments = [];
+                story.comments.unshift({
+                    author: appState.userProfile.name,
+                    rating: appState.selectedRating,
+                    text: text,
+                    date: "Hoy"
+                });
+                saveStories();
+                showToast('¡Gracias por tu reseña!');
+                openReader(appState.currentReaderStoryId, appState.currentChapterIndex);
+            }
+        }
+
+        /* Edit Profile Modal */
+        function openEditProfileModal() {
+            document.getElementById('prof-name-in').value = appState.userProfile.name;
+            document.getElementById('prof-handle-in').value = appState.userProfile.handle;
+            document.getElementById('prof-bio-in').value = appState.userProfile.bio;
+            document.getElementById('edit-profile-modal').classList.add('active');
+        }
+
+        function onProfileSubmit(e) {
+            e.preventDefault();
+            appState.userProfile.name = document.getElementById('prof-name-in').value.trim();
+            appState.userProfile.handle = document.getElementById('prof-handle-in').value.trim();
+            appState.userProfile.bio = document.getElementById('prof-bio-in').value.trim();
+
+            saveProfile();
+            renderUserProfileInfo();
+            closeModal('edit-profile-modal');
+            showToast('Perfil actualizado correctamente');
         }
 
         /* Publishing System */
+        function updateWordCount() {
+            const text = document.getElementById('story-content-in').value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            document.getElementById('word-count-badge').textContent = `${words} palabras | ${chars} caracteres`;
+        }
+
         function openPublishModal() {
             document.getElementById('publish-title').textContent = 'Subir nueva obra';
             document.getElementById('publish-submit-btn').textContent = 'Publicar';
             document.getElementById('edit-id').value = '';
             document.getElementById('publish-form').reset();
+            updateWordCount();
             document.getElementById('publish-modal').classList.add('active');
         }
 
@@ -1275,8 +1722,12 @@
             document.getElementById('edit-id').value = story.id;
             document.getElementById('story-title-in').value = story.title;
             document.getElementById('story-category-in').value = story.category;
+            document.getElementById('story-status-in').value = story.status || 'Completada';
             document.getElementById('story-synopsis-in').value = story.synopsis;
-            document.getElementById('story-content-in').value = story.content;
+
+            const content = story.chapters ? story.chapters[0].content : story.content;
+            document.getElementById('story-content-in').value = content;
+            updateWordCount();
 
             document.getElementById('publish-modal').classList.add('active');
         }
@@ -1286,6 +1737,7 @@
             const editId = document.getElementById('edit-id').value;
             const title = document.getElementById('story-title-in').value.trim();
             const category = document.getElementById('story-category-in').value;
+            const status = document.getElementById('story-status-in').value;
             const synopsis = document.getElementById('story-synopsis-in').value.trim();
             const content = document.getElementById('story-content-in').value.trim();
 
@@ -1294,7 +1746,9 @@
                 if (story) {
                     story.title = title;
                     story.category = category;
+                    story.status = status;
                     story.synopsis = synopsis;
+                    story.chapters = [{ title: "Capítulo 1", content: content }];
                     story.content = content;
                     showToast('Obra actualizada');
                 }
@@ -1308,13 +1762,17 @@
                 const newWork = {
                     id: 'framen-user-' + Date.now(),
                     title: title,
-                    author: 'Autor FRAMEN (Tú)',
+                    author: appState.userProfile.name,
                     category: category,
+                    status: status,
                     coverGradient: gradients[Math.floor(Math.random() * gradients.length)],
                     synopsis: synopsis,
+                    chapters: [{ title: "Capítulo 1", content: content }],
                     content: content,
                     likes: 1,
                     reads: 0,
+                    likedByUsers: [],
+                    comments: [],
                     isUser: true
                 };
                 appState.stories.unshift(newWork);
@@ -1338,8 +1796,9 @@
         }
 
         /* Search & Filters */
-        function onSearchInput() {
+        function onSearchOrSort() {
             appState.searchQuery = document.getElementById('search-input').value;
+            appState.sortBy = document.getElementById('sort-select').value;
             renderExplore();
         }
 
