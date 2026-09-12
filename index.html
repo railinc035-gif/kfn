@@ -3,39 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRAMEN - Novelas & Historias</title>
+    <title>FRAMEN - App de Historias</title>
     <!-- GUNDB DECENTRALIZED REALTIME DATABASE -->
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <style>
         :root {
-            --bg-dark: #08090d;
-            --bg-panel: #11131a;
-            --bg-card: #181b26;
-            --border-color: #262a3b;
-            --text-primary: #ffffff;
-            --text-secondary: #9ea8ba;
-            --accent-red: #ff2a55;
-            --accent-red-hover: #e01e47;
-            --accent-glow: rgba(255, 42, 85, 0.35);
-            --header-bg: rgba(8, 9, 13, 0.9);
-            --card-hover: #222636;
-            --badge-hot: #ff334b;
-            --badge-new: #00e676;
-            --badge-status: #29b6f6;
+            --bg-dark: #090a0f;
+            --bg-panel: #12151e;
+            --bg-card: #1a1e2e;
+            --border-color: #2a2e42;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-orange: #ff6600;
+            --accent-orange-hover: #e65c00;
+            --accent-glow: rgba(255, 102, 0, 0.35);
+            --header-bg: rgba(9, 10, 15, 0.88);
+            --card-hover: #22273d;
         }
 
         body.theme-claro {
-            --bg-dark: #f5f7fa;
+            --bg-dark: #f8fafc;
             --bg-panel: #ffffff;
-            --bg-card: #ffffff;
-            --border-color: #e2e8f0;
+            --bg-card: #f1f5f9;
+            --border-color: #cbd5e1;
             --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --accent-red: #e11d48;
-            --accent-red-hover: #be123c;
-            --accent-glow: rgba(225, 29, 72, 0.2);
-            --header-bg: rgba(245, 247, 250, 0.9);
-            --card-hover: #f1f5f9;
+            --text-secondary: #475569;
+            --accent-orange: #ff6600;
+            --accent-orange-hover: #e65c00;
+            --accent-glow: rgba(255, 102, 0, 0.2);
+            --header-bg: rgba(248, 250, 252, 0.88);
+            --card-hover: #e2e8f0;
         }
 
         * {
@@ -55,7 +52,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* SPLASH SCREEN */
+        /* SPLASH / LOGO */
         #splash {
             position: fixed;
             inset: 0;
@@ -91,7 +88,7 @@
             100% { opacity: 0; transform: scale(1.04); visibility: hidden; }
         }
 
-        /* MAIN LAYOUT */
+        /* APLICACIÓN PRINCIPAL */
         #app {
             min-height: 100vh;
             display: flex;
@@ -110,19 +107,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* HEADER MANGA PLUS STYLE */
+        /* Header */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
             background: var(--header-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 14px 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--accent-red);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .brand {
@@ -142,11 +139,8 @@
             font-size: 22px;
             font-weight: 900;
             letter-spacing: 1.5px;
-            color: var(--text-primary);
-        }
-
-        .app-name span {
-            color: var(--accent-red);
+            color: var(--accent-orange);
+            text-shadow: 0 0 12px var(--accent-glow);
         }
 
         .header-actions {
@@ -156,8 +150,8 @@
         }
 
         .icon-btn {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -170,30 +164,32 @@
             outline: none;
         }
 
-        .icon-btn:hover {
+        .icon-btn:hover, .icon-btn:active {
             background: var(--card-hover);
-            border-color: var(--accent-red);
+            transform: scale(1.05);
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
         }
 
         .icon-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: none;
             stroke: currentColor;
-            stroke-width: 2.2;
+            stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
-        /* MAIN CONTENT VIEWS */
+        /* Vistas Principal */
         main {
-            padding: 16px 20px;
+            padding: 20px;
             flex: 1;
         }
 
         .tab-view {
             display: none;
-            animation: fadeIn 0.25s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-view.active {
@@ -201,179 +197,255 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .section-header {
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 24px 0 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 24px 0 14px;
+            color: var(--accent-orange);
         }
 
-        .section-header:first-child {
+        .section-title:first-child {
             margin-top: 0;
         }
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+        /* Chips de Categorías */
+        .categories-scroll {
             display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            background: var(--accent-red);
-            border-radius: 2px;
-            display: inline-block;
-        }
-
-        /* MANGA PLUS STYLE CAROUSEL BANNER */
-        .featured-carousel {
-            display: flex;
-            gap: 14px;
+            gap: 10px;
             overflow-x: auto;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
             scrollbar-width: none;
-            snap-type: x mandatory;
         }
 
-        .featured-carousel::-webkit-scrollbar {
+        .categories-scroll::-webkit-scrollbar {
             display: none;
         }
 
-        .banner-card {
-            min-width: 290px;
-            max-width: 290px;
-            height: 180px;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            snap-align: start;
+        .chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            background-size: cover;
-            background-position: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chip.active, .chip:hover {
+            background: var(--accent-orange);
+            color: #ffffff;
+            border-color: var(--accent-orange);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        /* Historia Destacada Original */
+        .featured-card {
+            min-height: 240px;
+            border-radius: 20px;
+            background: linear-gradient(140deg, #2b1200, #0f172a);
+            border: 1px solid var(--border-color);
+            padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .banner-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(8,9,13,0.92) 85%);
-            z-index: 1;
+        body.theme-claro .featured-card {
+            background: linear-gradient(140deg, #ff6600, #b34700);
+            color: #ffffff;
         }
 
-        .banner-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 2;
+        .featured-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px -5px var(--accent-glow);
+        }
+
+        .featured-tag {
+            align-self: flex-start;
             padding: 4px 10px;
-            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
             font-size: 11px;
-            font-weight: 900;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: auto;
             color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .banner-badge.hot { background: var(--badge-hot); }
-        .banner-badge.new { background: var(--badge-new); color: #000; }
-        .banner-badge.updated { background: var(--badge-status); color: #000; }
-
-        .banner-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .banner-title {
-            font-size: 18px;
-            font-weight: 800;
+        .featured-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 8px;
             line-height: 1.25;
             color: #ffffff;
+        }
+
+        .featured-desc {
+            color: #f1f5f9;
+            font-size: 14px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        /* Grid de Historias */
+        .stories-horizontal {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scrollbar-width: none;
+        }
+
+        .stories-horizontal::-webkit-scrollbar {
+            display: none;
+        }
+
+        .story-card {
+            min-width: 155px;
+            max-width: 155px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-orange);
+            background: var(--card-hover);
+        }
+
+        .story-cover {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 6px;
+            background-color: var(--border-color);
+        }
+
+        .story-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 6px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 6px;
+            color: #fff;
+        }
+
+        .story-card h3 {
+            font-size: 14px;
+            font-weight: 700;
             margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-primary);
+        }
+
+        .story-card p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .banner-subtitle {
-            font-size: 12px;
-            color: #d1d5db;
+        .story-footer {
+            margin-top: auto;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-secondary);
         }
 
-        /* TOP RANKING SECTION */
-        .ranking-list {
+        /* Lista Vertical */
+        .stories-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .ranking-item {
+        .story-list-item {
             display: flex;
-            align-items: center;
             gap: 14px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 10px 14px;
+            border-radius: 16px;
+            padding: 12px;
+            align-items: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
         }
 
-        .ranking-item:hover {
-            border-color: var(--accent-red);
-            transform: translateX(4px);
+        .story-list-item:hover {
+            transform: translateX(3px);
+            border-color: var(--accent-orange);
             background: var(--card-hover);
         }
 
-        .rank-num {
-            font-size: 24px;
-            font-weight: 900;
-            font-style: italic;
-            width: 28px;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        .rank-num.top1 { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-        .rank-num.top2 { color: #c0c0c0; }
-        .rank-num.top3 { color: #cd7f32; }
-
-        .rank-thumb {
-            width: 55px;
-            height: 75px;
-            border-radius: 8px;
+        .story-list-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
             background-color: var(--border-color);
         }
 
-        .rank-info {
+        .story-list-info {
             flex: 1;
             min-width: 0;
         }
 
-        .rank-title {
+        .story-list-info h3 {
             font-size: 15px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 4px;
             color: var(--text-primary);
             white-space: nowrap;
@@ -381,211 +453,213 @@
             text-overflow: ellipsis;
         }
 
-        .rank-meta {
-            font-size: 12px;
+        .story-list-info p {
+            font-size: 13px;
             color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
             margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .tag-status {
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 700;
-            background: rgba(41, 182, 246, 0.15);
-            color: var(--badge-status);
-        }
-
-        .rank-chapters {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--accent-red);
-        }
-
-        /* HORIZONTAL STORIES SLIDER */
-        .stories-grid {
+        .story-list-meta {
             display: flex;
             gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            scrollbar-width: none;
-        }
-
-        .stories-grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        .manga-card {
-            min-width: 130px;
-            max-width: 130px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .manga-cover {
-            width: 100%;
-            height: 180px;
-            border-radius: 12px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            margin-bottom: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .manga-card:hover .manga-cover {
-            transform: translateY(-4px);
-            border-color: var(--accent-red);
-        }
-
-        .manga-card h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 2px;
-        }
-
-        .manga-card p {
             font-size: 11px;
             color: var(--text-secondary);
         }
 
-        /* CALENDARIO DE EMISIÓN */
-        .schedule-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-            scrollbar-width: none;
-        }
-
-        .schedule-scroll::-webkit-scrollbar { display: none; }
-
-        .schedule-btn {
-            padding: 8px 14px;
-            border-radius: 10px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 12px;
+        /* BOTÓN DE BORRAR OBRA */
+        .delete-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
             font-weight: 700;
             cursor: pointer;
-            white-space: nowrap;
             transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .schedule-btn.active, .schedule-btn:hover {
-            background: var(--accent-red);
+        .delete-btn:hover {
+            background: #ef4444;
             color: #ffffff;
-            border-color: var(--accent-red);
         }
 
-        /* BUSQUEDA */
+        /* Vista Explorar / Búsqueda */
         .search-box {
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 16px 12px 44px;
-            border-radius: 12px;
+            padding: 14px 18px 14px 46px;
+            border-radius: 14px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 15px;
             outline: none;
+            transition: all 0.2s ease;
         }
 
         .search-input:focus {
-            border-color: var(--accent-red);
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
         .search-box svg {
             position: absolute;
-            left: 14px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            stroke: var(--text-secondary);
+            width: 20px;
+            height: 20px;
             fill: none;
+            stroke: var(--text-secondary);
             stroke-width: 2;
         }
 
-        /* PROFILE CARD */
+        /* PROFILE VIEW REDESIGN */
         .profile-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 24px;
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff9933);
+            opacity: 0.8;
         }
 
         .profile-avatar {
-            width: 72px;
-            height: 72px;
+            position: relative;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-red), #ff758c);
+            background: var(--bg-card);
+            border: 3px solid var(--bg-card);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
-            box-shadow: 0 6px 16px var(--accent-glow);
-            color: #fff;
-            font-weight: 800;
-            font-size: 28px;
+            margin: 10px auto 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            color: var(--accent-orange);
+            font-weight: 900;
+            font-size: 32px;
         }
 
-        .profile-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-        .profile-bio { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        .profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-badge-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: rgba(255, 102, 0, 0.15);
+            color: var(--accent-orange);
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .profile-bio {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
 
         .profile-stats {
             display: flex;
             justify-content: space-around;
             border-top: 1px solid var(--border-color);
-            padding-top: 14px;
+            padding-top: 16px;
         }
 
-        .stat-item h4 { font-size: 18px; font-weight: 800; color: var(--accent-red); }
-        .stat-item p { font-size: 11px; color: var(--text-secondary); }
+        .stat-item h4 {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-orange);
+        }
+
+        .stat-item p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
 
         .settings-list {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
         }
 
         .setting-item {
-            padding: 14px 18px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border-color);
             cursor: pointer;
+            transition: background 0.2s ease;
         }
 
-        .setting-item:last-child { border-bottom: none; }
-        .setting-item:hover { background: var(--card-hover); }
+        .setting-item:last-child {
+            border-bottom: none;
+        }
 
-        .setting-info { display: flex; align-items: center; gap: 12px; }
-        .setting-info svg { width: 18px; height: 18px; stroke: var(--text-secondary); fill: none; stroke-width: 2; }
-        .setting-label { font-size: 14px; font-weight: 600; }
-        .setting-value { font-size: 13px; color: var(--text-secondary); }
+        .setting-item:hover {
+            background: var(--card-hover);
+        }
 
-        /* BOTTOM NAVBAR */
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .setting-info svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .setting-value {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Navegación Inferior */
         nav {
             position: fixed;
             bottom: 0;
@@ -593,7 +667,7 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 600px;
-            height: 65px;
+            height: 70px;
             background: var(--header-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -610,15 +684,15 @@
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
             width: 25%;
             height: 100%;
             border: none;
             background: none;
             outline: none;
-            transition: color 0.2s ease;
         }
 
         .nav-item svg {
@@ -627,121 +701,21 @@
             fill: none;
             stroke: currentColor;
             stroke-width: 2;
-            margin-bottom: 3px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-bottom: 4px;
+            transition: transform 0.2s ease;
         }
 
         .nav-item.active {
-            color: var(--accent-red);
+            color: var(--accent-orange);
         }
 
-        /* VISTA DETALLE DE OBRA (MANGA PLUS MANGA PAGE) */
-        .story-detail-header {
-            position: relative;
-            min-height: 220px;
-            border-radius: 18px;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+        .nav-item.active svg {
+            transform: translateY(-2px);
         }
 
-        .story-detail-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, var(--bg-dark) 10%, rgba(0,0,0,0.6) 100%);
-        }
-
-        .story-detail-info {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            gap: 16px;
-            align-items: flex-end;
-            width: 100%;
-        }
-
-        .detail-cover {
-            width: 90px;
-            height: 125px;
-            border-radius: 10px;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-        }
-
-        .detail-text h2 {
-            font-size: 20px;
-            font-weight: 900;
-            margin-bottom: 4px;
-            color: #ffffff;
-        }
-
-        .detail-text p {
-            font-size: 13px;
-            color: #d1d5db;
-            margin-bottom: 8px;
-        }
-
-        .detail-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .detail-synopsis {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            background: var(--bg-card);
-            padding: 16px;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-        }
-
-        /* LISTA DE CAPÍTULOS */
-        .chapter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .chapter-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .chapter-item:hover {
-            border-color: var(--accent-red);
-            background: var(--card-hover);
-            transform: translateX(3px);
-        }
-
-        .chapter-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .chapter-date {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        /* LECTOR DE CAPÍTULO MANGA PLUS */
+        /* MODALES */
         .modal {
             position: fixed;
             inset: 0;
@@ -760,7 +734,7 @@
         }
 
         .modal-header {
-            padding: 12px 16px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -772,23 +746,23 @@
         .modal-body {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 18px 40px;
-            max-width: 650px;
+            padding: 24px 20px 40px;
+            max-width: 700px;
             margin: 0 auto;
             width: 100%;
         }
 
-        .reader-chapter-badge {
-            font-size: 11px;
+        .reader-category {
+            font-size: 12px;
             font-weight: 800;
-            color: var(--accent-red);
+            color: var(--accent-orange);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .reader-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 900;
             line-height: 1.3;
             margin-bottom: 12px;
@@ -798,11 +772,30 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 16px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            font-size: 12px;
+            margin-bottom: 24px;
+            font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        .reader-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
         }
 
         .reader-content {
@@ -815,7 +808,46 @@
             margin-bottom: 18px;
         }
 
-        /* COMENTARIOS SECCIÓN MANGA PLUS */
+        .reader-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .reader-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reader-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .reader-btn.liked svg {
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
+
+        .reader-btn.bookmarked svg {
+            fill: var(--accent-orange);
+            stroke: var(--accent-orange);
+        }
+
+        /* COMENTARIOS */
         .comments-section {
             margin-top: 40px;
             padding-top: 24px;
@@ -826,9 +858,7 @@
             font-size: 16px;
             font-weight: 800;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--accent-orange);
         }
 
         .comment-input-box {
@@ -851,7 +881,7 @@
         .comment-submit-btn {
             padding: 10px 16px;
             border-radius: 10px;
-            background: var(--accent-red);
+            background: var(--accent-orange);
             color: #fff;
             font-size: 13px;
             font-weight: 700;
@@ -870,7 +900,7 @@
         .comment-user {
             font-size: 12px;
             font-weight: 700;
-            color: var(--accent-red);
+            color: var(--accent-orange);
             margin-bottom: 4px;
         }
 
@@ -880,46 +910,83 @@
         }
 
         /* FORMULARIOS */
-        .form-group { margin-bottom: 14px; }
-        .form-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
         .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 12px 14px;
+            border-radius: 12px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 14px;
             outline: none;
+            transition: border-color 0.2s ease;
         }
-        .form-textarea { min-height: 120px; resize: vertical; }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--accent-orange);
+        }
+
+        .form-textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.5;
+        }
 
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            background: var(--accent-red);
-            color: #fff;
-            font-size: 14px;
+            padding: 14px;
+            border-radius: 12px;
+            background: var(--accent-orange);
+            color: #ffffff;
+            font-size: 15px;
             font-weight: 800;
             border: none;
             cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 10px;
         }
 
-        /* EMPTY STATE */
+        .submit-btn:hover {
+            background: var(--accent-orange-hover);
+        }
+
+        /* Empty state */
         .empty-state {
             text-align: center;
-            padding: 30px 16px;
+            padding: 40px 20px;
             color: var(--text-secondary);
         }
 
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--text-secondary);
+            fill: none;
+            stroke-width: 1.5;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        /* Visual Toast Notification */
         .toast {
             position: fixed;
-            bottom: 80px;
+            bottom: 85px;
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: var(--bg-card);
-            border: 1px solid var(--accent-red);
+            border: 1px solid var(--accent-orange);
             color: var(--text-primary);
             padding: 10px 20px;
             border-radius: 20px;
@@ -940,19 +1007,19 @@
 </head>
 <body>
 
-<!-- SPLASH LOGO -->
+<!-- SPLASH / LOGO -->
 <div id="splash">
     <img id="logo" src="logo.png" alt="FRAMEN Logo">
 </div>
 
-<!-- APP PRINCIPAL -->
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="app">
 
     <!-- Header -->
     <header>
         <div class="brand">
             <img src="logo.png" alt="FRAMEN" class="brand-logo">
-            <span class="app-name">FRAMEN<span>+</span></span>
+            <span class="app-name">FRAMEN</span>
         </div>
         <div class="header-actions">
             <button class="icon-btn" id="theme-btn" title="Cambiar tema">
@@ -964,77 +1031,81 @@
         </div>
     </header>
 
+    <!-- Vistas de Navegación -->
     <main>
-        <!-- TAB 1: INICIO (ESTILO MANGA PLUS) -->
+        <!-- TAB 1: INICIO (ESTRUCTURA ORIGINAL RESTAURADA CON NOMBRES EN NARANJA) -->
         <section id="view-inicio" class="tab-view active">
-            <!-- Carousel Destacados / Banners -->
-            <div class="section-header">
-                <h3 class="section-title">Destacados</h3>
-            </div>
-            <div class="featured-carousel" id="featured-carousel">
-                <!-- Banners cargados dinámicamente -->
+            <!-- Categorías -->
+            <div class="categories-scroll" id="categories-container">
+                <!-- Se llena dinámicamente -->
             </div>
 
-            <!-- Ranking Top 5 -->
-            <div class="section-header">
-                <h3 class="section-title">Top Ranking</h3>
-            </div>
-            <div class="ranking-list" id="ranking-container">
-                <!-- Ranking dinámico -->
+            <!-- Historia Destacada -->
+            <div id="featured-card-wrapper">
+                <!-- Render dinámico -->
             </div>
 
-            <!-- Novedades / En Emisión -->
-            <div class="section-header">
-                <h3 class="section-title">En Emisión</h3>
+            <!-- Sección Historias Nuevas -->
+            <div class="section-title">
+                <span>Historias nuevas</span>
             </div>
-            <div class="stories-grid" id="new-stories-container">
+            <div class="stories-horizontal" id="new-stories-container">
                 <!-- Tarjetas -->
+            </div>
+
+            <!-- Sección Más Leídas -->
+            <div class="section-title">
+                <span>Más leídas</span>
+            </div>
+            <div class="stories-list" id="popular-stories-container">
+                <!-- Lista -->
             </div>
         </section>
 
-        <!-- TAB 2: EXPLORAR / CALENDARIO -->
+        <!-- TAB 2: EXPLORAR -->
         <section id="view-explorar" class="tab-view">
             <div class="search-box">
                 <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="explore-search-input" class="search-input" placeholder="Buscar novela, autor o género...">
+                <input type="text" id="explore-search-input" class="search-input" placeholder="Buscar por título, autor o género...">
             </div>
 
-            <div class="section-header">
-                <h3 class="section-title">Calendario de Emisión</h3>
+            <div class="section-title">
+                <span>Explorar por Categoría</span>
             </div>
-            <div class="schedule-scroll" id="schedule-container">
-                <!-- Filtros por día -->
+            <div class="categories-scroll" id="explore-categories">
+                <!-- Chips -->
             </div>
 
-            <div class="ranking-list" id="explore-results-container">
-                <!-- Lista de obras -->
+            <div class="stories-list" id="explore-results-container">
+                <!-- Resultados -->
             </div>
         </section>
 
-        <!-- TAB 3: BIBLIOTECA (FAVORITOS Y GUARDADOS) -->
+        <!-- TAB 3: BIBLIOTECA -->
         <section id="view-biblioteca" class="tab-view">
-            <div class="section-header">
-                <h3 class="section-title">Mi Biblioteca</h3>
+            <div class="section-title">
+                <span>Mis Guardados</span>
             </div>
-            <div class="ranking-list" id="library-container">
-                <!-- Obra guardadas -->
+            <div class="stories-list" id="library-container">
+                <!-- Historias guardadas -->
             </div>
         </section>
 
-        <!-- TAB 4: PERFIL & SUBIR OBRA -->
+        <!-- TAB 4: PERFIL (MEJORADO CON GESTIÓN Y BORRADO DE OBRAS) -->
         <section id="view-perfil" class="tab-view">
             <div class="profile-card">
                 <div class="profile-avatar">F</div>
-                <h3 class="profile-name">Escritor FRAMEN+</h3>
-                <p class="profile-bio">Publica tus novelas en la red descentralizada GunDB.</p>
+                <h3 class="profile-name">Escritor FRAMEN</h3>
+                <span class="profile-badge-tag">Creador Verificado</span>
+                <p class="profile-bio">Gestión completa de obras en la red descentralizada GunDB.</p>
                 <div class="profile-stats">
                     <div class="stat-item">
                         <h4 id="stat-published-count">0</h4>
-                        <p>Obras</p>
+                        <p>Mis Obras</p>
                     </div>
                     <div class="stat-item">
                         <h4 id="stat-saved-count">0</h4>
-                        <p>Favoritas</p>
+                        <p>Guardadas</p>
                     </div>
                     <div class="stat-item">
                         <h4 id="stat-likes-count">0</h4>
@@ -1043,29 +1114,38 @@
                 </div>
             </div>
 
-            <div class="section-header">
-                <h3 class="section-title">Panel de Creador</h3>
+            <div class="section-title">
+                <span>Gestión de Contenido</span>
             </div>
+
             <div class="settings-list" style="margin-bottom: 20px;">
                 <div class="setting-item" id="upload-story-btn">
                     <div class="setting-info">
                         <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                        <span class="setting-label">Subir nueva obra / Capítulo</span>
+                        <span class="setting-label">Subir nueva obra</span>
                     </div>
-                    <span class="setting-value" style="color: var(--accent-red); font-weight: 800;">+ Publicar</span>
+                    <span class="setting-value" style="color: var(--accent-orange); font-weight: 800;">+ Publicar</span>
                 </div>
             </div>
 
-            <div class="section-header">
-                <h3 class="section-title">Ajustes</h3>
+            <div class="section-title">
+                <span>Mis Obras Publicadas</span>
             </div>
+            <div class="stories-list" id="my-stories-container" style="margin-bottom: 24px;">
+                <!-- Lista de obras con opción de borrar -->
+            </div>
+
+            <div class="section-title">
+                <span>Ajustes y Preferencias</span>
+            </div>
+
             <div class="settings-list">
                 <div class="setting-item" id="toggle-theme-setting">
                     <div class="setting-info">
                         <svg viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                        <span class="setting-label">Modo de pantalla</span>
+                        <span class="setting-label">Tema de aplicación</span>
                     </div>
-                    <span class="setting-value" id="theme-status-label">Oscuro</span>
+                    <span class="setting-value" id="theme-status-label">Oscuro (Negro)</span>
                 </div>
                 <div class="setting-item" id="reset-library-btn">
                     <div class="setting-info">
@@ -1076,42 +1156,9 @@
                 </div>
             </div>
         </section>
-
-        <!-- VISTA DETALLE DE LA OBRA -->
-        <section id="view-story-detail" class="tab-view">
-            <button class="icon-btn" id="detail-back-btn" style="margin-bottom: 12px;">
-                <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-            </button>
-
-            <div class="story-detail-header" id="detail-header-bg">
-                <div class="story-detail-overlay"></div>
-                <div class="story-detail-info">
-                    <div class="detail-cover" id="detail-cover-img"></div>
-                    <div class="detail-text">
-                        <h2 id="detail-title">Título de la Obra</h2>
-                        <p id="detail-author">Por Autor</p>
-                        <div class="detail-tags">
-                            <span class="tag-status" id="detail-status">EN EMISIÓN</span>
-                            <span class="tag-status" style="background: rgba(255,255,255,0.15); color: #fff;" id="detail-category">FANTASÍA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="detail-synopsis" id="detail-synopsis">
-                Sinopsis de la obra...
-            </div>
-
-            <div class="section-header">
-                <h3 class="section-title">Capítulos Disponibles</h3>
-            </div>
-            <div class="chapter-list" id="detail-chapters-container">
-                <!-- Lista de episodios -->
-            </div>
-        </section>
     </main>
 
-    <!-- NAVBAR INFERIOR -->
+    <!-- Navegación Inferior -->
     <nav>
         <button class="nav-item active" data-tab="inicio">
             <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
@@ -1130,86 +1177,88 @@
             Perfil
         </button>
     </nav>
+
 </div>
 
-<!-- MODAL LECTOR DE CAPÍTULO MANGA PLUS -->
+<!-- MODAL DE LECTURA -->
 <div class="modal" id="reader-modal">
     <div class="modal-header">
-        <button class="icon-btn" id="reader-close-btn" title="Cerrar Lector">
+        <button class="icon-btn" id="reader-close-btn" title="Cerrar">
             <svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
-        <div style="display: flex; gap: 8px;">
-            <button class="icon-btn" id="reader-fontsize-btn" title="Ajustar fuente">
-                <span style="font-weight: 900; font-size: 13px;">A+</span>
+        <div class="reader-actions">
+            <button class="reader-btn" id="reader-fontsize-btn" title="Ajustar fuente">
+                <span style="font-weight: 800; font-size: 14px;">A+</span>
             </button>
-            <button class="icon-btn" id="reader-bookmark-btn" title="Guardar">
+            <button class="reader-btn" id="reader-bookmark-btn">
                 <svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                <span id="reader-bookmark-text">Guardar</span>
             </button>
-            <button class="icon-btn" id="reader-like-btn" title="Me Gusta">
+            <button class="reader-btn" id="reader-like-btn">
                 <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                <span id="reader-likes-count">0</span>
+            </button>
+            <button class="delete-btn" id="reader-delete-btn" title="Borrar esta obra">
+                <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                <span>Borrar</span>
             </button>
         </div>
     </div>
     <div class="modal-body">
-        <div class="reader-chapter-badge" id="reader-chapter-number">CAPÍTULO 1</div>
-        <h1 class="reader-title" id="reader-title">Título del Capítulo</h1>
+        <div class="reader-category" id="reader-category">FANTASÍA</div>
+        <h1 class="reader-title" id="reader-title">Título de la Historia</h1>
         <div class="reader-meta">
-            <span id="reader-author">Por Autor</span> • <span id="reader-date">Hoy</span>
+            <div class="reader-author">
+                <div class="author-avatar" id="reader-author-avatar">A</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary);" id="reader-author-name">Nombre Autor</div>
+                    <div style="font-size: 11px;" id="reader-date">Publicado recientemente</div>
+                </div>
+            </div>
+            <div id="reader-read-time">5 min de lectura</div>
         </div>
         <div class="reader-content" id="reader-content">
             <!-- Párrafos -->
         </div>
 
-        <!-- COMENTARIOS AL FINAL DEL CAPÍTULO -->
+        <!-- COMENTARIOS EN TIEMPO REAL CON GUNDB -->
         <div class="comments-section">
-            <h4 class="comments-title">Comentarios de Lectores (GunDB Realtime)</h4>
+            <h4 class="comments-title">Comentarios en Realtime (GunDB)</h4>
             <div class="comment-input-box">
-                <input type="text" id="comment-input-el" class="comment-input" placeholder="Escribe tu comentario en la red GunDB...">
+                <input type="text" id="comment-input-el" class="comment-input" placeholder="Escribe tu comentario...">
                 <button class="comment-submit-btn" id="comment-submit-btn">Enviar</button>
             </div>
             <div id="comments-list-container">
-                <!-- Lista de comentarios -->
+                <!-- Comentarios -->
             </div>
         </div>
     </div>
 </div>
 
-<!-- MODAL SUBIR OBRA / CAPÍTULO -->
+<!-- MODAL DE SUBIR OBRA -->
 <div class="modal" id="upload-modal">
     <div class="modal-header">
-        <h3 style="font-size: 16px; font-weight: 800;">Subir Obra / Capítulo (GunDB)</h3>
-        <button class="icon-btn" id="upload-close-btn">
+        <h3 style="font-size: 18px; font-weight: 800;">Subir nueva obra</h3>
+        <button class="icon-btn" id="upload-close-btn" title="Cerrar">
             <svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
     </div>
     <div class="modal-body">
         <form id="upload-form">
             <div class="form-group">
-                <label class="form-label">Título de la Obra</label>
-                <input type="text" id="form-title" class="form-input" placeholder="Ej. Solo Leveling: La Novela" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Título del Capítulo / Episodio</label>
-                <input type="text" id="form-chapter-title" class="form-input" placeholder="Ej. Capítulo 1: El Despertar" required>
+                <label class="form-label">Título de la obra</label>
+                <input type="text" id="form-title" class="form-input" placeholder="Ej. El Viaje de las Estrellas" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Categoría / Género</label>
                 <select id="form-category" class="form-select" required>
-                    <option value="Acción">Acción / Shonen</option>
-                    <option value="Fantasía">Fantasía / Isekai</option>
-                    <option value="Misterio">Misterio / Suspense</option>
-                    <option value="Romance">Romance</option>
                     <option value="Ciencia Ficción">Ciencia Ficción</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Estado y Emisión</label>
-                <select id="form-schedule" class="form-select" required>
-                    <option value="Lunes">En Emisión (Lunes)</option>
-                    <option value="Miércoles">En Emisión (Miércoles)</option>
-                    <option value="Viernes">En Emisión (Viernes)</option>
-                    <option value="Domingo">En Emisión (Domingo)</option>
-                    <option value="Finalizado">Completado / Finalizado</option>
+                    <option value="Fantasía">Fantasía</option>
+                    <option value="Misterio">Misterio</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Cyberpunk">Cyberpunk</option>
+                    <option value="Poesía">Poesía</option>
+                    <option value="Drama">Drama</option>
                 </select>
             </div>
             <div class="form-group">
@@ -1217,16 +1266,20 @@
                 <input type="text" id="form-author" class="form-input" placeholder="Tu nombre o seudónimo" required>
             </div>
             <div class="form-group">
-                <label class="form-label">URL de Portada (opcional)</label>
-                <input type="url" id="form-cover" class="form-input" placeholder="https://ejemplo.com/portada.jpg">
+                <label class="form-label">Tiempo estimado de lectura</label>
+                <input type="text" id="form-readtime" class="form-input" placeholder="Ej. 5 min" value="5 min" required>
             </div>
             <div class="form-group">
-                <label class="form-label">Sinopsis Corta</label>
-                <input type="text" id="form-excerpt" class="form-input" placeholder="Resumen atrapante de la obra" required>
+                <label class="form-label">URL de portada (opcional)</label>
+                <input type="url" id="form-cover" class="form-input" placeholder="https://ejemplo.com/imagen.jpg">
             </div>
             <div class="form-group">
-                <label class="form-label">Contenido del Capítulo (Texto)</label>
-                <textarea id="form-content" class="form-textarea" placeholder="Escribe el texto del capítulo aquí..." required></textarea>
+                <label class="form-label">Resumen / Extracto corto</label>
+                <input type="text" id="form-excerpt" class="form-input" placeholder="Breve descripción de la obra" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contenido completo de la obra</label>
+                <textarea id="form-content" class="form-textarea" placeholder="Escribe tu historia aquí..." required></textarea>
             </div>
             <button type="submit" class="submit-btn">Publicar en GunDB</button>
         </form>
@@ -1248,39 +1301,41 @@
         });
     }
 
-    // BASE DE DATOS DE OBRAS Y COMENTARIOS
+    // BASE DE DATOS DE OBRAS EN LOCALSTORAGE + GUNDB
     let STORIES = JSON.parse(localStorage.getItem('framen_user_stories') || '[]');
 
     let state = {
         activeTab: 'inicio',
         theme: localStorage.getItem('framen_theme') || 'negro',
-        selectedDay: 'Todos',
+        selectedCategory: 'Todas',
         savedStoryIds: JSON.parse(localStorage.getItem('framen_saved') || '[]'),
         likedStoryIds: JSON.parse(localStorage.getItem('framen_liked') || '[]'),
-        currentStory: null,
-        currentChapter: null,
+        currentReadingStory: null,
         fontSizeIndex: 1,
         fontSizes: ['15px', '18px', '21px']
     };
 
-    const SCHEDULE_DAYS = ['Todos', 'Lunes', 'Miércoles', 'Viernes', 'Domingo', 'Finalizado'];
+    const CATEGORIES = ['Todas', 'Ciencia Ficción', 'Fantasía', 'Misterio', 'Romance', 'Cyberpunk', 'Poesía', 'Drama'];
 
     document.addEventListener('DOMContentLoaded', () => {
         applyTheme(state.theme);
-        initScheduleFilters();
+        initCategories();
         initGunSync();
         renderAllViews();
         setupEventListeners();
     });
 
-    // SINCRONIZACIÓN REALTIME CON GUNDB
     function initGunSync() {
         if (!gun) return;
 
-        // Escuchar cambios de Obras en GunDB
-        const gunStories = gun.get('framen_v2_stories');
-        gunStories.map().on((data, id) => {
-            if (!data) return;
+        gun.get('framen_v3_stories').map().on((data, id) => {
+            if (data === null) {
+                // Obra borrada
+                STORIES = STORIES.filter(s => s.id !== id);
+                saveLocalStories();
+                renderAllViews();
+                return;
+            }
             try {
                 const storyObj = typeof data === 'string' ? JSON.parse(data) : data;
                 if (!storyObj || !storyObj.id) return;
@@ -1293,8 +1348,8 @@
                 }
                 saveLocalStories();
                 renderAllViews();
-            } catch (err) {
-                console.error('GunDB story parse error:', err);
+            } catch (e) {
+                console.error('Error Sync GunDB:', e);
             }
         });
     }
@@ -1306,16 +1361,34 @@
     function saveStoriesToGun(storyObj) {
         saveLocalStories();
         if (gun && storyObj && storyObj.id) {
-            gun.get('framen_v2_stories').get(storyObj.id).put(JSON.stringify(storyObj));
+            gun.get('framen_v3_stories').get(storyObj.id).put(JSON.stringify(storyObj));
         }
     }
 
+    function deleteStory(storyId) {
+        if (!confirm('¿Estás seguro de que deseas borrar esta obra permanentemente?')) return;
+
+        STORIES = STORIES.filter(s => s.id !== storyId);
+        saveLocalStories();
+
+        if (gun) {
+            gun.get('framen_v3_stories').get(storyId).put(null);
+        }
+
+        if (state.currentReadingStory && state.currentReadingStory.id === storyId) {
+            closeReader();
+        }
+
+        renderAllViews();
+        showToast('Obra borrada con éxito');
+    }
+
     function renderAllViews() {
-        renderBanners();
-        renderRanking();
-        renderHomeGrid();
-        renderExploreList(document.getElementById('explore-search-input')?.value || '');
+        renderFeaturedStory();
+        renderHomeStories();
+        renderExploreStories(document.getElementById('explore-search-input')?.value || '');
         renderLibrary();
+        renderMyStoriesList();
         updateProfileStats();
     }
 
@@ -1324,166 +1397,196 @@
         localStorage.setItem('framen_theme', theme);
         const body = document.body;
         const themeLabel = document.getElementById('theme-status-label');
+        const themeBtn = document.getElementById('theme-btn');
 
         if (theme === 'blanco') {
             body.classList.add('theme-claro');
-            if (themeLabel) themeLabel.textContent = 'Claro';
+            if (themeLabel) themeLabel.textContent = 'Claro (Blanco)';
+            if (themeBtn) {
+                themeBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+            }
         } else {
             body.classList.remove('theme-claro');
-            if (themeLabel) themeLabel.textContent = 'Oscuro';
+            if (themeLabel) themeLabel.textContent = 'Oscuro (Negro)';
+            if (themeBtn) {
+                themeBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`;
+            }
         }
     }
 
     function toggleTheme() {
-        applyTheme(state.theme === 'blanco' ? 'negro' : 'blanco');
-        showToast(`Modo ${state.theme === 'blanco' ? 'Claro' : 'Oscuro'} activado`);
+        const nextTheme = state.theme === 'blanco' ? 'negro' : 'blanco';
+        applyTheme(nextTheme);
+        showToast(`Tema cambiado a ${nextTheme === 'blanco' ? 'Blanco' : 'Negro'}`);
     }
 
-    /* RENDER BANNERS */
-    function renderBanners() {
-        const container = document.getElementById('featured-carousel');
-        if (!container) return;
+    function initCategories() {
+        const containers = [document.getElementById('categories-container'), document.getElementById('explore-categories')];
+        containers.forEach(container => {
+            if (!container) return;
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button class="chip ${cat === state.selectedCategory ? 'active' : ''}" data-category="${cat}">${cat}</button>
+            `).join('');
+        });
+    }
+
+    /* RENDER INICIO RESTAURADO */
+    function renderFeaturedStory() {
+        const wrapper = document.getElementById('featured-card-wrapper');
+        if (!wrapper) return;
 
         if (STORIES.length === 0) {
-            container.innerHTML = `
-                <div class="empty-state" style="width: 100%; background: var(--bg-card); border-radius: 16px; border: 1px dashed var(--border-color);">
-                    <p style="font-weight: 800; color: var(--text-primary);">Sin contenido destacado</p>
-                    <p style="font-size: 12px;">Publica la primera obra en GunDB desde la pestaña Perfil.</p>
+            wrapper.innerHTML = `
+                <div class="empty-state" style="background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 20px; padding: 30px 20px;">
+                    <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                    <p style="font-weight: 800; color: var(--accent-orange); margin-bottom: 4px;">No hay historias disponibles</p>
+                    <p style="font-size: 13px;">Sé el primero en publicar una historia desde la pestaña Perfil.</p>
                 </div>
             `;
             return;
         }
 
-        const featured = STORIES.slice(0, 4);
-        const badgeTypes = ['hot', 'new', 'updated'];
-        const badgeLabels = ['HOT', 'NUEVO', 'AL DÍA'];
+        const featured = STORIES[0];
+        wrapper.innerHTML = `
+            <div class="featured-card" onclick="openReader('${featured.id}')">
+                <span class="featured-tag">Historia Destacada</span>
+                <h2 class="featured-title">${escapeHtml(featured.title)}</h2>
+                <p class="featured-desc">${escapeHtml(featured.excerpt)}</p>
+                <div class="featured-meta">
+                    <span>Por ${escapeHtml(featured.author)}</span> • <span>${featured.readTime || '5 min'}</span>
+                </div>
+            </div>
+        `;
+    }
 
-        container.innerHTML = featured.map((story, i) => `
-            <div class="banner-card" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60'}');" onclick="openStoryDetail('${story.id}')">
-                <div class="banner-overlay"></div>
-                <span class="banner-badge ${badgeTypes[i % 3]}">${badgeLabels[i % 3]}</span>
-                <div class="banner-content">
-                    <div class="banner-title">${escapeHtml(story.title)}</div>
-                    <div class="banner-subtitle">
-                        <span>Por ${escapeHtml(story.author)}</span> • <span>${story.schedule || 'En Emisión'}</span>
+    function renderHomeStories() {
+        const newContainer = document.getElementById('new-stories-container');
+        const popContainer = document.getElementById('popular-stories-container');
+
+        const filtered = state.selectedCategory === 'Todas'
+            ? STORIES
+            : STORIES.filter(s => s.category === state.selectedCategory);
+
+        if (filtered.length === 0) {
+            const emptyHtml = `<div class="empty-state" style="width: 100%;"><p>No hay historias en esta sección.</p></div>`;
+            newContainer.innerHTML = emptyHtml;
+            popContainer.innerHTML = emptyHtml;
+            return;
+        }
+
+        newContainer.innerHTML = filtered.map(story => `
+            <div class="story-card" onclick="openReader('${story.id}')">
+                <div class="story-cover" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');">
+                    <span class="story-badge">${story.category}</span>
+                </div>
+                <h3>${escapeHtml(story.title)}</h3>
+                <p>Por ${escapeHtml(story.author)}</p>
+                <div class="story-footer">
+                    <span>${story.readTime || '5 min'}</span>
+                    <span style="color: var(--accent-orange); font-weight: 700;">♥ ${story.likes || 0}</span>
+                </div>
+            </div>
+        `).join('');
+
+        popContainer.innerHTML = [...filtered].sort((a,b) => (b.likes || 0) - (a.likes || 0)).map(story => `
+            <div class="story-list-item" onclick="openReader('${story.id}')">
+                <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');"></div>
+                <div class="story-list-info">
+                    <h3>${escapeHtml(story.title)}</h3>
+                    <p>${escapeHtml(story.excerpt)}</p>
+                    <div class="story-list-meta">
+                        <span>${escapeHtml(story.author)}</span> • <span>${story.readTime || '5 min'}</span> • <span style="color: var(--accent-orange); font-weight: 700;">♥ ${story.likes || 0}</span>
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    /* RENDER RANKING */
-    function renderRanking() {
-        const container = document.getElementById('ranking-container');
-        if (!container) return;
-
-        if (STORIES.length === 0) {
-            container.innerHTML = `<div class="empty-state"><p>No hay obras publicadas en la red GunDB.</p></div>`;
-            return;
-        }
-
-        const sorted = [...STORIES].sort((a,b) => (b.likes || 0) - (a.likes || 0)).slice(0, 5);
-
-        container.innerHTML = sorted.map((story, idx) => `
-            <div class="ranking-item" onclick="openStoryDetail('${story.id}')">
-                <div class="rank-num ${idx === 0 ? 'top1' : idx === 1 ? 'top2' : idx === 2 ? 'top3' : ''}">${idx + 1}</div>
-                <div class="rank-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60'}');"></div>
-                <div class="rank-info">
-                    <div class="rank-title">${escapeHtml(story.title)}</div>
-                    <div class="rank-meta">
-                        <span>${escapeHtml(story.author)}</span> •
-                        <span class="tag-status">${story.schedule || 'Emisión'}</span>
-                    </div>
-                    <div class="rank-chapters">${story.chapters?.length || 1} Cap. disponibles</div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    /* RENDER GRID DE HISTORIAS EN EMISIÓN */
-    function renderHomeGrid() {
-        const container = document.getElementById('new-stories-container');
-        if (!container) return;
-
-        if (STORIES.length === 0) {
-            container.innerHTML = `<div class="empty-state" style="width: 100%;"><p>Sin emisiones recientes.</p></div>`;
-            return;
-        }
-
-        container.innerHTML = STORIES.map(story => `
-            <div class="manga-card" onclick="openStoryDetail('${story.id}')">
-                <div class="manga-cover" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60'}');"></div>
-                <h4>${escapeHtml(story.title)}</h4>
-                <p>${story.category}</p>
-            </div>
-        `).join('');
-    }
-
-    /* FILTROS CALENDARIO */
-    function initScheduleFilters() {
-        const container = document.getElementById('schedule-container');
-        if (!container) return;
-        container.innerHTML = SCHEDULE_DAYS.map(day => `
-            <button class="schedule-btn ${day === state.selectedDay ? 'active' : ''}" data-day="${day}">${day}</button>
-        `).join('');
-    }
-
-    function renderExploreList(filterText = '') {
+    function renderExploreStories(filterText = '') {
         const container = document.getElementById('explore-results-container');
-        if (!container) return;
+        const text = filterText.toLowerCase().trim();
 
         let filtered = STORIES;
-        if (state.selectedDay !== 'Todos') {
-            filtered = filtered.filter(s => s.schedule === state.selectedDay);
+        if (state.selectedCategory !== 'Todas') {
+            filtered = filtered.filter(s => s.category === state.selectedCategory);
         }
-        if (filterText.trim()) {
-            const query = filterText.toLowerCase();
+        if (text) {
             filtered = filtered.filter(s =>
-                s.title.toLowerCase().includes(query) ||
-                s.author.toLowerCase().includes(query) ||
-                s.category.toLowerCase().includes(query)
+                s.title.toLowerCase().includes(text) ||
+                s.author.toLowerCase().includes(text) ||
+                s.category.toLowerCase().includes(text) ||
+                s.excerpt.toLowerCase().includes(text)
             );
         }
 
         if (filtered.length === 0) {
-            container.innerHTML = `<div class="empty-state"><p>No se encontraron obras para este filtro.</p></div>`;
+            container.innerHTML = `<div class="empty-state"><p>No se encontraron historias.</p></div>`;
             return;
         }
 
-        container.innerHTML = filtered.map((story) => `
-            <div class="ranking-item" onclick="openStoryDetail('${story.id}')">
-                <div class="rank-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60'}');"></div>
-                <div class="rank-info">
-                    <div class="rank-title">${escapeHtml(story.title)}</div>
-                    <div class="rank-meta">
-                        <span>${escapeHtml(story.author)}</span> • <span class="tag-status">${story.category}</span>
+        container.innerHTML = filtered.map(story => `
+            <div class="story-list-item" onclick="openReader('${story.id}')">
+                <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');"></div>
+                <div class="story-list-info">
+                    <h3>${escapeHtml(story.title)}</h3>
+                    <p>${escapeHtml(story.excerpt)}</p>
+                    <div class="story-list-meta">
+                        <span>${story.category}</span> • <span>${story.readTime || '5 min'}</span>
                     </div>
-                    <div class="rank-chapters">${story.schedule || 'Emisión'}</div>
                 </div>
             </div>
         `).join('');
     }
 
-    /* RENDER BIBLIOTECA */
     function renderLibrary() {
         const container = document.getElementById('library-container');
-        if (!container) return;
+        const savedStories = STORIES.filter(s => state.savedStoryIds.includes(s.id));
 
-        const saved = STORIES.filter(s => state.savedStoryIds.includes(s.id));
-        document.getElementById('stat-saved-count').textContent = saved.length;
+        document.getElementById('stat-saved-count').textContent = savedStories.length;
 
-        if (saved.length === 0) {
-            container.innerHTML = `<div class="empty-state"><p>No tienes obras guardadas en favoritos.</p></div>`;
+        if (savedStories.length === 0) {
+            container.innerHTML = `<div class="empty-state"><p>No tienes historias guardadas en tu biblioteca.</p></div>`;
             return;
         }
 
-        container.innerHTML = saved.map(story => `
-            <div class="ranking-item" onclick="openStoryDetail('${story.id}')">
-                <div class="rank-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60'}');"></div>
-                <div class="rank-info">
-                    <div class="rank-title">${escapeHtml(story.title)}</div>
-                    <div class="rank-meta"><span>${escapeHtml(story.author)}</span></div>
+        container.innerHTML = savedStories.map(story => `
+            <div class="story-list-item" onclick="openReader('${story.id}')">
+                <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');"></div>
+                <div class="story-list-info">
+                    <h3>${escapeHtml(story.title)}</h3>
+                    <p>${escapeHtml(story.excerpt)}</p>
+                    <div class="story-list-meta">
+                        <span>${story.category}</span> • <span>${escapeHtml(story.author)}</span>
+                    </div>
                 </div>
+            </div>
+        `).join('');
+    }
+
+    /* VISTA DE PERFIL MEJORADA: LISTA DE OBRAS CON OPCIÓN DE BORRAR */
+    function renderMyStoriesList() {
+        const container = document.getElementById('my-stories-container');
+        if (!container) return;
+
+        if (STORIES.length === 0) {
+            container.innerHTML = `<div class="empty-state"><p>Aún no has publicado ninguna obra.</p></div>`;
+            return;
+        }
+
+        container.innerHTML = STORIES.map(story => `
+            <div class="story-list-item">
+                <div class="story-list-thumb" style="background-image: url('${story.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&auto=format&fit=crop&q=60'}');" onclick="openReader('${story.id}')"></div>
+                <div class="story-list-info" onclick="openReader('${story.id}')">
+                    <h3>${escapeHtml(story.title)}</h3>
+                    <p>${escapeHtml(story.excerpt)}</p>
+                    <div class="story-list-meta">
+                        <span>${story.category}</span> • <span>♥ ${story.likes || 0}</span>
+                    </div>
+                </div>
+                <button class="delete-btn" onclick="deleteStory('${story.id}')">
+                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; stroke: currentColor; fill: none;"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    Borrar
+                </button>
             </div>
         `).join('');
     }
@@ -1494,75 +1597,79 @@
         document.getElementById('stat-likes-count').textContent = totalLikes;
     }
 
-    /* PÁGINA DETALLE DE LA OBRA */
-    function openStoryDetail(storyId) {
+    /* MODAL DEL LECTOR CON COMENTARIOS REALTIME EN GUNDB */
+    function openReader(storyId) {
         const story = STORIES.find(s => s.id === storyId);
         if (!story) return;
 
-        state.currentStory = story;
-        document.getElementById('detail-title').textContent = story.title;
-        document.getElementById('detail-author').textContent = `Por ${story.author}`;
-        document.getElementById('detail-status').textContent = story.schedule || 'EN EMISIÓN';
-        document.getElementById('detail-category').textContent = story.category.toUpperCase();
-        document.getElementById('detail-synopsis').textContent = story.excerpt;
-
-        const coverUrl = story.cover || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60';
-        document.getElementById('detail-cover-img').style.backgroundImage = `url('${coverUrl}')`;
-        document.getElementById('detail-header-bg').style.backgroundImage = `url('${coverUrl}')`;
-
-        // Render Capítulos
-        const chapters = story.chapters || [{ title: 'Capítulo 1', content: story.content || [] }];
-        const chaptersContainer = document.getElementById('detail-chapters-container');
-        chaptersContainer.innerHTML = chapters.map((chap, idx) => `
-            <div class="chapter-item" onclick="openChapterReader(${idx})">
-                <div class="chapter-title">${escapeHtml(chap.title)}</div>
-                <div class="chapter-date">${story.date || 'Reciente'}</div>
-            </div>
-        `).join('');
-
-        switchTab('story-detail');
-    }
-
-    /* LECTOR DE CAPÍTULOS CON GUNDB COMMENTS */
-    function openChapterReader(chapterIndex) {
-        if (!state.currentStory) return;
-        const chapters = state.currentStory.chapters || [{ title: 'Capítulo 1', content: state.currentStory.content || [] }];
-        const chapter = chapters[chapterIndex] || chapters[0];
-
-        state.currentChapter = chapter;
-        document.getElementById('reader-chapter-number').textContent = `CAPÍTULO ${chapterIndex + 1}`;
-        document.getElementById('reader-title').textContent = chapter.title;
-        document.getElementById('reader-author').textContent = `Por ${state.currentStory.author}`;
-        document.getElementById('reader-date').textContent = state.currentStory.date || 'Hoy';
+        state.currentReadingStory = story;
+        document.getElementById('reader-category').textContent = story.category;
+        document.getElementById('reader-title').textContent = story.title;
+        document.getElementById('reader-author-name').textContent = story.author;
+        document.getElementById('reader-author-avatar').textContent = story.author.charAt(0).toUpperCase();
+        document.getElementById('reader-date').textContent = story.date || 'Reciente';
+        document.getElementById('reader-read-time').textContent = story.readTime || '5 min';
+        document.getElementById('reader-likes-count').textContent = story.likes || 0;
 
         const contentEl = document.getElementById('reader-content');
         contentEl.style.fontSize = state.fontSizes[state.fontSizeIndex];
 
-        const paragraphs = Array.isArray(chapter.content)
-            ? chapter.content
-            : (chapter.content || '').split('\n').filter(p => p.trim());
+        const paragraphs = Array.isArray(story.content)
+            ? story.content
+            : (story.content || '').split('\n').filter(p => p.trim());
         contentEl.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
 
+        const deleteBtn = document.getElementById('reader-delete-btn');
+        if (deleteBtn) {
+            deleteBtn.onclick = () => deleteStory(story.id);
+        }
+
+        updateReaderActionButtons();
         listenGunComments();
+
         document.getElementById('reader-modal').classList.add('active');
     }
 
     function closeReader() {
         document.getElementById('reader-modal').classList.remove('active');
+        state.currentReadingStory = null;
     }
 
-    /* ESCUCHAR Y RENDEREAR COMENTARIOS CON GUNDB */
-    let currentGunCommentListener = null;
+    function updateReaderActionButtons() {
+        if (!state.currentReadingStory) return;
+        const id = state.currentReadingStory.id;
+        const isSaved = state.savedStoryIds.includes(id);
+        const isLiked = state.likedStoryIds.includes(id);
+
+        const bookmarkBtn = document.getElementById('reader-bookmark-btn');
+        const likeBtn = document.getElementById('reader-like-btn');
+        const bookmarkText = document.getElementById('reader-bookmark-text');
+
+        if (isSaved) {
+            bookmarkBtn.classList.add('bookmarked');
+            bookmarkText.textContent = 'Guardada';
+        } else {
+            bookmarkBtn.classList.remove('bookmarked');
+            bookmarkText.textContent = 'Guardar';
+        }
+
+        if (isLiked) {
+            likeBtn.classList.add('liked');
+        } else {
+            likeBtn.classList.remove('liked');
+        }
+    }
+
     let loadedCommentsList = [];
 
     function listenGunComments() {
         const container = document.getElementById('comments-list-container');
-        if (!container || !state.currentStory) return;
+        if (!container || !state.currentReadingStory) return;
 
         loadedCommentsList = [];
-        container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Cargando comentarios en tiempo real...</p>`;
+        container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Cargando comentarios...</p>`;
 
-        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`.replace(/[^a-zA-Z0-9_]/g, '_');
+        const key = `framen_comm_${state.currentReadingStory.id}`;
 
         if (gun) {
             gun.get('framen_comments_node').get(key).map().on((commentData) => {
@@ -1579,13 +1686,11 @@
                     }
                     renderLoadedComments();
                 } catch (e) {
-                    console.error('Error parsing GunDB comment:', e);
+                    console.error('Error parse comment:', e);
                 }
             });
         } else {
-            // Local fallback
-            const localComms = JSON.parse(localStorage.getItem(`framen_comm_${key}`) || '[]');
-            loadedCommentsList = localComms;
+            loadedCommentsList = JSON.parse(localStorage.getItem(key) || '[]');
             renderLoadedComments();
         }
     }
@@ -1595,7 +1700,7 @@
         if (!container) return;
 
         if (loadedCommentsList.length === 0) {
-            container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Sé el primero en comentar este capítulo en la red GunDB.</p>`;
+            container.innerHTML = `<p style="font-size: 12px; color: var(--text-secondary);">Sé el primero en comentar esta obra.</p>`;
             return;
         }
 
@@ -1610,12 +1715,12 @@
     function addComment() {
         const input = document.getElementById('comment-input-el');
         const text = input.value.trim();
-        if (!text || !state.currentStory) return;
+        if (!text || !state.currentReadingStory) return;
 
-        const key = `${state.currentStory.id}_${state.currentChapter?.title || 'cap1'}`.replace(/[^a-zA-Z0-9_]/g, '_');
+        const key = `framen_comm_${state.currentReadingStory.id}`;
         const commentObj = {
             id: Date.now().toString() + Math.random().toString(36).substr(2, 4),
-            user: 'Lector FRAMEN+',
+            user: 'Lector FRAMEN',
             text,
             date: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
         };
@@ -1624,71 +1729,95 @@
             gun.get('framen_comments_node').get(key).get(commentObj.id).put(JSON.stringify(commentObj));
         }
 
-        // Respaldo local
         loadedCommentsList.unshift(commentObj);
-        localStorage.setItem(`framen_comm_${key}`, JSON.stringify(loadedCommentsList));
+        localStorage.setItem(key, JSON.stringify(loadedCommentsList));
 
         input.value = '';
         renderLoadedComments();
-        showToast('Comentario enviado a GunDB');
+        showToast('Comentario publicado');
     }
 
-    /* PUBLICAR NUEVA OBRA / CAPÍTULO */
+    function toggleBookmarkCurrentStory() {
+        if (!state.currentReadingStory) return;
+        const id = state.currentReadingStory.id;
+        const index = state.savedStoryIds.indexOf(id);
+
+        if (index > -1) {
+            state.savedStoryIds.splice(index, 1);
+            showToast('Historia eliminada de tu biblioteca');
+        } else {
+            state.savedStoryIds.push(id);
+            showToast('Historia guardada en tu biblioteca');
+        }
+
+        localStorage.setItem('framen_saved', JSON.stringify(state.savedStoryIds));
+        updateReaderActionButtons();
+        renderLibrary();
+    }
+
+    function toggleLikeCurrentStory() {
+        if (!state.currentReadingStory) return;
+        const id = state.currentReadingStory.id;
+        const index = state.likedStoryIds.indexOf(id);
+
+        if (index > -1) {
+            state.likedStoryIds.splice(index, 1);
+            if (state.currentReadingStory.likes > 0) state.currentReadingStory.likes--;
+        } else {
+            state.likedStoryIds.push(id);
+            state.currentReadingStory.likes = (state.currentReadingStory.likes || 0) + 1;
+            showToast('¡Te ha gustado esta historia!');
+        }
+
+        saveStoriesToGun(state.currentReadingStory);
+        localStorage.setItem('framen_liked', JSON.stringify(state.likedStoryIds));
+        document.getElementById('reader-likes-count').textContent = state.currentReadingStory.likes;
+        updateReaderActionButtons();
+        renderAllViews();
+    }
+
+    function toggleFontSize() {
+        state.fontSizeIndex = (state.fontSizeIndex + 1) % state.fontSizes.length;
+        const newSize = state.fontSizes[state.fontSizeIndex];
+        document.getElementById('reader-content').style.fontSize = newSize;
+        showToast(`Tamaño de fuente: ${newSize}`);
+    }
+
     function handleUploadFormSubmit(e) {
         e.preventDefault();
         const title = document.getElementById('form-title').value.trim();
-        const chapterTitle = document.getElementById('form-chapter-title').value.trim();
         const category = document.getElementById('form-category').value;
-        const schedule = document.getElementById('form-schedule').value;
         const author = document.getElementById('form-author').value.trim();
+        const readTime = document.getElementById('form-readtime').value.trim() || '5 min';
         const cover = document.getElementById('form-cover').value.trim();
         const excerpt = document.getElementById('form-excerpt').value.trim();
         const contentText = document.getElementById('form-content').value.trim();
 
-        const paragraphs = contentText.split('\n').filter(p => p.trim());
+        const newStory = {
+            id: Date.now().toString(),
+            title,
+            category,
+            author,
+            readTime,
+            cover,
+            excerpt,
+            content: contentText.split('\n').filter(p => p.trim()),
+            likes: 0,
+            date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })
+        };
 
-        // Buscar si la obra ya existe para añadir capítulo o crear una nueva
-        let story = STORIES.find(s => s.title.toLowerCase() === title.toLowerCase());
-
-        if (story) {
-            if (!story.chapters) story.chapters = [];
-            story.chapters.push({
-                title: chapterTitle,
-                content: paragraphs
-            });
-            saveStoriesToGun(story);
-            showToast('¡Nuevo capítulo añadido en GunDB!');
-        } else {
-            story = {
-                id: Date.now().toString(),
-                title,
-                category,
-                schedule,
-                author,
-                cover,
-                excerpt,
-                likes: 0,
-                date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }),
-                chapters: [{
-                    title: chapterTitle,
-                    content: paragraphs
-                }]
-            };
-            STORIES.unshift(story);
-            saveStoriesToGun(story);
-            showToast('¡Nueva obra publicada en GunDB!');
-        }
-
+        STORIES.unshift(newStory);
+        saveStoriesToGun(newStory);
         renderAllViews();
 
         document.getElementById('upload-form').reset();
         document.getElementById('upload-modal').classList.remove('active');
+        showToast('¡Obra publicada con éxito!');
     }
 
-    /* TOAST */
-    function showToast(msg) {
+    function showToast(message) {
         const toast = document.getElementById('toast-el');
-        toast.textContent = msg;
+        toast.textContent = message;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2200);
     }
@@ -1698,7 +1827,6 @@
         return str.replace(/[&<>"']/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;' }[m]));
     }
 
-    /* EVENT LISTENERS */
     function setupEventListeners() {
         document.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
@@ -1715,57 +1843,29 @@
         });
         document.getElementById('upload-form').addEventListener('submit', handleUploadFormSubmit);
 
-        document.getElementById('detail-back-btn').addEventListener('click', () => switchTab('inicio'));
-        document.getElementById('reader-close-btn').addEventListener('click', closeReader);
-
-        document.getElementById('comment-submit-btn').addEventListener('click', addComment);
-
         document.getElementById('search-btn').addEventListener('click', () => {
             switchTab('explorar');
             document.getElementById('explore-search-input')?.focus();
         });
 
         document.getElementById('explore-search-input')?.addEventListener('input', (e) => {
-            renderExploreList(e.target.value);
+            renderExploreStories(e.target.value);
         });
 
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('schedule-btn')) {
-                state.selectedDay = e.target.getAttribute('data-day');
-                initScheduleFilters();
-                renderExploreList(document.getElementById('explore-search-input')?.value || '');
+            if (e.target.classList.contains('chip')) {
+                state.selectedCategory = e.target.getAttribute('data-category');
+                initCategories();
+                renderHomeStories();
+                renderExploreStories(document.getElementById('explore-search-input')?.value || '');
             }
         });
 
-        document.getElementById('reader-fontsize-btn').addEventListener('click', () => {
-            state.fontSizeIndex = (state.fontSizeIndex + 1) % state.fontSizes.length;
-            const newSize = state.fontSizes[state.fontSizeIndex];
-            document.getElementById('reader-content').style.fontSize = newSize;
-            showToast(`Fuente: ${newSize}`);
-        });
-
-        document.getElementById('reader-bookmark-btn').addEventListener('click', () => {
-            if (!state.currentStory) return;
-            const id = state.currentStory.id;
-            const idx = state.savedStoryIds.indexOf(id);
-            if (idx > -1) {
-                state.savedStoryIds.splice(idx, 1);
-                showToast('Eliminada de Favoritos');
-            } else {
-                state.savedStoryIds.push(id);
-                showToast('Añadida a Favoritos');
-            }
-            localStorage.setItem('framen_saved', JSON.stringify(state.savedStoryIds));
-            renderLibrary();
-        });
-
-        document.getElementById('reader-like-btn').addEventListener('click', () => {
-            if (!state.currentStory) return;
-            state.currentStory.likes = (state.currentStory.likes || 0) + 1;
-            saveStoriesToGun(state.currentStory);
-            renderAllViews();
-            showToast('¡Te ha gustado este capítulo!');
-        });
+        document.getElementById('reader-close-btn').addEventListener('click', closeReader);
+        document.getElementById('reader-bookmark-btn').addEventListener('click', toggleBookmarkCurrentStory);
+        document.getElementById('reader-like-btn').addEventListener('click', toggleLikeCurrentStory);
+        document.getElementById('reader-fontsize-btn').addEventListener('click', toggleFontSize);
+        document.getElementById('comment-submit-btn').addEventListener('click', addComment);
 
         document.getElementById('reset-library-btn').addEventListener('click', () => {
             state.savedStoryIds = [];
