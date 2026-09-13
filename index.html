@@ -529,7 +529,7 @@
         }
 
         /* ====================================================
-           NUEVO PERFIL ESTILO ASCII
+           PERFIL STRICT MAP LAYOUT
         ==================================================== */
         .profile-container {
             display: flex;
@@ -541,20 +541,23 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 20px;
+            padding: 16px 20px 20px;
             position: relative;
         }
 
-        .profile-header-actions {
+        .profile-top-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
+            font-size: 18px;
+            color: var(--text-secondary);
         }
 
-        .profile-main-info {
+        .profile-user-info {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
 
         .user-titles {
@@ -563,62 +566,55 @@
         }
 
         .user-name-title {
-            font-size: 22px;
-            font-weight: 900;
+            font-size: 20px;
+            font-weight: 800;
             color: var(--text-primary);
         }
 
         .user-handle {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             font-weight: 600;
         }
 
         .profile-photo-stats-row {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 16px;
             justify-content: space-between;
         }
 
         .profile-photo-box {
             position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
+            width: 75px;
+            height: 75px;
+            border-radius: 10px;
             background: linear-gradient(135deg, var(--accent-orange), #ff9933);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 32px;
+            font-size: 28px;
             color: #fff;
             flex-shrink: 0;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
         }
 
-        .photo-edit-badge {
+        .photo-edit-icon {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            cursor: pointer;
+            top: -8px;
+            right: -8px;
+            font-size: 14px;
+            color: var(--text-primary);
         }
 
         .stats-columns {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex: 1;
             justify-content: space-around;
+            align-items: center;
+            padding-top: 10px;
         }
 
         .stat-col {
@@ -629,49 +625,53 @@
         }
 
         .stat-col-num {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--accent-orange);
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-primary);
         }
 
         .stat-col-label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
             font-weight: 600;
+            margin-top: 2px;
         }
 
         .follow-btn {
-            width: 100px;
-            padding: 8px;
-            border-radius: 10px;
-            background: var(--accent-orange);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 800;
-            border: none;
+            width: 85px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
             margin-top: 4px;
         }
 
         .follow-btn:hover {
-            background: var(--accent-orange-hover);
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
         }
 
-        /* CARD HISTORIA RECIENTE EN PERFIL */
+        /* CARD HISTORIA RECIENTE EN PERFIL (AS EN ASCII MAP) */
         .recent-story-box {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 18px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            align-items: center;
+            text-align: center;
         }
 
         .recent-story-cover {
             width: 100%;
-            height: 180px;
+            height: 170px;
             border-radius: 12px;
             background-size: cover;
             background-position: center;
@@ -682,33 +682,32 @@
             font-size: 18px;
             font-weight: 900;
             color: var(--text-primary);
-            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .recent-story-divider {
             width: 100%;
             height: 1px;
             background: var(--border-color);
-            margin: 4px 0;
+            margin: 2px 0;
         }
 
         .recent-story-desc {
             font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.4;
-            text-align: center;
         }
 
         .recent-story-tags {
             font-size: 12px;
             font-weight: 700;
-            color: var(--accent-orange);
-            text-align: center;
+            color: var(--text-secondary);
         }
 
         .recent-story-actions {
             display: flex;
-            gap: 12px;
+            gap: 16px;
+            width: 100%;
             margin-top: 6px;
         }
 
@@ -717,18 +716,18 @@
             padding: 10px;
             border-radius: 10px;
             background: transparent;
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
             font-weight: 800;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s ease;
         }
 
         .action-btn-outlined:hover {
-            background: var(--accent-orange);
-            color: #fff;
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
         }
 
         .action-btn-danger {
@@ -736,21 +735,21 @@
             padding: 10px;
             border-radius: 10px;
             background: transparent;
-            border: 1px solid #ef4444;
-            color: #ef4444;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
             font-weight: 800;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s ease;
         }
 
         .action-btn-danger:hover {
-            background: #ef4444;
-            color: #fff;
+            border-color: #ef4444;
+            color: #ef4444;
         }
 
-        /* GRID MIS HISTORIAS */
+        /* HISTORIAS MAP GRID */
         .my-stories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -799,6 +798,58 @@
             font-size: 12px;
             color: var(--text-secondary);
             font-weight: 600;
+        }
+
+        .settings-list {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .setting-item {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item:hover {
+            background: var(--card-hover);
+        }
+
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .setting-info svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .setting-value {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* Navegación Inferior */
@@ -1164,6 +1215,9 @@
             <span class="app-name">FRAMEN</span>
         </div>
         <div class="header-actions">
+            <button class="icon-btn" id="upload-story-btn" title="Subir nueva obra">
+                <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            </button>
             <button class="icon-btn" id="theme-btn" title="Cambiar tema">
                 <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             </button>
@@ -1175,19 +1229,16 @@
 
     <!-- Vistas de Navegación -->
     <main>
-        <!-- TAB 1: INICIO (ESTRUCTURA ORIGINAL CON LETRAS EN NARANJA) -->
+        <!-- TAB 1: INICIO -->
         <section id="view-inicio" class="tab-view active">
-            <!-- Categorías -->
             <div class="categories-scroll" id="categories-container">
-                <!-- Se llena dinámicamente -->
+                <!-- Chips -->
             </div>
 
-            <!-- Historia Destacada -->
             <div id="featured-card-wrapper">
-                <!-- Render dinámico -->
+                <!-- Destacada -->
             </div>
 
-            <!-- Sección Historias Nuevas -->
             <div class="section-title">
                 <span>Historias nuevas</span>
             </div>
@@ -1195,7 +1246,6 @@
                 <!-- Tarjetas -->
             </div>
 
-            <!-- Sección Más Leídas -->
             <div class="section-title">
                 <span>Más leídas</span>
             </div>
@@ -1233,16 +1283,17 @@
             </div>
         </section>
 
-        <!-- TAB 4: PERFIL (REDISEÑO FIEL AL DIAGRAMA ASCII) -->
+        <!-- TAB 4: PERFIL (FIEL AL MAPA ASCII EXACTO) -->
         <section id="view-perfil" class="tab-view">
             <div class="profile-container">
-                <!-- Tarjeta de Encabezado Perfil -->
+                <!-- Tarjeta de Encabezado Perfil ASCII -->
                 <div class="profile-header-card">
-                    <div class="profile-header-actions">
-                        <button class="icon-btn" style="width: 32px; height: 32px;" title="Opciones">⋮</button>
+                    <div class="profile-top-bar">
+                        <span>⋮</span>
+                        <span style="cursor: pointer;" onclick="switchTab('inicio')">←</span>
                     </div>
 
-                    <div class="profile-main-info">
+                    <div class="profile-user-info">
                         <div class="user-titles">
                             <h2 class="user-name-title" id="profile-display-name">Mi Nombre</h2>
                             <span class="user-handle" id="profile-display-handle">@miusuario</span>
@@ -1250,8 +1301,8 @@
 
                         <div class="profile-photo-stats-row">
                             <div class="profile-photo-box" id="profile-photo-container">
-                                <span id="avatar-initials">F</span>
-                                <div class="photo-edit-badge" title="Editar Foto">✎</div>
+                                <span>FOTO</span>
+                                <span class="photo-edit-icon">✎</span>
                             </div>
 
                             <div class="stats-columns">
@@ -1271,57 +1322,34 @@
                         </div>
 
                         <div>
-                            <button class="follow-btn" id="follow-profile-btn">Seguir</button>
+                            <button class="follow-btn" id="follow-profile-btn">[Seguir ]</button>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Sección Publicar Nueva Obra -->
-                <div class="settings-list">
-                    <div class="setting-item" id="upload-story-btn">
-                        <div class="setting-info">
-                            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                            <span class="setting-label">Subir nueva obra</span>
-                        </div>
-                        <span class="setting-value" style="color: var(--accent-orange); font-weight: 800;">+ Publicar</span>
                     </div>
                 </div>
 
                 <!-- HISTORIA Reciente (Cuadro ASCII) -->
-                <div class="section-title">
+                <div class="section-title" style="margin-top: 10px; margin-bottom: 10px; font-size: 15px;">
                     <span>HISTORIA reciente</span>
                 </div>
                 <div id="recent-story-wrapper">
                     <!-- Dinámico -->
                 </div>
 
-                <!-- MIS HISTORIAS Grid (ASCII Layout con Vistas y Likes) -->
-                <div class="section-title">
-                    <span>MIS HISTORIAS</span>
+                <!-- HISTORIAS (Grid ASCII) -->
+                <div class="section-title" style="margin-top: 10px; margin-bottom: 6px; font-size: 15px;">
+                    <span>HISTORIAS</span>
                 </div>
+                <div style="width: 100%; height: 1px; background: var(--border-color); margin-bottom: 14px;"></div>
+
                 <div class="my-stories-grid" id="my-stories-grid-container">
-                    <!-- Tarjetas pequeñas -->
+                    <!-- Tarjetas ASCII -->
                 </div>
 
-                <!-- Ajustes adicionales -->
-                <div class="section-title">
-                    <span>Ajustes</span>
-                </div>
-                <div class="settings-list">
-                    <div class="setting-item" id="toggle-theme-setting">
-                        <div class="setting-info">
-                            <svg viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                            <span class="setting-label">Tema de aplicación</span>
-                        </div>
-                        <span class="setting-value" id="theme-status-label">Oscuro</span>
-                    </div>
-                    <div class="setting-item" id="reset-library-btn">
-                        <div class="setting-info">
-                            <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                            <span class="setting-label">Vaciar biblioteca</span>
-                        </div>
-                        <span class="setting-value">Limpiar</span>
-                    </div>
+                <!-- Opciones ocultas visualmente pero preservadas funcionalmente -->
+                <div style="display: none;">
+                    <div id="toggle-theme-setting"></div>
+                    <div id="reset-library-btn"></div>
+                    <span id="theme-status-label"></span>
                 </div>
             </div>
         </section>
@@ -1384,7 +1412,7 @@
                     <div style="font-size: 11px;" id="reader-date">Publicado recientemente</div>
                 </div>
             </div>
-            <div id="reader-read-time">5 min de lectura</div>
+            <div id="reader-read-time">8 min de lectura</div>
         </div>
         <div class="reader-content" id="reader-content">
             <!-- Párrafos -->
@@ -1416,17 +1444,17 @@
         <form id="upload-form">
             <div class="form-group">
                 <label class="form-label">Título de la obra</label>
-                <input type="text" id="form-title" class="form-input" placeholder="Ej. El Último Tren" required>
+                <input type="text" id="form-title" class="form-input" placeholder="Ej. EL ÚLTIMO TREN" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Categoría / Género</label>
                 <select id="form-category" class="form-select" required>
+                    <option value="Terror · Misterio">Terror · Misterio</option>
                     <option value="Misterio">Misterio</option>
                     <option value="Terror">Terror</option>
                     <option value="Ciencia Ficción">Ciencia Ficción</option>
                     <option value="Fantasía">Fantasía</option>
                     <option value="Romance">Romance</option>
-                    <option value="Cyberpunk">Cyberpunk</option>
                 </select>
             </div>
             <div class="form-group">
@@ -1443,7 +1471,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Resumen / Extracto corto</label>
-                <input type="text" id="form-excerpt" class="form-input" placeholder="Breve descripción de la obra" required>
+                <input type="text" id="form-excerpt" class="form-input" placeholder="Una historia de misterio..." required>
             </div>
             <div class="form-group">
                 <label class="form-label">Contenido completo de la obra</label>
@@ -1469,7 +1497,6 @@
         });
     }
 
-    // BASE DE DATOS DE OBRAS
     let STORIES = JSON.parse(localStorage.getItem('framen_user_stories') || '[]');
 
     let state = {
@@ -1485,7 +1512,7 @@
     };
 
     const CATEGORIES = ['Todas', 'Ciencia Ficción', 'Fantasía', 'Misterio', 'Terror', 'Romance', 'Cyberpunk'];
-    const SIX_HOURS_MS = 6 * 60 * 60 * 1000; // 6 HORAS EN MILISEGUNDOS
+    const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
 
     document.addEventListener('DOMContentLoaded', () => {
         applyTheme(state.theme);
@@ -1552,7 +1579,6 @@
         showToast('Obra borrada con éxito');
     }
 
-    /* REGLA DE VISTAS ANTI-SPAM (COOLDOWN DE 6 HORAS POR USUARIO/DISPOSITIVO) */
     function registerStoryView(story) {
         if (!story) return;
         const storageKey = `framen_view_time_${story.id}`;
@@ -1613,7 +1639,6 @@
         });
     }
 
-    /* RENDER INICIO RESTAURADO CON LETRAS EN NARANJA */
     function renderFeaturedStory() {
         const wrapper = document.getElementById('featured-card-wrapper');
         if (!wrapper) return;
@@ -1623,7 +1648,7 @@
                 <div class="empty-state" style="background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 20px; padding: 30px 20px;">
                     <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
                     <p style="font-weight: 800; color: var(--accent-orange); margin-bottom: 4px;">No hay historias disponibles</p>
-                    <p style="font-size: 13px;">Sé el primero en publicar una historia desde la pestaña Perfil.</p>
+                    <p style="font-size: 13px;">Sé el primero en publicar una historia desde el botón + arriba.</p>
                 </div>
             `;
             return;
@@ -1636,7 +1661,7 @@
                 <h2 class="featured-title">${escapeHtml(featured.title)}</h2>
                 <p class="featured-desc">${escapeHtml(featured.excerpt)}</p>
                 <div class="featured-meta">
-                    <span>Por ${escapeHtml(featured.author)}</span> • <span>${featured.readTime || '5 min'}</span>
+                    <span>Por ${escapeHtml(featured.author)}</span> • <span>${featured.readTime || '8 min'}</span>
                 </div>
             </div>
         `;
@@ -1665,7 +1690,7 @@
                 <h3>${escapeHtml(story.title)}</h3>
                 <p>Por ${escapeHtml(story.author)}</p>
                 <div class="story-footer">
-                    <span>${story.readTime || '5 min'}</span>
+                    <span>${story.readTime || '8 min'}</span>
                     <span style="color: var(--accent-orange); font-weight: 700;">👁 ${story.views || 0}</span>
                 </div>
             </div>
@@ -1744,18 +1769,27 @@
         `).join('');
     }
 
-    /* RENDER PERFIL REDISEÑADO FIEL AL ESQUEMA ASCII */
+    /* RENDER PERFIL FIEL AL MAPA ASCII DE MANERA EXACTA */
     function renderProfileSection() {
         document.getElementById('stat-profile-stories-count').textContent = STORIES.length;
 
-        // HISTORIA Reciente (La primera publicada)
+        // HISTORIA reciente (Fiel al ASCII map)
         const recentWrapper = document.getElementById('recent-story-wrapper');
         if (recentWrapper) {
             if (STORIES.length === 0) {
                 recentWrapper.innerHTML = `
-                    <div class="empty-state" style="background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 18px;">
-                        <p style="font-weight: 700; color: var(--accent-orange);">Aún no has publicado ninguna historia.</p>
-                        <p style="font-size: 12px; margin-top: 4px;">Usa el botón "+ Publicar" arriba para agregar tu primera obra.</p>
+                    <div class="recent-story-box">
+                        <div class="recent-story-cover" style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 13px; font-weight: 700;">
+                            [ PORTADA ]
+                        </div>
+                        <div class="recent-story-title">EL ÚLTIMO TREN</div>
+                        <div class="recent-story-divider"></div>
+                        <div class="recent-story-desc">Una historia de misterio...</div>
+                        <div class="recent-story-tags">Terror · Misterio · 8 min</div>
+                        <div class="recent-story-actions">
+                            <button class="action-btn-outlined" onclick="document.getElementById('upload-story-btn').click()">[ LEER ]</button>
+                            <button class="action-btn-danger">[ELIMINAR]</button>
+                        </div>
                     </div>
                 `;
             } else {
@@ -1768,19 +1802,36 @@
                         <div class="recent-story-desc">${escapeHtml(rec.excerpt)}</div>
                         <div class="recent-story-tags">${rec.category} · ${rec.readTime || '8 min'}</div>
                         <div class="recent-story-actions">
-                            <button class="action-btn-outlined" onclick="openReader('${rec.id}')">LEER</button>
-                            <button class="action-btn-danger" onclick="deleteStory('${rec.id}')">ELIMINAR</button>
+                            <button class="action-btn-outlined" onclick="openReader('${rec.id}')">[ LEER ]</button>
+                            <button class="action-btn-danger" onclick="deleteStory('${rec.id}')">[ELIMINAR]</button>
                         </div>
                     </div>
                 `;
             }
         }
 
-        // MIS HISTORIAS GRID
+        // HISTORIAS GRID
         const gridContainer = document.getElementById('my-stories-grid-container');
         if (gridContainer) {
             if (STORIES.length === 0) {
-                gridContainer.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p>Sin historias en tu catálogo.</p></div>`;
+                gridContainer.innerHTML = `
+                    <div class="grid-story-card">
+                        <div class="grid-story-cover" style="display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--text-secondary);">PORTADA</div>
+                        <div class="grid-story-title">El visitante de medianoche</div>
+                        <div class="grid-story-stats">
+                            <span>👁 0</span>
+                            <span>♥ 0</span>
+                        </div>
+                    </div>
+                    <div class="grid-story-card">
+                        <div class="grid-story-cover" style="display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--text-secondary);">PORTADA</div>
+                        <div class="grid-story-title">Después de medianoche</div>
+                        <div class="grid-story-stats">
+                            <span>👁 0</span>
+                            <span>♥ 0</span>
+                        </div>
+                    </div>
+                `;
             } else {
                 gridContainer.innerHTML = STORIES.map(s => `
                     <div class="grid-story-card" onclick="openReader('${s.id}')">
@@ -1796,14 +1847,11 @@
         }
     }
 
-    /* MODAL DEL LECTOR */
     function openReader(storyId) {
         const story = STORIES.find(s => s.id === storyId);
         if (!story) return;
 
         state.currentReadingStory = story;
-
-        // Registrar vista respetando el cooldown de 6 horas
         registerStoryView(story);
 
         document.getElementById('reader-category').textContent = story.category;
@@ -1811,7 +1859,7 @@
         document.getElementById('reader-author-name').textContent = story.author;
         document.getElementById('reader-author-avatar').textContent = story.author.charAt(0).toUpperCase();
         document.getElementById('reader-date').textContent = story.date || 'Reciente';
-        document.getElementById('reader-read-time').textContent = story.readTime || '5 min';
+        document.getElementById('reader-read-time').textContent = story.readTime || '8 min';
         document.getElementById('reader-likes-count').textContent = story.likes || 0;
 
         const contentEl = document.getElementById('reader-content');
@@ -2037,7 +2085,6 @@
         });
 
         document.getElementById('theme-btn').addEventListener('click', toggleTheme);
-        document.getElementById('toggle-theme-setting').addEventListener('click', toggleTheme);
 
         document.getElementById('upload-story-btn').addEventListener('click', () => {
             document.getElementById('upload-modal').classList.add('active');
@@ -2069,13 +2116,10 @@
             state.isFollowing = !state.isFollowing;
             const btn = document.getElementById('follow-profile-btn');
             if (state.isFollowing) {
-                btn.textContent = 'Siguiendo';
-                btn.style.background = 'var(--bg-card)';
-                btn.style.border = '1px solid var(--border-color)';
+                btn.textContent = '[Siguiendo]';
                 showToast('Ahora sigues a este perfil');
             } else {
-                btn.textContent = 'Seguir';
-                btn.style.background = 'var(--accent-orange)';
+                btn.textContent = '[Seguir ]';
                 showToast('Has dejado de seguir a este perfil');
             }
         });
@@ -2085,13 +2129,6 @@
         document.getElementById('reader-like-btn').addEventListener('click', toggleLikeCurrentStory);
         document.getElementById('reader-fontsize-btn').addEventListener('click', toggleFontSize);
         document.getElementById('comment-submit-btn').addEventListener('click', addComment);
-
-        document.getElementById('reset-library-btn').addEventListener('click', () => {
-            state.savedStoryIds = [];
-            localStorage.setItem('framen_saved', JSON.stringify([]));
-            renderLibrary();
-            showToast('Biblioteca vaciada');
-        });
     }
 
     function switchTab(tabName) {
